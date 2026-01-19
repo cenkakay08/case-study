@@ -19,13 +19,25 @@ interface AuthState {
   error: string | null;
 }
 
-const initialState: AuthState = {
-  user: null,
-  token: localStorage.getItem("token"),
-  isAuthenticated: !!localStorage.getItem("token"),
-  isLoading: false,
-  error: null,
+const getInitialState = (): AuthState => {
+  const savedState = localStorage.getItem("authState");
+  if (savedState) {
+    try {
+      return JSON.parse(savedState);
+    } catch {
+      // If parsing fails, use default initial state
+    }
+  }
+  return {
+    user: null,
+    token: null,
+    isAuthenticated: false,
+    isLoading: false,
+    error: null,
+  };
 };
+
+const initialState: AuthState = getInitialState();
 
 export const loginAsyncThunk = createAsyncThunk(
   "auth/login",
@@ -33,8 +45,6 @@ export const loginAsyncThunk = createAsyncThunk(
     try {
       const data = await loginApi(credentials);
       const { user, token } = data;
-
-      localStorage.setItem("token", token);
 
       toastManager.add({
         title: "Başarılı",
@@ -65,7 +75,6 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
-      localStorage.removeItem("token");
     },
     clearError: (state) => {
       state.error = null;
