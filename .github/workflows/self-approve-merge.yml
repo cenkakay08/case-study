@@ -1,0 +1,30 @@
+name: Self Approve and Merge
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  approve-and-merge:
+    if: github.actor == 'cenkakay08'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr review ${{ github.event.pull_request.number }} --approve --repo ${{ github.repository }}
+
+      - name: Merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge ${{ github.event.pull_request.number }} --merge --delete-branch --repo ${{ github.repository }} || gh pr merge ${{ github.event.pull_request.number }} --auto --merge --delete-branch --repo ${{ github.repository }}
+
+      - name: Trigger Deployment
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main --repo ${{ github.repository }}
