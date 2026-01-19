@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "email": "user1@test.com",
+      "password": "123456",
+      "role": "User",
+      "name": "User One"
+    },
+    {
+      "id": "u2",
+      "email": "user2@test.com",
+      "password": "123456",
+      "role": "User",
+      "name": "User Two"
+    },
+    {
+      "id": "a1",
+      "email": "admin@test.com",
+      "password": "admin123",
+      "role": "Admin",
+      "name": "Admin User"
+    },
+    {
+      "id": "m1",
+      "email": "moderator@test.com",
+      "password": "mod123",
+      "role": "Moderator",
+      "name": "Moderator User"
+    },
+    {
+      "id": "v1",
+      "email": "viewer@test.com",
+      "password": "viewer123",
+      "role": "Viewer",
+      "name": "Viewer User"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Fix login bug",
+      "description": "The login page crashes on invalid email format.",
+      "priority": "high",
+      "category": "Teknik Destek",
+      "status": "pending",
+      "createdBy": "u1",
+      "createdAt": "2026-01-19T10:00:00Z"
+    },
+    {
+      "id": "t2",
+      "title": "New laptop request",
+      "description": "I need a new laptop for development.",
+      "priority": "normal",
+      "category": "Satın Alma",
+      "status": "approved",
+      "createdBy": "u1",
+      "createdAt": "2026-01-18T14:30:00Z"
+    },
+    {
+      "id": "t3",
+      "title": "Vacation request",
+      "description": "Requesting leave for next week.",
+      "priority": "low",
+      "category": "İzin Talebi",
+      "status": "rejected",
+      "createdBy": "u2",
+      "createdAt": "2026-01-17T09:15:00Z",
+      "rejectionReason": "Project deadline approaching."
+    }
+  ]
+}
