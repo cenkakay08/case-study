@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
 import { Badge } from "@/components/Badge/Badge";
+import { TaskDetailDialog } from "@/components/Dialogs/TaskDetailDialog/TaskDetailDialog";
 import styles from "./Dashboard.module.css";
 import { formatDate } from "@/utils/date";
 
@@ -85,6 +86,9 @@ const Dashboard: React.FC = () => {
                 <th>{t("myRequests.table.priority")}</th>
                 <th>{t("myRequests.table.status")}</th>
                 <th>{t("myRequests.table.date")}</th>
+                <th className={styles.stickyColumn}>
+                  {t("myRequests.table.actions")}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -103,11 +107,14 @@ const Dashboard: React.FC = () => {
                     </Badge>
                   </td>
                   <td>{formatDate(task.createdAt, i18n.language)}</td>
+                  <td className={styles.stickyColumn}>
+                    <TaskDetailDialog task={task} />
+                  </td>
                 </tr>
               ))}
               {recentTasks.length === 0 && (
                 <tr>
-                  <td colSpan={5} style={{ textAlign: "center" }}>
+                  <td colSpan={6} style={{ textAlign: "center" }}>
                     {t("dashboard.noRecentRequests")}
                   </td>
                 </tr>
