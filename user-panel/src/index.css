@@ -9,6 +9,11 @@ body {
   background-color: var(--color-gray-50);
 }
 
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
 #root {
   isolation: isolate;
   display: flex;
