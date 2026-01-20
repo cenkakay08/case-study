@@ -67,10 +67,22 @@
       "category": "KATEGORİ",
       "priority": "ÖNCELİK",
       "status": "DURUM",
-      "date": "TARİH"
+      "date": "TARİH",
+      "actions": "İŞLEMLER"
+    },
+    "details": {
+      "title": "Talep Detayı",
+      "viewDetails": "Detaylar",
+      "description": "Açıklama",
+      "rejectionReason": "Red Nedeni",
+      "close": "Kapat"
     }
   },
   "categories": {
+    "Satın Alma": "Satın Alma",
+    "Teknik Destek": "Teknik Destek",
+    "zin Talebi": "İzin Talebi",
+    "Diğer": "Diğer",
     "Purchasing": "Satın Alma",
     "Technical Support": "Teknik Destek",
     "Leave Request": "İzin Talebi",

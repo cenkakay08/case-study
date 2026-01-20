@@ -104,6 +104,22 @@
   background-color: var(--color-gray-50);
 }
 
+.stickyColumn {
+  position: sticky;
+  right: 0;
+  background-color: var(--color-white);
+  z-index: 10;
+  box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0.1);
+}
+
+.table th.stickyColumn {
+  background-color: var(--color-gray-50);
+}
+
+.table tr:hover td.stickyColumn {
+  background-color: var(--color-gray-50);
+}
+
 .taskTitle {
   font-weight: 600;
   color: var(--color-gray-900);

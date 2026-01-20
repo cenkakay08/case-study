@@ -22,11 +22,7 @@ export function Backdrop({ className, ...props }: BaseDialog.Backdrop.Props) {
   );
 }
 
-export function Popup({
-  children,
-  className,
-  ...props
-}: BaseDialog.Popup.Props) {
+export function Popup({ className, ...props }: BaseDialog.Popup.Props) {
   return (
     <BaseDialog.Popup
       className={`${styles.Popup} ${className || ""}`}
