@@ -4,8 +4,11 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { logout } from "@/store/slices/authSlice";
 import styles from "./MainLayout.module.css";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const MainLayout: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
 
@@ -26,7 +29,7 @@ const MainLayout: React.FC = () => {
               isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
             }
           >
-            Dashboard
+            {t("common.dashboard")}
           </NavLink>
           <NavLink
             to="/create-request"
@@ -34,7 +37,7 @@ const MainLayout: React.FC = () => {
               isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
             }
           >
-            Talep Oluştur
+            {t("common.createRequest")}
           </NavLink>
           <NavLink
             to="/my-requests"
@@ -42,9 +45,10 @@ const MainLayout: React.FC = () => {
               isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
             }
           >
-            Taleplerim
+            {t("common.myRequests")}
           </NavLink>
           <ThemeSwitcher />
+          <LanguageSwitcher />
         </nav>
         <div className={styles.footer}>
           <div className={styles.userInfo}>
@@ -52,7 +56,7 @@ const MainLayout: React.FC = () => {
             <span className={styles.userEmail}>{user?.email}</span>
           </div>
           <button onClick={handleLogout} className={styles.logoutButton}>
-            Çıkış Yap
+            {t("common.logout")}
           </button>
         </div>
       </aside>

@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import * as Switch from "@/components/Switch/Switch";
 import styles from "./ThemeSwitcher.module.css";
 
 export function ThemeSwitcher() {
+  const { t } = useTranslation();
   const [theme, setTheme] = React.useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("theme") as "light" | "dark";
@@ -29,7 +31,7 @@ export function ThemeSwitcher() {
 
   return (
     <div className={styles.themeSwitcher}>
-      <span className={styles.themeLabel}>Karanlık Mod</span>
+      <span className={styles.themeLabel}>{t("common.darkMode")}</span>
       <Switch.Root
         checked={theme === "dark"}
         onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}

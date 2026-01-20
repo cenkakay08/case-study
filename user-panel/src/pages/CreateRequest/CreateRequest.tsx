@@ -1,4 +1,5 @@
-import { revalidateLogic, useForm } from "@tanstack/react-form";
+import React from "react";
+import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import * as Field from "@/components/Field/Field";
 import * as Select from "@/components/Select/Select";
@@ -6,22 +7,28 @@ import { Button } from "@/components/Button/Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createTaskAsync } from "@/store/slices/taskSlice";
 import styles from "./CreateRequest.module.css";
+import { useTranslation } from "react-i18next";
 
-const requestSchema = z.object({
-  title: z.string().min(3, "Başlık en az 3 karakter olmalıdır"),
-  description: z.string().min(10, "Açıklama en az 10 karakter olmalıdır"),
-  category: z.string().min(1, "Kategori seçilmelidir"),
-  priority: z.enum(["low", "normal", "high", "urgent"], "Öncelik seçilmelidir"),
-});
+const getRequestSchema = (t: (key: string) => string) =>
+  z.object({
+    title: z.string().min(3, t("createRequest.validation.titleMin")),
+    description: z
+      .string()
+      .min(10, t("createRequest.validation.descriptionMin")),
+    category: z.string().min(1, t("createRequest.validation.categoryRequired")),
+    priority: z.enum(["low", "normal", "high", "urgent"] as const, {
+      message: t("createRequest.validation.priorityRequired"),
+    }),
+  });
 
-const CATEGORIES = ["Satın Alma", "Teknik Destek", "İzin Talebi", "Diğer"];
-
-const PRIORITIES = [
-  { value: "low", label: "Düşük" },
-  { value: "normal", label: "Normal" },
-  { value: "high", label: "Yüksek" },
-  { value: "urgent", label: "Acil" },
+const CATEGORIES = [
+  "Purchasing",
+  "Technical Support",
+  "Leave Request",
+  "Other",
 ];
+
+const PRIORITIES = ["low", "normal", "high", "urgent"] as const;
 
 const createRequestDefaultValues = {
   title: "",
@@ -31,8 +38,11 @@ const createRequestDefaultValues = {
 };
 
 export default function CreateRequest() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.tasks);
+
+  const requestSchema = React.useMemo(() => getRequestSchema(t), [t]);
 
   const form = useForm({
     defaultValues: createRequestDefaultValues,
@@ -52,8 +62,8 @@ export default function CreateRequest() {
     <div className={styles.container}>
       <div className={styles.card}>
         <header className={styles.header}>
-          <h1 className={styles.title}>Talep Oluştur</h1>
-          <p className={styles.subtitle}>İhtiyacınız olan desteği belirtin</p>
+          <h1 className={styles.title}>{t("createRequest.title")}</h1>
+          <p className={styles.subtitle}>{t("createRequest.subtitle")}</p>
         </header>
 
         <form
@@ -68,9 +78,11 @@ export default function CreateRequest() {
             name="title"
             children={(field) => (
               <Field.Root className={styles.fullWidth}>
-                <Field.Label required>Başlık</Field.Label>
+                <Field.Label required>
+                  {t("createRequest.form.titleLabel")}
+                </Field.Label>
                 <Field.Control
-                  placeholder="Talep başlığı..."
+                  placeholder={t("createRequest.form.titlePlaceholder")}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
@@ -86,13 +98,21 @@ export default function CreateRequest() {
             name="category"
             children={(field) => (
               <Field.Root>
-                <Field.Label required>Kategori</Field.Label>
+                <Field.Label required>
+                  {t("createRequest.form.categoryLabel")}
+                </Field.Label>
                 <Select.Root
                   value={field.state.value}
                   onValueChange={(val) => field.handleChange(val ?? "")}
                 >
                   <Select.Trigger>
-                    <Select.Value placeholder="Kategori seçin" />
+                    <Select.Value
+                      placeholder={t("createRequest.form.categoryPlaceholder")}
+                    >
+                      {field.state.value
+                        ? t(`categories.${field.state.value}`)
+                        : ""}
+                    </Select.Value>
                     <Select.Icon>
                       <Select.ChevronUpDownIcon />
                     </Select.Icon>
@@ -103,7 +123,9 @@ export default function CreateRequest() {
                         <Select.List>
                           {CATEGORIES.map((cat) => (
                             <Select.Item key={cat} value={cat}>
-                              <Select.ItemText>{cat}</Select.ItemText>
+                              <Select.ItemText>
+                                {t(`categories.${cat}`)}
+                              </Select.ItemText>
                               <Select.ItemIndicator>
                                 <Select.CheckIcon />
                               </Select.ItemIndicator>
@@ -125,7 +147,9 @@ export default function CreateRequest() {
             name="priority"
             children={(field) => (
               <Field.Root>
-                <Field.Label required>Öncelik</Field.Label>
+                <Field.Label required>
+                  {t("createRequest.form.priorityLabel")}
+                </Field.Label>
                 <Select.Root
                   value={field.state.value}
                   onValueChange={(val) =>
@@ -133,11 +157,12 @@ export default function CreateRequest() {
                   }
                 >
                   <Select.Trigger>
-                    <Select.Value placeholder="Öncelik seçin">
-                      {
-                        PRIORITIES.find((p) => p.value === field.state.value)
-                          ?.label
-                      }
+                    <Select.Value
+                      placeholder={t("createRequest.form.priorityPlaceholder")}
+                    >
+                      {field.state.value
+                        ? t(`priorities.${field.state.value}`)
+                        : ""}
                     </Select.Value>
                     <Select.Icon>
                       <Select.ChevronUpDownIcon />
@@ -148,8 +173,10 @@ export default function CreateRequest() {
                       <Select.Popup>
                         <Select.List>
                           {PRIORITIES.map((p) => (
-                            <Select.Item key={p.value} value={p.value}>
-                              <Select.ItemText>{p.label}</Select.ItemText>
+                            <Select.Item key={p} value={p}>
+                              <Select.ItemText>
+                                {t(`priorities.${p}`)}
+                              </Select.ItemText>
                               <Select.ItemIndicator>
                                 <Select.CheckIcon />
                               </Select.ItemIndicator>
@@ -171,7 +198,9 @@ export default function CreateRequest() {
             name="description"
             children={(field) => (
               <Field.Root className={styles.fullWidth}>
-                <Field.Label required>Açıklama</Field.Label>
+                <Field.Label required>
+                  {t("createRequest.form.descriptionLabel")}
+                </Field.Label>
                 <Field.Control
                   render={
                     <textarea
@@ -182,7 +211,7 @@ export default function CreateRequest() {
                       }}
                     />
                   }
-                  placeholder="Talebiniz hakkında detaylı bilgi verin..."
+                  placeholder={t("createRequest.form.descriptionPlaceholder")}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e: any) => field.handleChange(e.target.value)}
@@ -205,8 +234,8 @@ export default function CreateRequest() {
                     style={{ width: "100%" }}
                   >
                     {isSubmitting || isLoading
-                      ? "Oluşturuluyor..."
-                      : "Talep Gönder"}
+                      ? t("createRequest.form.submitting")
+                      : t("createRequest.form.submitButton")}
                   </Button>
                 );
               }}

@@ -1,0 +1,89 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "createRequest": "Create Request",
+    "myRequests": "My Requests",
+    "logout": "Logout",
+    "darkMode": "Dark Mode",
+    "loading": "Loading...",
+    "success": "Success",
+    "error": "Error"
+  },
+  "login": {
+    "title": "Welcome Back",
+    "subtitle": "Sign in to access your user panel",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "example@email.com",
+    "passwordLabel": "Password",
+    "submitButton": "Sign In",
+    "signingIn": "Signing In...",
+    "invalidCredentials": "Invalid email or password",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 6 characters"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}!",
+    "subtitle": "Here is an overview of your requests and system status.",
+    "totalRequests": "Total Requests",
+    "pendingRequests": "Pending",
+    "approvedRequests": "Approved",
+    "rejectedRequests": "Rejected",
+    "recentRequests": "Recent Requests",
+    "noRecentRequests": "No requests found yet."
+  },
+  "createRequest": {
+    "title": "Create Request",
+    "subtitle": "Specify the support you need",
+    "form": {
+      "titleLabel": "Title",
+      "titlePlaceholder": "Request title...",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "Select category",
+      "priorityLabel": "Priority",
+      "priorityPlaceholder": "Select priority",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Provide detailed info about your request...",
+      "submitButton": "Send Request",
+      "submitting": "Creating..."
+    },
+    "validation": {
+      "titleMin": "Title must be at least 3 characters",
+      "descMin": "Description must be at least 10 characters",
+      "categoryRequired": "Category must be selected",
+      "priorityRequired": "Priority must be selected"
+    }
+  },
+  "myRequests": {
+    "title": "My Requests",
+    "subtitle": "Track the status of your requests here",
+    "searchPlaceholder": "Search requests...",
+    "statusFilterPlaceholder": "All Statuses",
+    "table": {
+      "request": "REQUEST",
+      "category": "CATEGORY",
+      "priority": "PRIORITY",
+      "status": "STATUS",
+      "date": "DATE"
+    }
+  },
+  "categories": {
+    "Purchasing": "Purchasing",
+    "Technical Support": "Technical Support",
+    "Leave Request": "Leave Request",
+    "Other": "Other"
+  },
+  "priorities": {
+    "low": "Low",
+    "normal": "Normal",
+    "high": "High",
+    "urgent": "Urgent"
+  },
+  "status": {
+    "all": "All Statuses",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  }
+}

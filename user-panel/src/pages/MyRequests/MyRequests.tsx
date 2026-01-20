@@ -4,19 +4,21 @@ import { fetchTasksAsync } from "@/store/slices/taskSlice";
 import { Badge } from "@/components/Badge/Badge";
 import * as Select from "@/components/Select/Select";
 import styles from "./MyRequests.module.css";
-
-const STATUS_FILTERS = [
-  { value: "all", label: "Tüm Durumlar" },
-  { value: "pending", label: "Bekleyenler" },
-  { value: "approved", label: "Onaylananlar" },
-  { value: "rejected", label: "Reddedilenler" },
-];
+import { useTranslation } from "react-i18next";
 
 export default function MyRequests() {
+  const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { tasks, isLoading } = useAppSelector((state) => state.tasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+
+  const STATUS_FILTERS = [
+    { value: "all", label: t("status.all") },
+    { value: "pending", label: t("status.pending") },
+    { value: "approved", label: t("status.approved") },
+    { value: "rejected", label: t("status.rejected") },
+  ];
 
   useEffect(() => {
     const promise = dispatch(fetchTasksAsync());
@@ -37,27 +39,28 @@ export default function MyRequests() {
   }, [tasks, searchTerm, statusFilter]);
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("tr-TR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    return new Date(dateString).toLocaleDateString(
+      i18n.language === "tr" ? "tr-TR" : "en-US",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      },
+    );
   };
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Taleplerim</h1>
-        <p className={styles.subtitle}>
-          Oluşturduğunuz taleplerin güncel durumunu buradan takip edebilirsiniz
-        </p>
+        <h1 className={styles.title}>{t("myRequests.title")}</h1>
+        <p className={styles.subtitle}>{t("myRequests.subtitle")}</p>
       </header>
 
       <div className={styles.controls}>
         <div className={styles.searchWrapper}>
           <input
             type="text"
-            placeholder="Talep ara..."
+            placeholder={t("myRequests.searchPlaceholder")}
             className={styles.searchInput}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -70,7 +73,9 @@ export default function MyRequests() {
             onValueChange={(val) => setStatusFilter(val ?? "all")}
           >
             <Select.Trigger style={{ minWidth: "12rem" }}>
-              <Select.Value placeholder="Durum Filtresi">
+              <Select.Value
+                placeholder={t("myRequests.statusFilterPlaceholder")}
+              >
                 {STATUS_FILTERS.find((f) => f.value === statusFilter)?.label}
               </Select.Value>
               <Select.Icon>
@@ -101,11 +106,11 @@ export default function MyRequests() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Talep</th>
-              <th>Kategori</th>
-              <th>Öncelik</th>
-              <th>Durum</th>
-              <th>Tarih</th>
+              <th>{t("myRequests.table.request")}</th>
+              <th>{t("myRequests.table.category")}</th>
+              <th>{t("myRequests.table.priority")}</th>
+              <th>{t("myRequests.table.status")}</th>
+              <th>{t("myRequests.table.date")}</th>
             </tr>
           </thead>
           <tbody>
@@ -114,14 +119,20 @@ export default function MyRequests() {
                 <tr key={task.id}>
                   <td>
                     <span className={styles.taskTitle}>{task.title}</span>
-                    <span className={styles.taskCategory}>{task.category}</span>
+                    <span className={styles.taskCategory}>
+                      {t(`categories.${task.category}`)}
+                    </span>
                   </td>
-                  <td>{task.category}</td>
+                  <td>{t(`categories.${task.category}`)}</td>
                   <td>
-                    <Badge type={task.priority}>{task.priority}</Badge>
+                    <Badge type={task.priority}>
+                      {t(`priorities.${task.priority}`)}
+                    </Badge>
                   </td>
                   <td>
-                    <Badge type={task.status}>{task.status}</Badge>
+                    <Badge type={task.status}>
+                      {t(`status.${task.status}`)}
+                    </Badge>
                   </td>
                   <td>{formatDate(task.createdAt)}</td>
                 </tr>
@@ -129,7 +140,9 @@ export default function MyRequests() {
             ) : (
               <tr>
                 <td colSpan={5} className={styles.emptyState}>
-                  {isLoading ? "Yükleniyor..." : "Talep bulunamadı."}
+                  {isLoading
+                    ? t("common.loading")
+                    : t("dashboard.noRecentRequests")}
                 </td>
               </tr>
             )}
