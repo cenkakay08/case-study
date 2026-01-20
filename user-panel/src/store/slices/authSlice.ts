@@ -3,13 +3,13 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { toastManager } from "../../components/Toast/Toast";
-import { router } from "../../routes/router";
+import { toastManager } from "@/components/Toast/Toast";
+import { router } from "@/routes/router";
 import {
   loginApi,
   type LoginPayload,
   type User,
-} from "../../api/login/loginController";
+} from "@/api/login/loginController";
 
 interface AuthState {
   user: User | null;

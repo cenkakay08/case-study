@@ -1,5 +1,5 @@
 import axios from "axios";
-import { logout } from "../store/slices/authSlice";
+import { logout } from "@/store/slices/authSlice";
 
 let store: any;
 

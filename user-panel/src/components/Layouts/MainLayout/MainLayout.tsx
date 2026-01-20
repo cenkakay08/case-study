@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { logout } from "../../../store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { logout } from "@/store/slices/authSlice";
 import styles from "./MainLayout.module.css";
 
 const MainLayout: React.FC = () => {

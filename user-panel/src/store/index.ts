@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./slices/authSlice";
-import taskReducer from "./slices/taskSlice";
-import { authListenerMiddleware } from "./listenerMiddleware";
+import authReducer from "@/store/slices/authSlice";
+import taskReducer from "@/store/slices/taskSlice";
+import { authListenerMiddleware } from "@/store/listenerMiddleware";
 
 export const store = configureStore({
   reducer: {

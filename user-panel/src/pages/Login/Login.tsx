@@ -1,11 +1,11 @@
 import React from "react";
 import { revalidateLogic, useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import * as Field from "../../components/Field/Field";
+import * as Field from "@/components/Field/Field";
 import styles from "./Login.module.css";
-import { Button } from "../../components/Button/Button";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { loginAsyncThunk } from "../../store/slices/authSlice";
+import { Button } from "@/components/Button/Button";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { loginAsyncThunk } from "@/store/slices/authSlice";
 
 const userSchema = z.object({
   email: z

@@ -1,6 +1,6 @@
-import * as Toast from "../../Toast/Toast";
+import * as Toast from "@/components/Toast/Toast";
 import { Outlet } from "react-router";
-import { ToastList } from "../../ToastList.tsx/ToastList";
+import { ToastList } from "@/components/ToastList.tsx/ToastList";
 
 export default function ProviderLayout() {
   return (
