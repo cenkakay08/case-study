@@ -67,10 +67,22 @@
       "category": "CATEGORY",
       "priority": "PRIORITY",
       "status": "STATUS",
-      "date": "DATE"
+      "date": "DATE",
+      "actions": "ACTIONS"
+    },
+    "details": {
+      "title": "Request Details",
+      "viewDetails": "View Details",
+      "description": "Description",
+      "rejectionReason": "Rejection Reason",
+      "close": "Close"
     }
   },
   "categories": {
+    "Satın Alma": "Purchasing",
+    "Teknik Destek": "Technical Support",
+    "zin Talebi": "Leave Request",
+    "Diğer": "Other",
     "Purchasing": "Purchasing",
     "Technical Support": "Technical Support",
     "Leave Request": "Leave Request",

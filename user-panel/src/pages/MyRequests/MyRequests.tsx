@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
 import { Badge } from "@/components/Badge/Badge";
 import * as Select from "@/components/Select/Select";
+import { TaskDetailDialog } from "@/components/Dialogs/TaskDetailDialog/TaskDetailDialog";
 import styles from "./MyRequests.module.css";
 import { useTranslation } from "react-i18next";
 
@@ -111,6 +112,9 @@ export default function MyRequests() {
               <th>{t("myRequests.table.priority")}</th>
               <th>{t("myRequests.table.status")}</th>
               <th>{t("myRequests.table.date")}</th>
+              <th className={styles.stickyColumn}>
+                {t("myRequests.table.actions")}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -135,11 +139,14 @@ export default function MyRequests() {
                     </Badge>
                   </td>
                   <td>{formatDate(task.createdAt)}</td>
+                  <td className={styles.stickyColumn}>
+                    <TaskDetailDialog task={task} />
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={5} className={styles.emptyState}>
+                <td colSpan={6} className={styles.emptyState}>
                   {isLoading
                     ? t("common.loading")
                     : t("dashboard.noRecentRequests")}
