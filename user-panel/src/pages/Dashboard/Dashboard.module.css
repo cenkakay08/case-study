@@ -99,7 +99,7 @@
 .error {
   padding: 1rem;
   background-color: var(--color-red-50);
-  color: var(--color-red-700);
+  color: var(--color-red-600);
   border-radius: 0.375rem;
   margin-bottom: 1.5rem;
   border: 1px solid var(--color-red-200);
