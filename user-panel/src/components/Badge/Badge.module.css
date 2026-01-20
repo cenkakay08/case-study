@@ -1,0 +1,46 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Priority Shades */
+.low {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+.normal {
+  background-color: var(--color-blue-100);
+  color: var(--color-blue-700);
+}
+
+.high {
+  background-color: var(--color-orange-100);
+  color: var(--color-orange-700);
+}
+
+.urgent {
+  background-color: var(--color-red-100);
+  color: var(--color-red-700);
+}
+
+/* Status Shades */
+.pending {
+  background-color: var(--color-yellow-100);
+  color: var(--color-yellow-700);
+}
+
+.approved {
+  background-color: var(--color-green-100);
+  color: var(--color-green-700);
+}
+
+.rejected {
+  background-color: var(--color-red-100);
+  color: var(--color-red-700);
+}
