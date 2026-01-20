@@ -5,6 +5,7 @@ import { Badge } from "@/components/Badge/Badge";
 import * as Select from "@/components/Select/Select";
 import styles from "./MyRequests.module.css";
 import { useTranslation } from "react-i18next";
+import { formatDate } from "@/utils/date";
 
 export default function MyRequests() {
   const { t, i18n } = useTranslation();
@@ -37,17 +38,6 @@ export default function MyRequests() {
       return matchesSearch && matchesStatus;
     });
   }, [tasks, searchTerm, statusFilter]);
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString(
-      i18n.language === "tr" ? "tr-TR" : "en-US",
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      },
-    );
-  };
 
   return (
     <div className={styles.container}>
@@ -134,7 +124,7 @@ export default function MyRequests() {
                       {t(`status.${task.status}`)}
                     </Badge>
                   </td>
-                  <td>{formatDate(task.createdAt)}</td>
+                  <td>{formatDate(task.createdAt, i18n.language)}</td>
                 </tr>
               ))
             ) : (

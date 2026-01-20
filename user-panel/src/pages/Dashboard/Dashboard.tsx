@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
 import { Badge } from "@/components/Badge/Badge";
 import styles from "./Dashboard.module.css";
+import { formatDate } from "@/utils/date";
 
 const Dashboard: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -101,11 +102,7 @@ const Dashboard: React.FC = () => {
                       {t(`status.${task.status}`)}
                     </Badge>
                   </td>
-                  <td>
-                    {new Date(task.createdAt).toLocaleDateString(
-                      i18n.language === "tr" ? "tr-TR" : "en-US",
-                    )}
-                  </td>
+                  <td>{formatDate(task.createdAt, i18n.language)}</td>
                 </tr>
               ))}
               {recentTasks.length === 0 && (
