@@ -9,6 +9,7 @@ import {
   createTaskApi,
   type Task,
 } from "@/api/tasks/taskController";
+import i18n from "@/i18n/config";
 
 interface TaskState {
   tasks: Task[];
@@ -33,7 +34,7 @@ export const fetchTasksAsync = createAsyncThunk(
         return rejectWithValue("Aborted");
       }
       return rejectWithValue(
-        error.response?.data?.message || "Görevler yüklenemedi",
+        error.response?.data?.message || "common.fetchError",
       );
     }
   },
@@ -49,20 +50,20 @@ export const createTaskAsync = createAsyncThunk(
       const response = await createTaskApi(task);
 
       toastManager.add({
-        title: "Başarılı",
-        description: "Talebiniz başarıyla oluşturuldu.",
+        title: i18n.t("common.success"),
+        description: i18n.t("success.requestCreated"),
       });
 
       return response.data;
     } catch (error: any) {
-      const message = error.response?.data?.message || "Talep oluşturulamadı";
+      const messageKey = error.response?.data?.message || "common.createError";
 
       toastManager.add({
-        title: "Hata",
-        description: message,
+        title: i18n.t("common.error"),
+        description: i18n.t(messageKey),
       });
 
-      return rejectWithValue(message);
+      return rejectWithValue(messageKey);
     }
   },
 );
