@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
 import { Badge } from "@/components/Badge/Badge";
 import styles from "./Dashboard.module.css";
 
 const Dashboard: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
   const dispatch = useAppDispatch();
@@ -32,70 +34,84 @@ const Dashboard: React.FC = () => {
     .slice(0, 5);
 
   if (isLoading && tasks.length === 0) {
-    return <div className={styles.loading}>Yükleniyor...</div>;
+    return <div className={styles.loading}>{t("common.loading")}</div>;
   }
 
   return (
     <div className={styles.dashboardContainer}>
       <header className={styles.welcomeSection}>
-        <h1>Dashboard</h1>
-        <p>Hoş geldin, {user?.name}!</p>
+        <h1>{t("common.dashboard")}</h1>
+        <p>{t("dashboard.welcome", { name: user?.name })}</p>
       </header>
 
-      {error && <div className={styles.error}>{error}</div>}
+      {error && <div className={styles.error}>{t(error)}</div>}
 
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <span className={styles.statLabel}>Toplam Talep</span>
+          <span className={styles.statLabel}>
+            {t("dashboard.totalRequests")}
+          </span>
           <span className={styles.statValue}>{totalCount}</span>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statLabel}>Bekleyen</span>
+          <span className={styles.statLabel}>
+            {t("dashboard.pendingRequests")}
+          </span>
           <span className={styles.statValue}>{pendingCount}</span>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statLabel}>Onaylanan</span>
+          <span className={styles.statLabel}>
+            {t("dashboard.approvedRequests")}
+          </span>
           <span className={styles.statValue}>{approvedCount}</span>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statLabel}>Reddedilen</span>
+          <span className={styles.statLabel}>
+            {t("dashboard.rejectedRequests")}
+          </span>
           <span className={styles.statValue}>{rejectedCount}</span>
         </div>
       </div>
 
       <section className={styles.recentSection}>
-        <h2>Son Taleplerim</h2>
+        <h2>{t("dashboard.recentRequests")}</h2>
         <div className={styles.tableWrapper}>
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Başlık</th>
-                <th>Kategori</th>
-                <th>Öncelik</th>
-                <th>Durum</th>
-                <th>Tarih</th>
+                <th>{t("myRequests.table.request")}</th>
+                <th>{t("myRequests.table.category")}</th>
+                <th>{t("myRequests.table.priority")}</th>
+                <th>{t("myRequests.table.status")}</th>
+                <th>{t("myRequests.table.date")}</th>
               </tr>
             </thead>
             <tbody>
               {recentTasks.map((task) => (
                 <tr key={task.id}>
                   <td>{task.title}</td>
-                  <td>{task.category}</td>
+                  <td>{t(`categories.${task.category}`)}</td>
                   <td>
-                    <Badge type={task.priority}>{task.priority}</Badge>
+                    <Badge type={task.priority}>
+                      {t(`priorities.${task.priority}`)}
+                    </Badge>
                   </td>
                   <td>
-                    <Badge type={task.status}>{task.status}</Badge>
+                    <Badge type={task.status}>
+                      {t(`status.${task.status}`)}
+                    </Badge>
                   </td>
                   <td>
-                    {new Date(task.createdAt).toLocaleDateString("tr-TR")}
+                    {new Date(task.createdAt).toLocaleDateString(
+                      i18n.language === "tr" ? "tr-TR" : "en-US",
+                    )}
                   </td>
                 </tr>
               ))}
               {recentTasks.length === 0 && (
                 <tr>
                   <td colSpan={5} style={{ textAlign: "center" }}>
-                    Henüz talep bulunmuyor.
+                    {t("dashboard.noRecentRequests")}
                   </td>
                 </tr>
               )}
