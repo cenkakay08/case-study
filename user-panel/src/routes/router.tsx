@@ -1,6 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import Login from "@/pages/Login/Login";
 import Dashboard from "@/pages/Dashboard/Dashboard";
+import CreateRequest from "@/pages/CreateRequest/CreateRequest";
+import MyRequests from "@/pages/MyRequests/MyRequests";
 import ProviderLayout from "@/components/Layouts/ProviderLayout/ProviderLayout";
 import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
@@ -30,11 +32,11 @@ export const router = createBrowserRouter([
               },
               {
                 path: "create-request",
-                element: <div>Talep Oluştur (Yapım Aşamasında)</div>,
+                element: <CreateRequest />,
               },
               {
                 path: "my-requests",
-                element: <div>Taleplerim (Yapım Aşamasında)</div>,
+                element: <MyRequests />,
               },
             ],
           },

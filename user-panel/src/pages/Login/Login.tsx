@@ -18,15 +18,17 @@ const userSchema = z.object({
     .min(6, { message: "Şifre en az 6 karakter olmalıdır" }),
 });
 
+const loginDefaultValues = {
+  email: "user1@test.com",
+  password: "123456",
+};
+
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isLoading, error } = useAppSelector((state) => state.auth);
 
   const form = useForm({
-    defaultValues: {
-      email: "user1@test.com",
-      password: "123456",
-    },
+    defaultValues: loginDefaultValues,
     validationLogic: revalidateLogic({
       mode: "submit",
       modeAfterSubmission: "change",

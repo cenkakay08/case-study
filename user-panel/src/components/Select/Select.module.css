@@ -141,17 +141,17 @@
   box-sizing: border-box;
   outline: 0;
   font-size: 0.875rem;
-  line-height: 1rem;
-  padding-block: 0.5rem;
-  padding-left: 0.625rem;
+  line-height: 1.25rem;
+  padding-block: 0.625rem;
+  padding-left: 2.5rem;
   padding-right: 1rem;
-  display: grid;
-  gap: 0.5rem;
+  display: flex;
   align-items: center;
-  grid-template-columns: 0.75rem 1fr;
+  position: relative;
   cursor: default;
   -webkit-user-select: none;
   user-select: none;
+  min-height: 2.5rem;
 
   @media (pointer: coarse) {
     padding-block: 0.625rem;
@@ -181,7 +181,13 @@
 }
 
 .ItemIndicator {
-  grid-column-start: 1;
+  position: absolute;
+  left: 0.875rem;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ItemIndicatorIcon {
@@ -191,7 +197,7 @@
 }
 
 .ItemText {
-  grid-column-start: 2;
+  flex: 1;
 }
 
 .ScrollArrow {

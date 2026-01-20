@@ -1,6 +1,11 @@
 .dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 .welcomeSection {
