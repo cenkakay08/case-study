@@ -3,6 +3,7 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import ProviderLayout from "../components/Layouts/ProviderLayout";
 import AuthGuardLayout from "../components/Layouts/AuthGuardLayout";
+import MainLayout from "../components/Layouts/MainLayout";
 
 export const router = createBrowserRouter([
   {
@@ -21,8 +22,21 @@ export const router = createBrowserRouter([
         element: <AuthGuardLayout />,
         children: [
           {
-            path: "dashboard",
-            element: <Dashboard />,
+            element: <MainLayout />,
+            children: [
+              {
+                path: "dashboard",
+                element: <Dashboard />,
+              },
+              {
+                path: "create-request",
+                element: <div>Talep Oluştur (Yapım Aşamasında)</div>,
+              },
+              {
+                path: "my-requests",
+                element: <div>Taleplerim (Yapım Aşamasında)</div>,
+              },
+            ],
           },
         ],
       },

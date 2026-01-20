@@ -1,19 +1,108 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { logout } from "../store/slices/authSlice";
-import { Button } from "../components/Button/Button";
+import { fetchTasksAsync } from "../store/slices/taskSlice";
+import { Badge } from "../components/Badge/Badge";
+import styles from "./Dashboard.module.css";
 
 const Dashboard: React.FC = () => {
   const { user } = useAppSelector((state) => state.auth);
+  const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    const promise = dispatch(fetchTasksAsync());
+
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch]);
+
+  // Statistics calculations
+  const myTasks = tasks.filter((t) => t.createdBy === user?.id);
+  const totalCount = myTasks.length;
+  const pendingCount = myTasks.filter((t) => t.status === "pending").length;
+  const approvedCount = myTasks.filter((t) => t.status === "approved").length;
+  const rejectedCount = myTasks.filter((t) => t.status === "rejected").length;
+
+  const recentTasks = [...myTasks]
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )
+    .slice(0, 5);
+
+  if (isLoading && tasks.length === 0) {
+    return <div className={styles.loading}>Yükleniyor...</div>;
+  }
+
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Dashboard</h1>
-      <p>Hoş geldin, {user?.name || "Kullanıcı"}!</p>
-      <div style={{ marginTop: "2rem" }}>
-        <Button onClick={() => dispatch(logout())}>Çıkış Yap</Button>
+    <div className={styles.dashboardContainer}>
+      <header className={styles.welcomeSection}>
+        <h1>Dashboard</h1>
+        <p>Hoş geldin, {user?.name}!</p>
+      </header>
+
+      {error && <div className={styles.error}>{error}</div>}
+
+      <div className={styles.statsGrid}>
+        <div className={styles.statCard}>
+          <span className={styles.statLabel}>Toplam Talep</span>
+          <span className={styles.statValue}>{totalCount}</span>
+        </div>
+        <div className={styles.statCard}>
+          <span className={styles.statLabel}>Bekleyen</span>
+          <span className={styles.statValue}>{pendingCount}</span>
+        </div>
+        <div className={styles.statCard}>
+          <span className={styles.statLabel}>Onaylanan</span>
+          <span className={styles.statValue}>{approvedCount}</span>
+        </div>
+        <div className={styles.statCard}>
+          <span className={styles.statLabel}>Reddedilen</span>
+          <span className={styles.statValue}>{rejectedCount}</span>
+        </div>
       </div>
+
+      <section className={styles.recentSection}>
+        <h2>Son Taleplerim</h2>
+        <div className={styles.tableWrapper}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Başlık</th>
+                <th>Kategori</th>
+                <th>Öncelik</th>
+                <th>Durum</th>
+                <th>Tarih</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentTasks.map((task) => (
+                <tr key={task.id}>
+                  <td>{task.title}</td>
+                  <td>{task.category}</td>
+                  <td>
+                    <Badge type={task.priority}>{task.priority}</Badge>
+                  </td>
+                  <td>
+                    <Badge type={task.status}>{task.status}</Badge>
+                  </td>
+                  <td>
+                    {new Date(task.createdAt).toLocaleDateString("tr-TR")}
+                  </td>
+                </tr>
+              ))}
+              {recentTasks.length === 0 && (
+                <tr>
+                  <td colSpan={5} style={{ textAlign: "center" }}>
+                    Henüz talep bulunmuyor.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 };

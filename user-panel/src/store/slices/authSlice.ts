@@ -43,8 +43,8 @@ export const loginAsyncThunk = createAsyncThunk(
   "auth/login",
   async (credentials: LoginPayload, { rejectWithValue }) => {
     try {
-      const data = await loginApi(credentials);
-      const { user, token } = data;
+      const response = await loginApi(credentials);
+      const { user, token } = response.data;
 
       toastManager.add({
         title: "Başarılı",
@@ -76,9 +76,6 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
     },
-    clearError: (state) => {
-      state.error = null;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -102,5 +99,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, clearError } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;
