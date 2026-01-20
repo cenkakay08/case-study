@@ -1077,6 +1077,26 @@
       "status": "pending",
       "createdBy": "u1",
       "createdAt": "2025-12-31T09:11:04.400Z"
+    },
+    {
+      "id": "t101",
+      "title": "asdsadad",
+      "description": "asdadsadadsasdasdasd",
+      "category": "Teknik Destek",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-20T13:00:51.011Z",
+      "status": "pending"
+    },
+    {
+      "id": "t102",
+      "title": "asdadaasda",
+      "description": "asdasdasdasdsadad",
+      "category": "İzin Talebi",
+      "priority": "urgent",
+      "createdBy": "u1",
+      "createdAt": "2026-01-20T13:01:00.756Z",
+      "status": "pending"
     }
   ]
 }

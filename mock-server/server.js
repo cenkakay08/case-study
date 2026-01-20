@@ -22,6 +22,9 @@ app.use(
 );
 app.use(bodyParser.json());
 
+// Delay middleware
+app.use((req, res, next) => setTimeout(next, 300));
+
 // Load data from db.json
 const dbPath = path.join(__dirname, "db.json");
 let db = JSON.parse(fs.readFileSync(dbPath, "utf8"));

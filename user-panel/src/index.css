@@ -18,6 +18,7 @@ body {
 }
 
 :root {
+  color-scheme: light dark;
   --color-white: oklch(100% 0 0);
   --color-black: oklch(0% 0 0);
 
@@ -67,12 +68,12 @@ body {
     --color-blue-600: oklch(70% 0.18 264);
     --color-blue-700: oklch(80% 0.14 264);
 
-    --color-red-50: oklch(97% 0.01 24);
-    --color-red-100: oklch(93% 0.03 24);
-    --color-red-200: oklch(88% 0.08 24);
-    --color-red-600: oklch(55% 0.2 24);
-    --color-red-700: oklch(45% 0.18 24);
-    --color-red-800: oklch(35% 0.16 24);
+    --color-red-50: oklch(25% 0.04 24);
+    --color-red-100: oklch(30% 0.06 24);
+    --color-red-200: oklch(35% 0.08 24);
+    --color-red-600: oklch(70% 0.18 24);
+    --color-red-700: oklch(80% 0.14 24);
+    --color-red-800: oklch(85% 0.12 24);
 
     --color-green-50: oklch(25% 0.04 145);
     --color-green-100: oklch(30% 0.06 145);
