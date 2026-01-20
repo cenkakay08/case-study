@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     )
-    .slice(0, 5);
+    .slice(0, 10);
 
   if (isLoading && tasks.length === 0) {
     return <div className={styles.loading}>{t("common.loading")}</div>;
