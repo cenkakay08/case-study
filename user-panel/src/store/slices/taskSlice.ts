@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { fetchTasksApi, type Task } from "../../api/tasks/taskController";
+import { fetchTasksApi, type Task } from "@/api/tasks/taskController";
 
 interface TaskState {
   tasks: Task[];

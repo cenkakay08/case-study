@@ -1,6 +1,6 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
-import { loginAsyncThunk, logout } from "./slices/authSlice";
-import type { RootState } from "./index";
+import { loginAsyncThunk, logout } from "@/store/slices/authSlice";
+import type { RootState } from "@/store/index";
 
 export const authListenerMiddleware = createListenerMiddleware();
 
