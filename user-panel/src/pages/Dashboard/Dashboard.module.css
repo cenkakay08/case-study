@@ -79,7 +79,7 @@
 
 .table th {
   padding: 0.75rem 1rem;
-  border-bottom: 2px solid var(--color-gray-100);
+  border-bottom: 2px solid var(--color-gray-200);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-gray-700);
@@ -87,9 +87,31 @@
 
 .table td {
   padding: 1rem;
-  border-bottom: 1px solid var(--color-gray-100);
+  border-bottom: 1px solid var(--color-gray-200);
   font-size: 0.875rem;
   color: var(--color-gray-800);
+}
+
+.stickyColumn {
+  position: sticky;
+  right: 0;
+  background-color: var(--color-white);
+  z-index: 10;
+  box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.table th.stickyColumn {
+  background-color: var(--color-white);
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+.table tr:hover td.stickyColumn {
+  background-color: var(--color-gray-50);
+}
+
+.table tr:hover {
+  background-color: var(--color-gray-50);
 }
 
 .loading {
