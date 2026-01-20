@@ -16,6 +16,9 @@
   line-height: 1.5rem;
   color: var(--color-gray-900);
   user-select: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+  width: max-content;
 
   @media (hover: hover) {
     &:hover {
