@@ -3,6 +3,7 @@ import { Outlet, NavLink } from "react-router";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { logout } from "@/store/slices/authSlice";
 import styles from "./MainLayout.module.css";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
 
 const MainLayout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -43,6 +44,7 @@ const MainLayout: React.FC = () => {
           >
             Taleplerim
           </NavLink>
+          <ThemeSwitcher />
         </nav>
         <div className={styles.footer}>
           <div className={styles.userInfo}>

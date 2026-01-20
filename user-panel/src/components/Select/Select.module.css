@@ -15,7 +15,7 @@
   outline: 0;
   border: 1px solid var(--color-gray-200);
   border-radius: 0.375rem;
-  background-color: canvas;
+  background-color: var(--color-white);
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -54,7 +54,7 @@
 .Popup {
   box-sizing: border-box;
   border-radius: 0.375rem;
-  background-color: canvas;
+  background-color: var(--color-white);
   background-clip: padding-box;
   color: var(--color-gray-900);
   min-width: var(--anchor-width);
@@ -122,7 +122,7 @@
 }
 
 .ArrowFill {
-  fill: canvas;
+  fill: var(--color-white);
 }
 
 .ArrowOuterStroke {
@@ -202,7 +202,7 @@
 
 .ScrollArrow {
   width: 100%;
-  background: canvas;
+  background: var(--color-white);
   z-index: 1;
   text-align: center;
   cursor: default;
