@@ -4,7 +4,7 @@
   align-items: start;
   gap: 0.25rem;
   width: 100%;
-  max-width: 16rem;
+  position: relative;
 }
 
 .Label {
@@ -12,6 +12,11 @@
   line-height: 1.25rem;
   font-weight: 500;
   color: var(--color-gray-900);
+}
+
+.Asterisk {
+  color: var(--color-red-600);
+  font-weight: 700;
 }
 
 .Input {
@@ -34,9 +39,13 @@
 }
 
 .Error {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: var(--color-red-800);
+  position: absolute;
+  bottom: -1.25rem;
+  left: 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-red-600);
+  white-space: nowrap;
 }
 
 .Description {

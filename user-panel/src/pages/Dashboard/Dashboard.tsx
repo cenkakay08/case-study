@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { fetchTasksAsync } from "../store/slices/taskSlice";
-import { Badge } from "../components/Badge/Badge";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { fetchTasksAsync } from "../../store/slices/taskSlice";
+import { Badge } from "../../components/Badge/Badge";
 import styles from "./Dashboard.module.css";
 
 const Dashboard: React.FC = () => {

@@ -6,8 +6,18 @@ export function Root({ className = "", ...props }: Field.Root.Props) {
   return <Field.Root className={`${classes.Field} ${className}`} {...props} />;
 }
 
-export function Label({ className = "", ...props }: Field.Label.Props) {
-  return <Field.Label className={`${classes.Label} ${className}`} {...props} />;
+export function Label({
+  className = "",
+  required,
+  children,
+  ...props
+}: Field.Label.Props & { required?: boolean }) {
+  return (
+    <Field.Label className={`${classes.Label} ${className}`} {...props}>
+      {children}
+      {required && <span className={classes.Asterisk}> *</span>}
+    </Field.Label>
+  );
 }
 
 export function Description({

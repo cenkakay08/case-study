@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import Login from "../pages/Login";
-import Dashboard from "../pages/Dashboard";
-import ProviderLayout from "../components/Layouts/ProviderLayout";
-import AuthGuardLayout from "../components/Layouts/AuthGuardLayout";
-import MainLayout from "../components/Layouts/MainLayout";
+import Login from "../pages/Login/Login";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import ProviderLayout from "../components/Layouts/ProviderLayout/ProviderLayout";
+import AuthGuardLayout from "../components/Layouts/AuthGuardLayout/AuthGuardLayout";
+import MainLayout from "../components/Layouts/MainLayout/MainLayout";
 
 export const router = createBrowserRouter([
   {

@@ -1,11 +1,22 @@
 import React from "react";
-import { useForm } from "@tanstack/react-form";
+import { revalidateLogic, useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import * as Field from "../components/Field/Field";
+import * as Field from "../../components/Field/Field";
 import styles from "./Login.module.css";
-import { Button } from "../components/Button/Button";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { loginAsyncThunk } from "../store/slices/authSlice";
+import { Button } from "../../components/Button/Button";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { loginAsyncThunk } from "../../store/slices/authSlice";
+
+const userSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: "E-posta alanı zorunludur" })
+    .pipe(z.email({ message: "Geçerli bir e-posta adresi giriniz" })),
+  password: z
+    .string()
+    .min(1, { message: "Şifre alanı zorunludur" })
+    .min(6, { message: "Şifre en az 6 karakter olmalıdır" }),
+});
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,17 +27,13 @@ const Login: React.FC = () => {
       email: "user1@test.com",
       password: "123456",
     },
+    validationLogic: revalidateLogic({
+      mode: "submit",
+      modeAfterSubmission: "change",
+    }),
     validators: {
-      onChange: z.object({
-        email: z
-          .string()
-          .min(1, { message: "E-posta alanı zorunludur" })
-          .pipe(z.email({ message: "Geçerli bir e-posta adresi giriniz" })),
-        password: z
-          .string()
-          .min(1, { message: "Şifre alanı zorunludur" })
-          .min(6, { message: "Şifre en az 6 karakter olmalıdır" }),
-      }),
+      onChange: userSchema,
+      onSubmit: userSchema,
     },
     onSubmit: async ({ value }) => {
       await dispatch(loginAsyncThunk(value));
@@ -40,7 +47,6 @@ const Login: React.FC = () => {
         <p className={styles.subtitle}>
           Kullanıcı panelinize erişmek için giriş yapın
         </p>
-
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -49,10 +55,11 @@ const Login: React.FC = () => {
           }}
           className={styles.form}
         >
-          <form.Field name="email">
-            {(field) => (
+          <form.Field
+            name="email"
+            children={(field) => (
               <Field.Root>
-                <Field.Label>E-posta</Field.Label>
+                <Field.Label required>E-posta</Field.Label>
                 <Field.Control
                   id={field.name}
                   name={field.name}
@@ -63,20 +70,17 @@ const Login: React.FC = () => {
                   autoComplete="email"
                   placeholder="örnek@eposta.com"
                 />
-                {field.state.meta.isTouched &&
-                field.state.meta.errors.length > 0 ? (
-                  <Field.Error>
-                    {field.state.meta.errors.join(", ")}
-                  </Field.Error>
-                ) : null}
+                <Field.Error match={!field.state.meta.isValid}>
+                  {field.state.meta.errors?.[0]?.message}
+                </Field.Error>
               </Field.Root>
             )}
-          </form.Field>
-
-          <form.Field name="password">
-            {(field) => (
+          />
+          <form.Field
+            name="password"
+            children={(field) => (
               <Field.Root>
-                <Field.Label>Şifre</Field.Label>
+                <Field.Label required>Şifre</Field.Label>
                 <Field.Control
                   id={field.name}
                   name={field.name}
@@ -87,16 +91,12 @@ const Login: React.FC = () => {
                   autoComplete="current-password"
                   placeholder="••••••"
                 />
-                {field.state.meta.isTouched &&
-                field.state.meta.errors.length > 0 ? (
-                  <Field.Error>
-                    {field.state.meta.errors.join(", ")}
-                  </Field.Error>
-                ) : null}
+                <Field.Error match={!field.state.meta.isValid}>
+                  {field.state.meta.errors?.[0]?.message}
+                </Field.Error>
               </Field.Root>
             )}
-          </form.Field>
-
+          />
           <div className={styles.actions}>
             <form.Subscribe selector={(state) => [state.isSubmitting]}>
               {([isSubmitting]) => (
@@ -107,7 +107,6 @@ const Login: React.FC = () => {
                 </Button>
               )}
             </form.Subscribe>
-
             {error && <div className={styles.generalError}>{error}</div>}
           </div>
         </form>
