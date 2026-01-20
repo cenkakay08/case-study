@@ -7,7 +7,9 @@
     "darkMode": "Karanlık Mod",
     "loading": "Yükleniyor...",
     "success": "Başarılı",
-    "error": "Hata"
+    "error": "Hata",
+    "fetchError": "Talepler yüklenemedi",
+    "createError": "Talep oluşturulamadı"
   },
   "login": {
     "title": "Tekrar Hoş Geldiniz",
@@ -85,5 +87,8 @@
     "pending": "Bekleyenler",
     "approved": "Onaylananlar",
     "rejected": "Reddedilenler"
+  },
+  "success": {
+    "requestCreated": "Talebiniz başarıyla oluşturuldu."
   }
 }

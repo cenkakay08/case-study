@@ -7,7 +7,9 @@
     "darkMode": "Dark Mode",
     "loading": "Loading...",
     "success": "Success",
-    "error": "Error"
+    "error": "Error",
+    "fetchError": "Failed to load requests",
+    "createError": "Failed to create request"
   },
   "login": {
     "title": "Welcome Back",
@@ -85,5 +87,8 @@
     "pending": "Pending",
     "approved": "Approved",
     "rejected": "Rejected"
+  },
+  "success": {
+    "requestCreated": "Your request has been successfully created."
   }
 }
