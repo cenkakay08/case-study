@@ -1,8 +1,8 @@
 {
   "common": {
     "dashboard": "Dashboard",
-    "createRequest": "Create Request",
-    "myRequests": "My Requests",
+    "createTask": "Create Request",
+    "myTasks": "My Requests",
     "logout": "Logout",
     "darkMode": "Dark Mode",
     "loading": "Loading...",
@@ -28,14 +28,14 @@
   "dashboard": {
     "welcome": "Welcome, {{name}}!",
     "subtitle": "Here is an overview of your requests and system status.",
-    "totalRequests": "Total Requests",
-    "pendingRequests": "Pending",
-    "approvedRequests": "Approved",
-    "rejectedRequests": "Rejected",
-    "recentRequests": "Recent Requests",
-    "noRecentRequests": "No requests found yet."
+    "totalTasks": "Total Requests",
+    "pendingTasks": "Pending",
+    "approvedTasks": "Approved",
+    "rejectedTasks": "Rejected",
+    "recentTasks": "Recent Requests",
+    "noRecentTasks": "No requests found yet."
   },
-  "createRequest": {
+  "createTask": {
     "title": "Create Request",
     "subtitle": "Specify the support you need",
     "form": {
@@ -57,13 +57,13 @@
       "priorityRequired": "Priority must be selected"
     }
   },
-  "myRequests": {
+  "myTasks": {
     "title": "My Requests",
     "subtitle": "Track the status of your requests here",
     "searchPlaceholder": "Search requests...",
     "statusFilterPlaceholder": "All Statuses",
     "table": {
-      "request": "REQUEST",
+      "task": "REQUEST",
       "category": "CATEGORY",
       "priority": "PRIORITY",
       "status": "STATUS",
@@ -80,7 +80,7 @@
   },
   "categories": {
     "technical_support": "Technical Support",
-    "leave_request": "Leave Request",
+    "leave_task": "Leave Request",
     "purchase": "Purchasing",
     "other": "Other"
   },
@@ -97,6 +97,6 @@
     "rejected": "Rejected"
   },
   "success": {
-    "requestCreated": "Your request has been successfully created."
+    "taskCreated": "Your request has been successfully created."
   }
 }

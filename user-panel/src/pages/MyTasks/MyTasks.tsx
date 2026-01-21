@@ -3,11 +3,11 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
 import { Badge, Select } from "@case-study/ui";
 import { TaskDetailDialog } from "../../components/Dialogs/TaskDetailDialog/TaskDetailDialog";
-import styles from "./MyRequests.module.css";
+import styles from "./MyTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
 
-export default function MyRequests() {
+export default function MyTasks() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { tasks, isLoading } = useAppSelector((state) => state.tasks);
@@ -42,15 +42,15 @@ export default function MyRequests() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>{t("myRequests.title")}</h1>
-        <p className={styles.subtitle}>{t("myRequests.subtitle")}</p>
+        <h1 className={styles.title}>{t("myTasks.title")}</h1>
+        <p className={styles.subtitle}>{t("myTasks.subtitle")}</p>
       </header>
 
       <div className={styles.controls}>
         <div className={styles.searchWrapper}>
           <input
             type="text"
-            placeholder={t("myRequests.searchPlaceholder")}
+            placeholder={t("myTasks.searchPlaceholder")}
             className={styles.searchInput}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -63,9 +63,7 @@ export default function MyRequests() {
             onValueChange={(val) => setStatusFilter(val ?? "all")}
           >
             <Select.Trigger style={{ minWidth: "12rem" }}>
-              <Select.Value
-                placeholder={t("myRequests.statusFilterPlaceholder")}
-              >
+              <Select.Value placeholder={t("myTasks.statusFilterPlaceholder")}>
                 {STATUS_FILTERS.find((f) => f.value === statusFilter)?.label}
               </Select.Value>
               <Select.Icon>
@@ -96,13 +94,13 @@ export default function MyRequests() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>{t("myRequests.table.request")}</th>
-              <th>{t("myRequests.table.category")}</th>
-              <th>{t("myRequests.table.priority")}</th>
-              <th>{t("myRequests.table.status")}</th>
-              <th>{t("myRequests.table.date")}</th>
+              <th>{t("myTasks.table.task")}</th>
+              <th>{t("myTasks.table.category")}</th>
+              <th>{t("myTasks.table.priority")}</th>
+              <th>{t("myTasks.table.status")}</th>
+              <th>{t("myTasks.table.date")}</th>
               <th className={styles.stickyColumn}>
-                {t("myRequests.table.actions")}
+                {t("myTasks.table.actions")}
               </th>
             </tr>
           </thead>
@@ -138,7 +136,7 @@ export default function MyRequests() {
                 <td colSpan={6} className={styles.emptyState}>
                   {isLoading
                     ? t("common.loading")
-                    : t("dashboard.noRecentRequests")}
+                    : t("dashboard.noRecentTasks")}
                 </td>
               </tr>
             )}

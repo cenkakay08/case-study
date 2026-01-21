@@ -6,14 +6,14 @@ import {
   rejectTaskAsync,
 } from "@/store/slices/taskSlice";
 import { Badge, Select, Dialog } from "@case-study/ui";
-import styles from "./PendingRequests.module.css";
+import styles from "./PendingTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
 import { TASK_STATUS } from "@/api/tasks/taskController";
 
 const ITEMS_PER_PAGE = 10;
 
-export default function PendingRequests() {
+export default function PendingTasks() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { tasks, isLoading } = useAppSelector((state) => state.tasks);
@@ -41,7 +41,7 @@ export default function PendingRequests() {
   const CATEGORY_FILTERS = [
     { value: "all", label: t("filters.allCategories") },
     { value: "technical_support", label: t("categories.technical_support") },
-    { value: "leave_request", label: t("categories.leave_request") },
+    { value: "leave_task", label: t("categories.leave_task") },
     { value: "purchase", label: t("categories.purchase") },
     { value: "other", label: t("categories.other") },
   ];
@@ -110,15 +110,15 @@ export default function PendingRequests() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>{t("pendingRequests.title")}</h1>
-        <p className={styles.subtitle}>{t("pendingRequests.subtitle")}</p>
+        <h1 className={styles.title}>{t("pendingTasks.title")}</h1>
+        <p className={styles.subtitle}>{t("pendingTasks.subtitle")}</p>
       </header>
 
       <div className={styles.controls}>
         <div className={styles.searchWrapper}>
           <input
             type="text"
-            placeholder={t("pendingRequests.searchPlaceholder")}
+            placeholder={t("pendingTasks.searchPlaceholder")}
             className={styles.searchInput}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -198,12 +198,12 @@ export default function PendingRequests() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>{t("requests.table.title")}</th>
-              <th>{t("requests.table.owner")}</th>
-              <th>{t("requests.table.priority")}</th>
-              <th>{t("requests.table.date")}</th>
+              <th>{t("tasks.table.title")}</th>
+              <th>{t("tasks.table.owner")}</th>
+              <th>{t("tasks.table.priority")}</th>
+              <th>{t("tasks.table.date")}</th>
               <th className={styles.stickyColumn}>
-                {t("requests.table.actions")}
+                {t("tasks.table.actions")}
               </th>
             </tr>
           </thead>
@@ -232,11 +232,11 @@ export default function PendingRequests() {
                         disabled={!canApproveReject}
                         title={
                           !canApproveReject
-                            ? t("pendingRequests.noPermission")
-                            : t("pendingRequests.approve")
+                            ? t("pendingTasks.noPermission")
+                            : t("pendingTasks.approve")
                         }
                       >
-                        {t("pendingRequests.approve")}
+                        {t("pendingTasks.approve")}
                       </button>
                       <button
                         className={styles.rejectButton}
@@ -244,11 +244,11 @@ export default function PendingRequests() {
                         disabled={!canApproveReject}
                         title={
                           !canApproveReject
-                            ? t("pendingRequests.noPermission")
-                            : t("pendingRequests.reject")
+                            ? t("pendingTasks.noPermission")
+                            : t("pendingTasks.reject")
                         }
                       >
-                        {t("pendingRequests.reject")}
+                        {t("pendingTasks.reject")}
                       </button>
                     </div>
                   </td>
@@ -257,9 +257,7 @@ export default function PendingRequests() {
             ) : (
               <tr>
                 <td colSpan={5} className={styles.emptyState}>
-                  {isLoading
-                    ? t("common.loading")
-                    : t("pendingRequests.noRequests")}
+                  {isLoading ? t("common.loading") : t("pendingTasks.noTasks")}
                 </td>
               </tr>
             )}
@@ -297,16 +295,14 @@ export default function PendingRequests() {
         <Dialog.Portal>
           <Dialog.Backdrop />
           <Dialog.Popup>
-            <Dialog.Title>
-              {t("pendingRequests.rejectDialog.title")}
-            </Dialog.Title>
+            <Dialog.Title>{t("pendingTasks.rejectDialog.title")}</Dialog.Title>
             <Dialog.Description>
-              {t("pendingRequests.rejectDialog.description")}
+              {t("pendingTasks.rejectDialog.description")}
             </Dialog.Description>
             <textarea
               value={rejectionReason}
               onChange={(e) => setRejectionReason(e.target.value)}
-              placeholder={t("pendingRequests.rejectDialog.placeholder")}
+              placeholder={t("pendingTasks.rejectDialog.placeholder")}
               style={{
                 width: "100%",
                 minHeight: "100px",
@@ -335,7 +331,7 @@ export default function PendingRequests() {
                 onClick={handleReject}
                 disabled={!rejectionReason.trim()}
               >
-                {t("pendingRequests.reject")}
+                {t("pendingTasks.reject")}
               </button>
             </div>
           </Dialog.Popup>

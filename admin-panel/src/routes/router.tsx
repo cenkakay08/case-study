@@ -1,14 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import Login from "@/pages/Login/Login";
 import Dashboard from "@/pages/Dashboard/Dashboard";
-import PendingRequests from "@/pages/PendingRequests/PendingRequests";
-import AllRequests from "@/pages/AllRequests/AllRequests";
+import PendingTasks from "@/pages/PendingTasks/PendingTasks";
+import AllTasks from "@/pages/AllTasks/AllTasks";
 import UserManagement from "@/pages/UserManagement/UserManagement";
 import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayout";
 import LoginGuardLayout from "@/components/Layouts/LoginGuardLayout/LoginGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
-
-// Temporary components until implemented
 
 export const router = createBrowserRouter([
   {
@@ -38,13 +36,14 @@ export const router = createBrowserRouter([
                 element: <Dashboard />,
               },
               {
-                path: "pending-requests",
-                element: <PendingRequests />,
+                path: "pending-tasks",
+                element: <PendingTasks />,
               },
               {
-                path: "all-requests",
-                element: <AllRequests />,
+                path: "all-tasks",
+                element: <AllTasks />,
               },
+
               {
                 path: "user-management",
                 element: <UserManagement />,

@@ -3,19 +3,19 @@ import { z } from "zod";
 import { Field, Select, Button } from "@case-study/ui";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createTaskAsync } from "@/store/slices/taskSlice";
-import styles from "./CreateRequest.module.css";
+import styles from "./CreateTask.module.css";
 import { useTranslation } from "react-i18next";
 
 const requestSchema = z.object({
-  title: z.string().min(3, "createRequest.validation.titleMin"),
-  description: z.string().min(10, "createRequest.validation.descriptionMin"),
-  category: z.string().min(1, "createRequest.validation.categoryRequired"),
+  title: z.string().min(3, "createTask.validation.titleMin"),
+  description: z.string().min(10, "createTask.validation.descriptionMin"),
+  category: z.string().min(1, "createTask.validation.categoryRequired"),
   priority: z.enum(["low", "normal", "high", "urgent"] as const, {
-    message: "createRequest.validation.priorityRequired",
+    message: "createTask.validation.priorityRequired",
   }),
 });
 
-const CATEGORIES = ["purchase", "technical_support", "leave_request", "other"];
+const CATEGORIES = ["purchase", "technical_support", "leave_task", "other"];
 
 const PRIORITIES = ["low", "normal", "high", "urgent"] as const;
 
@@ -26,7 +26,7 @@ const createRequestDefaultValues = {
   priority: "" as any,
 };
 
-export default function CreateRequest() {
+export default function CreateTask() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.tasks);
@@ -49,8 +49,8 @@ export default function CreateRequest() {
     <div className={styles.container}>
       <div className={styles.card}>
         <header className={styles.header}>
-          <h1 className={styles.title}>{t("createRequest.title")}</h1>
-          <p className={styles.subtitle}>{t("createRequest.subtitle")}</p>
+          <h1 className={styles.title}>{t("createTask.title")}</h1>
+          <p className={styles.subtitle}>{t("createTask.subtitle")}</p>
         </header>
 
         <form
@@ -66,10 +66,10 @@ export default function CreateRequest() {
             children={(field) => (
               <Field.Root className={styles.fullWidth}>
                 <Field.Label required>
-                  {t("createRequest.form.titleLabel")}
+                  {t("createTask.form.titleLabel")}
                 </Field.Label>
                 <Field.Control
-                  placeholder={t("createRequest.form.titlePlaceholder")}
+                  placeholder={t("createTask.form.titlePlaceholder")}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
@@ -86,7 +86,7 @@ export default function CreateRequest() {
             children={(field) => (
               <Field.Root>
                 <Field.Label required>
-                  {t("createRequest.form.categoryLabel")}
+                  {t("createTask.form.categoryLabel")}
                 </Field.Label>
                 <Select.Root
                   value={field.state.value}
@@ -94,7 +94,7 @@ export default function CreateRequest() {
                 >
                   <Select.Trigger>
                     <Select.Value
-                      placeholder={t("createRequest.form.categoryPlaceholder")}
+                      placeholder={t("createTask.form.categoryPlaceholder")}
                     >
                       {field.state.value
                         ? t(`categories.${field.state.value}`)
@@ -135,7 +135,7 @@ export default function CreateRequest() {
             children={(field) => (
               <Field.Root>
                 <Field.Label required>
-                  {t("createRequest.form.priorityLabel")}
+                  {t("createTask.form.priorityLabel")}
                 </Field.Label>
                 <Select.Root
                   value={field.state.value}
@@ -145,7 +145,7 @@ export default function CreateRequest() {
                 >
                   <Select.Trigger>
                     <Select.Value
-                      placeholder={t("createRequest.form.priorityPlaceholder")}
+                      placeholder={t("createTask.form.priorityPlaceholder")}
                     >
                       {field.state.value
                         ? t(`priorities.${field.state.value}`)
@@ -186,7 +186,7 @@ export default function CreateRequest() {
             children={(field) => (
               <Field.Root className={styles.fullWidth}>
                 <Field.Label required>
-                  {t("createRequest.form.descriptionLabel")}
+                  {t("createTask.form.descriptionLabel")}
                 </Field.Label>
                 <Field.Control
                   render={
@@ -198,7 +198,7 @@ export default function CreateRequest() {
                       }}
                     />
                   }
-                  placeholder={t("createRequest.form.descriptionPlaceholder")}
+                  placeholder={t("createTask.form.descriptionPlaceholder")}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e: any) => field.handleChange(e.target.value)}
@@ -221,8 +221,8 @@ export default function CreateRequest() {
                     style={{ width: "100%" }}
                   >
                     {isSubmitting || isLoading
-                      ? t("createRequest.form.submitting")
-                      : t("createRequest.form.submitButton")}
+                      ? t("createTask.form.submitting")
+                      : t("createTask.form.submitButton")}
                   </Button>
                 );
               }}

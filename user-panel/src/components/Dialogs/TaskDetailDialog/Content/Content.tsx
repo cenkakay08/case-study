@@ -25,21 +25,21 @@ export function Content({ task }: ContentProps) {
   return (
     <>
       <div className={styles.dialogHeader}>
-        <Dialog.Title>{t("myRequests.details.title")}</Dialog.Title>
+        <Dialog.Title>{t("myTasks.details.title")}</Dialog.Title>
         <Dialog.Close className={styles.dialogCloseButton}>✕</Dialog.Close>
       </div>
 
       <div className={styles.dialogContent}>
         <div className={styles.detailRow}>
           <span className={styles.detailLabel}>
-            {t("createRequest.form.titleLabel")}
+            {t("createTask.form.titleLabel")}
           </span>
           <span className={styles.detailValue}>{task.title}</span>
         </div>
 
         <div className={styles.detailRow}>
           <span className={styles.detailLabel}>
-            {t("myRequests.details.description")}
+            {t("myTasks.details.description")}
           </span>
           <p className={styles.detailDescription}>{task.description}</p>
         </div>
@@ -47,7 +47,7 @@ export function Content({ task }: ContentProps) {
         <div className={styles.detailGrid}>
           <div className={styles.detailRow}>
             <span className={styles.detailLabel}>
-              {t("myRequests.table.category")}
+              {t("myTasks.table.category")}
             </span>
             <span className={styles.detailValue}>
               {t(`categories.${task.category}`)}
@@ -56,7 +56,7 @@ export function Content({ task }: ContentProps) {
 
           <div className={styles.detailRow}>
             <span className={styles.detailLabel}>
-              {t("myRequests.table.priority")}
+              {t("myTasks.table.priority")}
             </span>
             <div>
               <Badge type={task.priority}>
@@ -87,7 +87,7 @@ export function Content({ task }: ContentProps) {
         {task.status === "rejected" && task.rejectionReason && (
           <div className={`${styles.detailRow} ${styles.rejectionRow}`}>
             <span className={styles.detailLabel}>
-              {t("myRequests.details.rejectionReason")}
+              {t("myTasks.details.rejectionReason")}
             </span>
             <p className={styles.rejectionText}>{task.rejectionReason}</p>
           </div>
@@ -95,7 +95,7 @@ export function Content({ task }: ContentProps) {
       </div>
 
       <div className={styles.dialogFooter}>
-        <Dialog.Close>{t("myRequests.details.close")}</Dialog.Close>
+        <Dialog.Close>{t("myTasks.details.close")}</Dialog.Close>
       </div>
     </>
   );

@@ -13,7 +13,7 @@ export function TaskDetailDialog({ task }: TaskDetailDialogProps) {
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger>{t("myRequests.details.viewDetails")}</Dialog.Trigger>
+      <Dialog.Trigger>{t("myTasks.details.viewDetails")}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop />
         <Dialog.Popup className={styles.popup}>

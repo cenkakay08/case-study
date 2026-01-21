@@ -7,8 +7,8 @@ import styles from "./Dashboard.module.css";
 import { isToday } from "@/utils/date";
 import { StatsOverview } from "./components/StatsOverview/StatsOverview";
 import { PriorityDistribution } from "./components/PriorityDistribution/PriorityDistribution";
-import { RecentRequestsTable } from "./components/RecentRequestsTable/RecentRequestsTable";
 import { DashboardSkeleton } from "./components/DashboardSkeleton/DashboardSkeleton";
+import { RecentTasksTable } from "./components/RecentTasksTable/RecentTasksTable";
 
 const Dashboard: React.FC = () => {
   const { t } = useTranslation();
@@ -102,7 +102,7 @@ const Dashboard: React.FC = () => {
             todayRejected={todayRejected}
           />
           <PriorityDistribution priorityCounts={priorityCounts} />
-          <RecentRequestsTable tasks={recentPendingTasks} />
+          <RecentTasksTable tasks={recentPendingTasks} />
         </>
       )}
     </div>

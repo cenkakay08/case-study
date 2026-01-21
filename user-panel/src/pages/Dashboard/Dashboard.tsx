@@ -50,44 +50,42 @@ const Dashboard: React.FC = () => {
 
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <span className={styles.statLabel}>
-            {t("dashboard.totalRequests")}
-          </span>
+          <span className={styles.statLabel}>{t("dashboard.totalTasks")}</span>
           <span className={styles.statValue}>{totalCount}</span>
         </div>
         <div className={styles.statCard}>
           <span className={styles.statLabel}>
-            {t("dashboard.pendingRequests")}
+            {t("dashboard.pendingTasks")}
           </span>
           <span className={styles.statValue}>{pendingCount}</span>
         </div>
         <div className={styles.statCard}>
           <span className={styles.statLabel}>
-            {t("dashboard.approvedRequests")}
+            {t("dashboard.approvedTasks")}
           </span>
           <span className={styles.statValue}>{approvedCount}</span>
         </div>
         <div className={styles.statCard}>
           <span className={styles.statLabel}>
-            {t("dashboard.rejectedRequests")}
+            {t("dashboard.rejectedTasks")}
           </span>
           <span className={styles.statValue}>{rejectedCount}</span>
         </div>
       </div>
 
       <section className={styles.recentSection}>
-        <h2>{t("dashboard.recentRequests")}</h2>
+        <h2>{t("dashboard.recentTasks")}</h2>
         <div className={styles.tableWrapper}>
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>{t("myRequests.table.request")}</th>
-                <th>{t("myRequests.table.category")}</th>
-                <th>{t("myRequests.table.priority")}</th>
-                <th>{t("myRequests.table.status")}</th>
-                <th>{t("myRequests.table.date")}</th>
+                <th>{t("myTasks.table.task")}</th>
+                <th>{t("myTasks.table.category")}</th>
+                <th>{t("myTasks.table.priority")}</th>
+                <th>{t("myTasks.table.status")}</th>
+                <th>{t("myTasks.table.date")}</th>
                 <th className={styles.stickyColumn}>
-                  {t("myRequests.table.actions")}
+                  {t("myTasks.table.actions")}
                 </th>
               </tr>
             </thead>
@@ -115,7 +113,7 @@ const Dashboard: React.FC = () => {
               {recentTasks.length === 0 && (
                 <tr>
                   <td colSpan={6} style={{ textAlign: "center" }}>
-                    {t("dashboard.noRecentRequests")}
+                    {t("dashboard.noRecentTasks")}
                   </td>
                 </tr>
               )}

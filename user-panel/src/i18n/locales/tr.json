@@ -1,8 +1,8 @@
 {
   "common": {
     "dashboard": "Dashboard",
-    "createRequest": "Talep Oluştur",
-    "myRequests": "Taleplerim",
+    "createTask": "Talep Oluştur",
+    "myTasks": "Taleplerim",
     "logout": "Çıkış Yap",
     "darkMode": "Karanlık Mod",
     "loading": "Yükleniyor...",
@@ -28,14 +28,14 @@
   "dashboard": {
     "welcome": "Hoş geldin, {{name}}!",
     "subtitle": "Taleplerinizin ve sistem durumunun genel bir özetini burada bulabilirsiniz.",
-    "totalRequests": "Toplam Talep",
-    "pendingRequests": "Bekleyen",
-    "approvedRequests": "Onaylanan",
-    "rejectedRequests": "Reddedilen",
-    "recentRequests": "Son Taleplerim",
-    "noRecentRequests": "Henüz talep bulunmuyor."
+    "totalTasks": "Toplam Talep",
+    "pendingTasks": "Bekleyen",
+    "approvedTasks": "Onaylanan",
+    "rejectedTasks": "Reddedilen",
+    "recentTasks": "Son Taleplerim",
+    "noRecentTasks": "Henüz talep bulunmuyor."
   },
-  "createRequest": {
+  "createTask": {
     "title": "Talep Oluştur",
     "subtitle": "İhtiyacınız olan desteği belirtin",
     "form": {
@@ -57,13 +57,13 @@
       "priorityRequired": "Öncelik seçilmelidir"
     }
   },
-  "myRequests": {
+  "myTasks": {
     "title": "Taleplerim",
     "subtitle": "Oluşturduğunuz taleplerin güncel durumunu buradan takip edebilirsiniz",
     "searchPlaceholder": "Talep ara...",
     "statusFilterPlaceholder": "Tüm Durumlar",
     "table": {
-      "request": "TALEP",
+      "task": "TALEP",
       "category": "KATEGORİ",
       "priority": "ÖNCELİK",
       "status": "DURUM",
@@ -80,7 +80,7 @@
   },
   "categories": {
     "technical_support": "Teknik Destek",
-    "leave_request": "İzin Talebi",
+    "leave_task": "İzin Talebi",
     "purchase": "Satın Alma",
     "other": "Diğer"
   },
@@ -97,6 +97,6 @@
     "rejected": "Reddedilenler"
   },
   "success": {
-    "requestCreated": "Talebiniz başarıyla oluşturuldu."
+    "taskCreated": "Talebiniz başarıyla oluşturuldu."
   }
 }

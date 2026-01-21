@@ -16,14 +16,14 @@ const SECRET_KEY = "super-secret-key";
 app.use(
   cors({
     origin: ["http://localhost:3000", "http://localhost:3001"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 app.use(bodyParser.json());
 
 // Delay middleware
-app.use((req, res, next) => setTimeout(next, 5000));
+app.use((req, res, next) => setTimeout(next, 300));
 
 // Load data from db.json
 const dbPath = path.join(__dirname, "db.json");
@@ -133,7 +133,7 @@ app.post("/api/tasks", authenticateToken, (req, res) => {
   res.status(201).json(newTask);
 });
 
-app.put("/api/tasks/:id", authenticateToken, (req, res) => {
+app.patch("/api/tasks/:id", authenticateToken, (req, res) => {
   const { id } = req.params;
   const index = db.tasks.findIndex((t) => t.id === id);
 
