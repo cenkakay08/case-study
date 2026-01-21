@@ -8,7 +8,40 @@
     "pendingRequests": "Pending Requests",
     "allRequests": "All Requests",
     "userManagement": "User Management",
-    "darkMode": "Dark Mode"
+    "darkMode": "Dark Mode",
+    "loading": "Loading...",
+    "fetchError": "Error loading data"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "totalPending": "Total Pending",
+    "todayApproved": "Today Approved",
+    "todayRejected": "Today Rejected",
+    "priorityDistribution": "Priority Distribution",
+    "recentPending": "Recent Pending Requests",
+    "noPendingRequests": "No pending requests"
+  },
+  "priorities": {
+    "urgent": "Urgent",
+    "high": "High",
+    "normal": "Normal",
+    "low": "Low"
+  },
+  "categories": {
+    "technical_support": "Technical Support",
+    "leave_request": "Leave Request",
+    "purchase": "Purchase",
+    "other": "Other"
+  },
+  "requests": {
+    "table": {
+      "title": "Title",
+      "owner": "Owner",
+      "category": "Category",
+      "priority": "Priority",
+      "status": "Status",
+      "date": "Date"
+    }
   },
   "login": {
     "title": "Admin Panel",
