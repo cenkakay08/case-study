@@ -9,6 +9,7 @@ import { Badge, Select, Dialog } from "@case-study/ui";
 import styles from "./PendingRequests.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
+import { TASK_STATUS } from "@/api/tasks/taskController";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -54,7 +55,7 @@ export default function PendingRequests() {
 
   // Filter only pending tasks
   const pendingTasks = useMemo(() => {
-    return tasks.filter((task) => task.status === "pending");
+    return tasks.filter((task) => task.status === TASK_STATUS.PENDING);
   }, [tasks]);
 
   const filteredTasks = useMemo(() => {
