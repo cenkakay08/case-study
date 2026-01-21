@@ -8,7 +8,40 @@
     "pendingRequests": "Bekleyen Talepler",
     "allRequests": "Tüm Talepler",
     "userManagement": "Kullanıcı Yönetimi",
-    "darkMode": "Karanlık Mod"
+    "darkMode": "Karanlık Mod",
+    "loading": "Yükleniyor...",
+    "fetchError": "Veriler yüklenirken hata oluştu"
+  },
+  "dashboard": {
+    "welcome": "Hoş geldiniz, {{name}}",
+    "totalPending": "Toplam Bekleyen",
+    "todayApproved": "Bugün Onaylanan",
+    "todayRejected": "Bugün Reddedilen",
+    "priorityDistribution": "Öncelik Dağılımı",
+    "recentPending": "Son Bekleyen Talepler",
+    "noPendingRequests": "Bekleyen talep yok"
+  },
+  "priorities": {
+    "urgent": "Acil",
+    "high": "Yüksek",
+    "normal": "Normal",
+    "low": "Düşük"
+  },
+  "categories": {
+    "technical_support": "Teknik Destek",
+    "leave_request": "İzin Talebi",
+    "purchase": "Satın Alma",
+    "other": "Diğer"
+  },
+  "requests": {
+    "table": {
+      "title": "Başlık",
+      "owner": "Talep Sahibi",
+      "category": "Kategori",
+      "priority": "Öncelik",
+      "status": "Durum",
+      "date": "Tarih"
+    }
   },
   "login": {
     "title": "Yönetici Paneli",
