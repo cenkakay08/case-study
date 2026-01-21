@@ -16,12 +16,14 @@ interface TaskState {
   tasks: Task[];
   isLoading: boolean;
   error: string | null;
+  currentRequestId: string | null;
 }
 
 const initialState: TaskState = {
   tasks: [],
   isLoading: false,
   error: null,
+  currentRequestId: null,
 };
 
 export const fetchTasksAsync = createAsyncThunk(
@@ -100,20 +102,24 @@ const taskSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTasksAsync.pending, (state) => {
+      .addCase(fetchTasksAsync.pending, (state, action) => {
         state.isLoading = true;
+        state.currentRequestId = action.meta.requestId;
         state.error = null;
       })
-      .addCase(
-        fetchTasksAsync.fulfilled,
-        (state, action: PayloadAction<Task[]>) => {
+      .addCase(fetchTasksAsync.fulfilled, (state, action) => {
+        if (state.currentRequestId === action.meta.requestId) {
           state.isLoading = false;
-          state.tasks = action.payload;
-        },
-      )
+          state.currentRequestId = null;
+        }
+        state.tasks = action.payload;
+      })
       .addCase(fetchTasksAsync.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload as string;
+        if (state.currentRequestId === action.meta.requestId) {
+          state.isLoading = false;
+          state.currentRequestId = null;
+          state.error = action.payload as string;
+        }
       })
       .addCase(
         approveTaskAsync.fulfilled,
