@@ -69,7 +69,9 @@
     "rejectDialog": {
       "title": "Reject Request",
       "description": "Please provide a reason for rejection",
-      "placeholder": "Enter rejection reason..."
+      "placeholder": "Enter rejection reason...",
+      "reasonLabel": "Rejection Reason",
+      "reasonMin": "Rejection reason must be at least 3 characters"
     },
     "approveDialog": {
       "title": "Approve Request",

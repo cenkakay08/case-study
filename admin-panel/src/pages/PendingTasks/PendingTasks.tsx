@@ -1,12 +1,13 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchTasksAsync, rejectTaskAsync } from "@/store/slices/taskSlice";
-import { Badge, Select, Dialog } from "@case-study/ui";
+import { fetchTasksAsync } from "@/store/slices/taskSlice";
+import { Badge, Button, Select } from "@case-study/ui";
 import styles from "./PendingTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
 import { TASK_STATUS } from "@/api/tasks/taskController";
 import { TaskApproveConfirmDialog } from "@/components/Dialogs/TaskApproveConfirmDialog/TaskApproveConfirmDialog";
+import { TaskRejectConfirmDialog } from "@/components/Dialogs/TaskRejectConfirmDialog/TaskRejectConfirmDialog";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -14,18 +15,10 @@ export default function PendingTasks() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { tasks, isLoading } = useAppSelector((state) => state.tasks);
-  const { user } = useAppSelector((state) => state.auth);
   const [searchTerm, setSearchTerm] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-
-  // Reject dialog state
-  const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
-  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
-  const [rejectionReason, setRejectionReason] = useState("");
-
-  const canApproveReject = user?.role === "Admin" || user?.role === "Moderator";
 
   const PRIORITY_FILTERS = [
     { value: "all", label: t("filters.allPriorities") },
@@ -75,30 +68,9 @@ export default function PendingTasks() {
     return filteredTasks.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredTasks, currentPage]);
 
-  // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, priorityFilter, categoryFilter]);
-
-  const handleOpenRejectDialog = (taskId: string) => {
-    setSelectedTaskId(taskId);
-    setRejectionReason("");
-    setRejectDialogOpen(true);
-  };
-
-  const handleReject = () => {
-    if (selectedTaskId && rejectionReason.trim()) {
-      dispatch(
-        rejectTaskAsync({
-          taskId: selectedTaskId,
-          rejectionReason: rejectionReason.trim(),
-        }),
-      );
-      setRejectDialogOpen(false);
-      setSelectedTaskId(null);
-      setRejectionReason("");
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -220,18 +192,7 @@ export default function PendingTasks() {
                   <td className={styles.stickyColumn}>
                     <div className={styles.actionButtons}>
                       <TaskApproveConfirmDialog task={task} />
-                      <button
-                        className={styles.rejectButton}
-                        onClick={() => handleOpenRejectDialog(task.id)}
-                        disabled={!canApproveReject}
-                        title={
-                          !canApproveReject
-                            ? t("pendingTasks.noPermission")
-                            : t("pendingTasks.reject")
-                        }
-                      >
-                        {t("pendingTasks.reject")}
-                      </button>
+                      <TaskRejectConfirmDialog task={task} />
                     </div>
                   </td>
                 </tr>
@@ -249,76 +210,28 @@ export default function PendingTasks() {
 
       {totalPages > 1 && (
         <div className={styles.pagination}>
-          <button
+          <Button
             className={styles.pageButton}
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
           >
             {t("pagination.previous")}
-          </button>
+          </Button>
           <span className={styles.pageInfo}>
             {t("pagination.pageInfo", {
               current: currentPage,
               total: totalPages,
             })}
           </span>
-          <button
+          <Button
             className={styles.pageButton}
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
           >
             {t("pagination.next")}
-          </button>
+          </Button>
         </div>
       )}
-
-      {/* Reject Dialog */}
-      <Dialog.Root open={rejectDialogOpen} onOpenChange={setRejectDialogOpen}>
-        <Dialog.Portal>
-          <Dialog.Backdrop />
-          <Dialog.Popup>
-            <Dialog.Title>{t("pendingTasks.rejectDialog.title")}</Dialog.Title>
-            <Dialog.Description>
-              {t("pendingTasks.rejectDialog.description")}
-            </Dialog.Description>
-            <textarea
-              value={rejectionReason}
-              onChange={(e) => setRejectionReason(e.target.value)}
-              placeholder={t("pendingTasks.rejectDialog.placeholder")}
-              style={{
-                width: "100%",
-                minHeight: "100px",
-                padding: "0.75rem",
-                borderRadius: "0.5rem",
-                border: "1px solid var(--color-gray-200)",
-                marginTop: "1rem",
-                resize: "vertical",
-              }}
-            />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                gap: "0.5rem",
-                marginTop: "1rem",
-              }}
-            >
-              <Dialog.Close>
-                <button className={styles.pageButton}>
-                  {t("common.cancel")}
-                </button>
-              </Dialog.Close>
-              <button
-                className={styles.rejectButton}
-                onClick={handleReject}
-                disabled={!rejectionReason.trim()}
-              >
-                {t("pendingTasks.reject")}
-              </button>
-            </div>
-          </Dialog.Popup>
-        </Dialog.Portal>
-      </Dialog.Root>
     </div>
   );
 }

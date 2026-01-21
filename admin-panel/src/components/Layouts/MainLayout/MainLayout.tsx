@@ -6,6 +6,7 @@ import styles from "./MainLayout.module.css";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { Button } from "@case-study/ui";
 
 const MainLayout: React.FC = () => {
   const { t } = useTranslation();
@@ -74,9 +75,9 @@ const MainLayout: React.FC = () => {
             <span className={styles.userEmail}>{user?.email}</span>
             <span className={styles.userRole}>{user?.role}</span>
           </div>
-          <button onClick={handleLogout} className={styles.logoutButton}>
+          <Button onClick={handleLogout} className={styles.logoutButton}>
             {t("common.logout")}
-          </button>
+          </Button>
         </div>
       </aside>
       <main className={styles.content}>

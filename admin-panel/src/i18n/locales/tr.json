@@ -69,7 +69,9 @@
     "rejectDialog": {
       "title": "Talebi Reddet",
       "description": "Lütfen red sebebini belirtin",
-      "placeholder": "Red sebebini yazın..."
+      "placeholder": "Red sebebini yazın...",
+      "reasonLabel": "Red Sebebi",
+      "reasonMin": "Red sebebi en az 3 karakter olmalıdır"
     },
     "approveDialog": {
       "title": "Talebi Onayla",
