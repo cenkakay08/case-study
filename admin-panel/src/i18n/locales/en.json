@@ -4,7 +4,11 @@
     "logout": "Logout",
     "dashboard": "Dashboard",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "pendingRequests": "Pending Requests",
+    "allRequests": "All Requests",
+    "userManagement": "User Management",
+    "darkMode": "Dark Mode"
   },
   "login": {
     "title": "Admin Panel",

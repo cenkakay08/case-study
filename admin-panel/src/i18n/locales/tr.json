@@ -4,7 +4,11 @@
     "logout": "Çıkış Yap",
     "dashboard": "Panel",
     "error": "Hata",
-    "success": "Başarılı"
+    "success": "Başarılı",
+    "pendingRequests": "Bekleyen Talepler",
+    "allRequests": "Tüm Talepler",
+    "userManagement": "Kullanıcı Yönetimi",
+    "darkMode": "Karanlık Mod"
   },
   "login": {
     "title": "Yönetici Paneli",
