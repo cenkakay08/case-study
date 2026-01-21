@@ -1,0 +1,22 @@
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "error": "Error",
+    "success": "Success"
+  },
+  "login": {
+    "title": "Admin Panel",
+    "subtitle": "Sign in to your administrative account",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "admin@test.com",
+    "passwordLabel": "Password",
+    "submitButton": "Sign In",
+    "signingIn": "Signing In...",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email address",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 6 characters"
+  }
+}

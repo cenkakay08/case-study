@@ -1,0 +1,22 @@
+{
+  "common": {
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "dashboard": "Panel",
+    "error": "Hata",
+    "success": "Başarılı"
+  },
+  "login": {
+    "title": "Yönetici Paneli",
+    "subtitle": "Yönetici hesabınızla giriş yapın",
+    "emailLabel": "E-posta Adresi",
+    "emailPlaceholder": "admin@test.com",
+    "passwordLabel": "Şifre",
+    "submitButton": "Giriş Yap",
+    "signingIn": "Giriş Yapılıyor...",
+    "emailRequired": "E-posta gereklidir",
+    "emailInvalid": "Geçersiz e-posta adresi",
+    "passwordRequired": "Şifre gereklidir",
+    "passwordMin": "Şifre en az 6 karakter olmalıdır"
+  }
+}
