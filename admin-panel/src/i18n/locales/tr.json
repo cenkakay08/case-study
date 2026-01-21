@@ -31,7 +31,7 @@
   },
   "categories": {
     "technical_support": "Teknik Destek",
-    "leave_task": "İzin Talebi",
+    "leave_request": "İzin Talebi",
     "purchase": "Satın Alma",
     "other": "Diğer"
   },
@@ -70,6 +70,10 @@
       "title": "Talebi Reddet",
       "description": "Lütfen red sebebini belirtin",
       "placeholder": "Red sebebini yazın..."
+    },
+    "approveDialog": {
+      "title": "Talebi Onayla",
+      "description": "Bu talebi onaylamak istediğinizden emin misiniz?"
     }
   },
   "allTasks": {

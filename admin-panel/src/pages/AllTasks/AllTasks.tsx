@@ -254,7 +254,7 @@ export default function AllTasks() {
               <div className={styles.detailGrid}>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>
-                    {t("requests.table.owner")}:
+                    {t("tasks.table.owner")}:
                   </span>
                   <span className={styles.detailValue}>
                     {selectedTask.createdBy}
@@ -262,7 +262,7 @@ export default function AllTasks() {
                 </div>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>
-                    {t("requests.table.category")}:
+                    {t("tasks.table.category")}:
                   </span>
                   <span className={styles.detailValue}>
                     {t(`categories.${selectedTask.category}`)}
@@ -270,7 +270,7 @@ export default function AllTasks() {
                 </div>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>
-                    {t("requests.table.priority")}:
+                    {t("tasks.table.priority")}:
                   </span>
                   <Badge type={selectedTask.priority}>
                     {t(`priorities.${selectedTask.priority}`)}
@@ -278,7 +278,7 @@ export default function AllTasks() {
                 </div>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>
-                    {t("requests.table.status")}:
+                    {t("tasks.table.status")}:
                   </span>
                   <Badge type={selectedTask.status}>
                     {t(`status.${selectedTask.status}`)}
@@ -286,7 +286,7 @@ export default function AllTasks() {
                 </div>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>
-                    {t("requests.table.date")}:
+                    {t("tasks.table.date")}:
                   </span>
                   <span className={styles.detailValue}>
                     {formatDate(selectedTask.createdAt, i18n.language)}

@@ -53,7 +53,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 2",
       "priority": "urgent",
       "category": "other",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u2",
       "createdAt": "2025-12-31T09:11:04.399Z"
     },
@@ -63,7 +63,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 3",
       "priority": "urgent",
       "category": "other",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u2",
       "createdAt": "2026-01-01T09:11:04.399Z"
     },
@@ -73,7 +73,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 4",
       "priority": "urgent",
       "category": "technical_support",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u2",
       "createdAt": "2026-01-11T09:11:04.399Z"
     },
@@ -94,7 +94,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 6",
       "priority": "high",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-09T09:11:04.399Z"
     },
@@ -125,7 +125,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 9",
       "priority": "urgent",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2025-12-30T09:11:04.399Z"
     },

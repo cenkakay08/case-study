@@ -31,7 +31,7 @@
   },
   "categories": {
     "technical_support": "Technical Support",
-    "leave_task": "Leave Request",
+    "leave_request": "Leave Request",
     "purchase": "Purchase",
     "other": "Other"
   },
@@ -70,6 +70,10 @@
       "title": "Reject Request",
       "description": "Please provide a reason for rejection",
       "placeholder": "Enter rejection reason..."
+    },
+    "approveDialog": {
+      "title": "Approve Request",
+      "description": "Are you sure you want to approve this request?"
     }
   },
   "allTasks": {

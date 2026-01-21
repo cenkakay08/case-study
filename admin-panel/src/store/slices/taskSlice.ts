@@ -45,13 +45,13 @@ export const fetchTasksAsync = createAsyncThunk(
 
 export const approveTaskAsync = createAsyncThunk(
   "tasks/approve",
-  async (taskId: string, { rejectWithValue }) => {
+  async (taskId: string, { rejectWithValue, signal }) => {
     try {
-      const response = await approveTaskApi(taskId);
+      const response = await approveTaskApi(taskId, signal);
 
       Toast.toastManager.add({
         title: i18n.t("common.success"),
-        description: i18n.t("pendingRequests.approveSuccess"),
+        description: i18n.t("pendingTasks.approveSuccess"),
       });
 
       return response.data;
@@ -72,14 +72,14 @@ export const rejectTaskAsync = createAsyncThunk(
   "tasks/reject",
   async (
     { taskId, rejectionReason }: { taskId: string; rejectionReason: string },
-    { rejectWithValue },
+    { rejectWithValue, signal },
   ) => {
     try {
-      const response = await rejectTaskApi(taskId, rejectionReason);
+      const response = await rejectTaskApi(taskId, rejectionReason, signal);
 
       Toast.toastManager.add({
         title: i18n.t("common.success"),
-        description: i18n.t("pendingRequests.rejectSuccess"),
+        description: i18n.t("pendingTasks.rejectSuccess"),
       });
 
       return response.data;

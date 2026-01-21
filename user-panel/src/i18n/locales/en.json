@@ -80,7 +80,7 @@
   },
   "categories": {
     "technical_support": "Technical Support",
-    "leave_task": "Leave Request",
+    "leave_request": "Leave Request",
     "purchase": "Purchasing",
     "other": "Other"
   },
