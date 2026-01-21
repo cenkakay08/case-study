@@ -15,3 +15,14 @@ export interface Task {
 export const fetchTasksApi = (abortSignal?: AbortSignal) => {
   return axiosInstance.get<Task[]>("/tasks", { signal: abortSignal });
 };
+
+export const approveTaskApi = (taskId: string) => {
+  return axiosInstance.patch<Task>(`/tasks/${taskId}`, { status: "approved" });
+};
+
+export const rejectTaskApi = (taskId: string, rejectionReason: string) => {
+  return axiosInstance.patch<Task>(`/tasks/${taskId}`, {
+    status: "rejected",
+    rejectionReason,
+  });
+};

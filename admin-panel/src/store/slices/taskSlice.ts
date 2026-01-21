@@ -3,7 +3,14 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { fetchTasksApi, type Task } from "@/api/tasks/taskController";
+import { Toast } from "@case-study/ui";
+import {
+  fetchTasksApi,
+  approveTaskApi,
+  rejectTaskApi,
+  type Task,
+} from "@/api/tasks/taskController";
+import i18n from "@/i18n/config";
 
 interface TaskState {
   tasks: Task[];
@@ -34,6 +41,59 @@ export const fetchTasksAsync = createAsyncThunk(
   },
 );
 
+export const approveTaskAsync = createAsyncThunk(
+  "tasks/approve",
+  async (taskId: string, { rejectWithValue }) => {
+    try {
+      const response = await approveTaskApi(taskId);
+
+      Toast.toastManager.add({
+        title: i18n.t("common.success"),
+        description: i18n.t("pendingRequests.approveSuccess"),
+      });
+
+      return response.data;
+    } catch (error: any) {
+      const messageKey = error.response?.data?.message || "common.error";
+
+      Toast.toastManager.add({
+        title: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+      });
+
+      return rejectWithValue(messageKey);
+    }
+  },
+);
+
+export const rejectTaskAsync = createAsyncThunk(
+  "tasks/reject",
+  async (
+    { taskId, rejectionReason }: { taskId: string; rejectionReason: string },
+    { rejectWithValue },
+  ) => {
+    try {
+      const response = await rejectTaskApi(taskId, rejectionReason);
+
+      Toast.toastManager.add({
+        title: i18n.t("common.success"),
+        description: i18n.t("pendingRequests.rejectSuccess"),
+      });
+
+      return response.data;
+    } catch (error: any) {
+      const messageKey = error.response?.data?.message || "common.error";
+
+      Toast.toastManager.add({
+        title: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+      });
+
+      return rejectWithValue(messageKey);
+    }
+  },
+);
+
 const taskSlice = createSlice({
   name: "tasks",
   initialState,
@@ -54,7 +114,29 @@ const taskSlice = createSlice({
       .addCase(fetchTasksAsync.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
-      });
+      })
+      .addCase(
+        approveTaskAsync.fulfilled,
+        (state, action: PayloadAction<Task>) => {
+          const index = state.tasks.findIndex(
+            (t) => t.id === action.payload.id,
+          );
+          if (index !== -1) {
+            state.tasks[index] = action.payload;
+          }
+        },
+      )
+      .addCase(
+        rejectTaskAsync.fulfilled,
+        (state, action: PayloadAction<Task>) => {
+          const index = state.tasks.findIndex(
+            (t) => t.id === action.payload.id,
+          );
+          if (index !== -1) {
+            state.tasks[index] = action.payload;
+          }
+        },
+      );
   },
 });
 

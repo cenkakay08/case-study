@@ -10,7 +10,8 @@
     "userManagement": "Kullanıcı Yönetimi",
     "darkMode": "Karanlık Mod",
     "loading": "Yükleniyor...",
-    "fetchError": "Veriler yüklenirken hata oluştu"
+    "fetchError": "Veriler yüklenirken hata oluştu",
+    "cancel": "İptal"
   },
   "dashboard": {
     "welcome": "Hoş geldiniz, {{name}}",
@@ -33,6 +34,10 @@
     "purchase": "Satın Alma",
     "other": "Diğer"
   },
+  "filters": {
+    "allPriorities": "Tüm Öncelikler",
+    "allCategories": "Tüm Kategoriler"
+  },
   "requests": {
     "table": {
       "title": "Başlık",
@@ -40,8 +45,30 @@
       "category": "Kategori",
       "priority": "Öncelik",
       "status": "Durum",
-      "date": "Tarih"
+      "date": "Tarih",
+      "actions": "İşlemler"
     }
+  },
+  "pendingRequests": {
+    "title": "Bekleyen Talepler",
+    "subtitle": "Onay bekleyen talepleri görüntüleyin ve yönetin",
+    "searchPlaceholder": "Başlık veya talep sahibi ara...",
+    "approve": "Onayla",
+    "reject": "Reddet",
+    "approveSuccess": "Talep başarıyla onaylandı",
+    "rejectSuccess": "Talep başarıyla reddedildi",
+    "noPermission": "Bu işlem için yetkiniz yok",
+    "noRequests": "Bekleyen talep bulunamadı",
+    "rejectDialog": {
+      "title": "Talebi Reddet",
+      "description": "Lütfen red sebebini belirtin",
+      "placeholder": "Red sebebini yazın..."
+    }
+  },
+  "pagination": {
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "pageInfo": "Sayfa {{current}} / {{total}}"
   },
   "login": {
     "title": "Yönetici Paneli",
