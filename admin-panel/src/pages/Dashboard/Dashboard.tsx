@@ -8,20 +8,13 @@ import { isToday } from "@/utils/date";
 import { StatsOverview } from "./components/StatsOverview/StatsOverview";
 import { PriorityDistribution } from "./components/PriorityDistribution/PriorityDistribution";
 import { RecentRequestsTable } from "./components/RecentRequestsTable/RecentRequestsTable";
+import { DashboardSkeleton } from "./components/DashboardSkeleton/DashboardSkeleton";
 
 const Dashboard: React.FC = () => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const promise = dispatch(fetchTasksAsync());
-
-    return () => {
-      promise.abort();
-    };
-  }, [dispatch]);
 
   // Statistics calculations gathered in one place using reduce and useMemo
   const {
@@ -84,9 +77,13 @@ const Dashboard: React.FC = () => {
     };
   }, [tasks]);
 
-  if (isLoading && tasks.length === 0) {
-    return <div className={styles.loading}>{t("common.loading")}</div>;
-  }
+  useEffect(() => {
+    const promise = dispatch(fetchTasksAsync());
+
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch]);
 
   return (
     <div className={styles.dashboardContainer}>
@@ -94,14 +91,20 @@ const Dashboard: React.FC = () => {
         <h1>{t("common.dashboard")}</h1>
         <p>{t("dashboard.welcome", { name: user?.name })}</p>
       </header>
-      {error && <div className={styles.error}>{t(error)}</div>}
-      <StatsOverview
-        pendingCount={pendingCount}
-        todayApproved={todayApproved}
-        todayRejected={todayRejected}
-      />
-      <PriorityDistribution priorityCounts={priorityCounts} />
-      <RecentRequestsTable tasks={recentPendingTasks} />
+      {isLoading ? (
+        <DashboardSkeleton />
+      ) : (
+        <>
+          {error && <div className={styles.error}>{t(error)}</div>}
+          <StatsOverview
+            pendingCount={pendingCount}
+            todayApproved={todayApproved}
+            todayRejected={todayRejected}
+          />
+          <PriorityDistribution priorityCounts={priorityCounts} />
+          <RecentRequestsTable tasks={recentPendingTasks} />
+        </>
+      )}
     </div>
   );
 };

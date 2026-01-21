@@ -8,4 +8,5 @@ export * as Switch from "./components/Switch/Switch";
 export * as Field from "./components/Field/Field";
 export * as Toast from "./components/Toast/Toast";
 export { ToastList } from "./components/ToastList/ToastList";
+export { Skeleton } from "./components/Skeleton/Skeleton";
 import "./tokens.css";
