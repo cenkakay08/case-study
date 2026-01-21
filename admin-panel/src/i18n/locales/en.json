@@ -10,7 +10,8 @@
     "userManagement": "User Management",
     "darkMode": "Dark Mode",
     "loading": "Loading...",
-    "fetchError": "Error loading data"
+    "fetchError": "Error loading data",
+    "cancel": "Cancel"
   },
   "dashboard": {
     "welcome": "Welcome, {{name}}",
@@ -33,6 +34,10 @@
     "purchase": "Purchase",
     "other": "Other"
   },
+  "filters": {
+    "allPriorities": "All Priorities",
+    "allCategories": "All Categories"
+  },
   "requests": {
     "table": {
       "title": "Title",
@@ -40,8 +45,30 @@
       "category": "Category",
       "priority": "Priority",
       "status": "Status",
-      "date": "Date"
+      "date": "Date",
+      "actions": "Actions"
     }
+  },
+  "pendingRequests": {
+    "title": "Pending Requests",
+    "subtitle": "View and manage requests awaiting approval",
+    "searchPlaceholder": "Search by title or owner...",
+    "approve": "Approve",
+    "reject": "Reject",
+    "approveSuccess": "Request approved successfully",
+    "rejectSuccess": "Request rejected successfully",
+    "noPermission": "You don't have permission for this action",
+    "noRequests": "No pending requests found",
+    "rejectDialog": {
+      "title": "Reject Request",
+      "description": "Please provide a reason for rejection",
+      "placeholder": "Enter rejection reason..."
+    }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageInfo": "Page {{current}} of {{total}}"
   },
   "login": {
     "title": "Admin Panel",
