@@ -3,7 +3,6 @@ import styles from "./AlertDialog.module.css";
 
 export const Root = BaseAlertDialog.Root;
 export const Portal = BaseAlertDialog.Portal;
-export const Close = BaseAlertDialog.Close;
 
 export function Trigger({
   className,
@@ -54,6 +53,15 @@ export function Description({
   return (
     <BaseAlertDialog.Description
       className={`${styles.Description} ${className || ""}`}
+      {...props}
+    />
+  );
+}
+
+export function Close({ className, ...props }: BaseAlertDialog.Close.Props) {
+  return (
+    <BaseAlertDialog.Close
+      className={`${styles.Button} ${className || ""}`}
       {...props}
     />
   );

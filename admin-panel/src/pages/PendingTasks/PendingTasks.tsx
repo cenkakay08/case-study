@@ -1,15 +1,12 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  fetchTasksAsync,
-  approveTaskAsync,
-  rejectTaskAsync,
-} from "@/store/slices/taskSlice";
+import { fetchTasksAsync, rejectTaskAsync } from "@/store/slices/taskSlice";
 import { Badge, Select, Dialog } from "@case-study/ui";
 import styles from "./PendingTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
 import { TASK_STATUS } from "@/api/tasks/taskController";
+import { TaskApproveConfirmDialog } from "@/components/Dialogs/TaskApproveConfirmDialog/TaskApproveConfirmDialog";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -41,7 +38,7 @@ export default function PendingTasks() {
   const CATEGORY_FILTERS = [
     { value: "all", label: t("filters.allCategories") },
     { value: "technical_support", label: t("categories.technical_support") },
-    { value: "leave_task", label: t("categories.leave_task") },
+    { value: "leave_request", label: t("categories.leave_request") },
     { value: "purchase", label: t("categories.purchase") },
     { value: "other", label: t("categories.other") },
   ];
@@ -82,10 +79,6 @@ export default function PendingTasks() {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, priorityFilter, categoryFilter]);
-
-  const handleApprove = (taskId: string) => {
-    dispatch(approveTaskAsync(taskId));
-  };
 
   const handleOpenRejectDialog = (taskId: string) => {
     setSelectedTaskId(taskId);
@@ -226,18 +219,7 @@ export default function PendingTasks() {
                   <td>{formatDate(task.createdAt, i18n.language)}</td>
                   <td className={styles.stickyColumn}>
                     <div className={styles.actionButtons}>
-                      <button
-                        className={styles.approveButton}
-                        onClick={() => handleApprove(task.id)}
-                        disabled={!canApproveReject}
-                        title={
-                          !canApproveReject
-                            ? t("pendingTasks.noPermission")
-                            : t("pendingTasks.approve")
-                        }
-                      >
-                        {t("pendingTasks.approve")}
-                      </button>
+                      <TaskApproveConfirmDialog task={task} />
                       <button
                         className={styles.rejectButton}
                         onClick={() => handleOpenRejectDialog(task.id)}

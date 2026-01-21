@@ -3,6 +3,7 @@ import { Dialog } from "@case-study/ui";
 import { Badge } from "@case-study/ui";
 import type { Task } from "@/api/tasks/taskController";
 import styles from "./Content.module.css";
+import { formatDate } from "@/utils/date";
 
 interface ContentProps {
   task: Task;
@@ -10,17 +11,6 @@ interface ContentProps {
 
 export function Content({ task }: ContentProps) {
   const { t, i18n } = useTranslation();
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString(
-      i18n.language === "tr" ? "tr-TR" : "en-US",
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      },
-    );
-  };
 
   return (
     <>
@@ -79,7 +69,7 @@ export function Content({ task }: ContentProps) {
               {t("myRequests.table.date")}
             </span>
             <span className={styles.detailValue}>
-              {formatDate(task.createdAt)}
+              {formatDate(task.createdAt, i18n.language)}
             </span>
           </div>
         </div>

@@ -7,10 +7,12 @@ import UserManagement from "@/pages/UserManagement/UserManagement";
 import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayout";
 import LoginGuardLayout from "@/components/Layouts/LoginGuardLayout/LoginGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
+import ProviderLayout from "@/components/Layouts/ProviderLayout/ProviderLayout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    element: <ProviderLayout />,
     children: [
       {
         index: true,
