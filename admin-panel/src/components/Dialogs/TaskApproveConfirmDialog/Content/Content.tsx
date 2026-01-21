@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { AlertDialog } from "@case-study/ui";
+import { AlertDialog, Button } from "@case-study/ui";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { approveTaskAsync } from "@/store/slices/taskSlice";
 import type { Task } from "@/api/tasks/taskController";
@@ -13,17 +13,17 @@ interface ContentProps {
 }
 
 export function Content({ task, setOpenDialog }: ContentProps) {
-  const abort = useRef<AbortController["abort"] | null>(null);
+  const abortController = useRef<AbortController | null>(null);
 
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.tasks);
 
   const handleConfirm = async () => {
-    const promise = dispatch(approveTaskAsync(task.id));
-    abort.current = promise.abort;
-
-    const response = await promise;
+    abortController.current = new AbortController();
+    const response = await dispatch(
+      approveTaskAsync(task.id, { signal: abortController.current.signal }),
+    );
 
     if (approveTaskAsync.fulfilled.match(response)) {
       setOpenDialog(false);
@@ -32,7 +32,7 @@ export function Content({ task, setOpenDialog }: ContentProps) {
 
   useEffect(() => {
     return () => {
-      abort.current?.();
+      abortController.current?.abort();
     };
   }, []);
 
@@ -99,13 +99,13 @@ export function Content({ task, setOpenDialog }: ContentProps) {
         <AlertDialog.Close className={styles.cancelButton}>
           {t("common.cancel")}
         </AlertDialog.Close>
-        <button
+        <Button
           className={styles.confirmButton}
           onClick={handleConfirm}
           disabled={isLoading}
         >
           {isLoading ? t("common.loading") : t("pendingTasks.approve")}
-        </button>
+        </Button>
       </div>
     </>
   );

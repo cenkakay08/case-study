@@ -135,9 +135,10 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 10",
       "priority": "high",
       "category": "technical_support",
-      "status": "pending",
+      "status": "rejected",
       "createdBy": "u1",
-      "createdAt": "2026-01-03T09:11:04.399Z"
+      "createdAt": "2026-01-03T09:11:04.399Z",
+      "rejectionReason": "asdasdasdasd"
     },
     {
       "id": "t11",
@@ -145,9 +146,10 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 11",
       "priority": "low",
       "category": "technical_support",
-      "status": "pending",
+      "status": "rejected",
       "createdBy": "u1",
-      "createdAt": "2025-12-29T09:11:04.399Z"
+      "createdAt": "2025-12-29T09:11:04.399Z",
+      "rejectionReason": "123123"
     },
     {
       "id": "t12",
@@ -155,9 +157,10 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 12",
       "priority": "urgent",
       "category": "purchase",
-      "status": "pending",
+      "status": "rejected",
       "createdBy": "u2",
-      "createdAt": "2026-01-16T09:11:04.399Z"
+      "createdAt": "2026-01-16T09:11:04.399Z",
+      "rejectionReason": "123123123"
     },
     {
       "id": "t13",
@@ -206,9 +209,10 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 17",
       "priority": "high",
       "category": "purchase",
-      "status": "pending",
+      "status": "rejected",
       "createdBy": "u1",
-      "createdAt": "2025-12-22T09:11:04.400Z"
+      "createdAt": "2025-12-22T09:11:04.400Z",
+      "rejectionReason": "sdasdasd"
     },
     {
       "id": "t18",
