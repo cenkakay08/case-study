@@ -89,6 +89,47 @@
     "next": "Next",
     "pageInfo": "Page {{current}} of {{total}}"
   },
+  "userManagement": {
+    "title": "User Management",
+    "subtitle": "Manage admin panel users",
+    "addUser": "Add User",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "save": "Save",
+    "noUsers": "No users found",
+    "createSuccess": "User created successfully",
+    "updateSuccess": "User updated successfully",
+    "deleteSuccess": "User deleted successfully",
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role"
+    },
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Enter user name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "newPassword": "New Password (optional)",
+      "newPasswordPlaceholder": "Leave blank to keep current",
+      "role": "Role"
+    },
+    "createDialog": {
+      "title": "Add New User",
+      "description": "Create a new admin panel user"
+    },
+    "editDialog": {
+      "title": "Edit User",
+      "description": "Update user information"
+    },
+    "deleteDialog": {
+      "title": "Delete User",
+      "description": "Are you sure you want to delete user {{name}}? This action cannot be undone."
+    }
+  },
   "login": {
     "title": "Admin Panel",
     "subtitle": "Sign in to your administrative account",
