@@ -11,7 +11,8 @@
     "darkMode": "Dark Mode",
     "loading": "Loading...",
     "fetchError": "Error loading data",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "close": "Close"
   },
   "dashboard": {
     "welcome": "Welcome, {{name}}",
@@ -33,6 +34,12 @@
     "leave_request": "Leave Request",
     "purchase": "Purchase",
     "other": "Other"
+  },
+  "status": {
+    "all": "All Statuses",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
   },
   "filters": {
     "allPriorities": "All Priorities",
@@ -63,6 +70,18 @@
       "title": "Reject Request",
       "description": "Please provide a reason for rejection",
       "placeholder": "Enter rejection reason..."
+    }
+  },
+  "allRequests": {
+    "title": "All Requests",
+    "subtitle": "View all requests in the system",
+    "searchPlaceholder": "Search by title or owner...",
+    "viewDetail": "Details",
+    "noRequests": "No requests found",
+    "detailDialog": {
+      "description": "Request details",
+      "descriptionLabel": "Description",
+      "rejectionReason": "Rejection Reason"
     }
   },
   "pagination": {

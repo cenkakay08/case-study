@@ -2,12 +2,12 @@ import { createBrowserRouter, Navigate } from "react-router";
 import Login from "@/pages/Login/Login";
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import PendingRequests from "@/pages/PendingRequests/PendingRequests";
+import AllRequests from "@/pages/AllRequests/AllRequests";
 import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayout";
 import LoginGuardLayout from "@/components/Layouts/LoginGuardLayout/LoginGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
 
 // Temporary components until implemented
-const AllRequests = () => <div>All Requests (Work in Progress)</div>;
 const UserManagement = () => <div>User Management (Work in Progress)</div>;
 
 export const router = createBrowserRouter([

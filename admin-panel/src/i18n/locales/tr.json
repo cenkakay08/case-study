@@ -11,7 +11,8 @@
     "darkMode": "Karanlık Mod",
     "loading": "Yükleniyor...",
     "fetchError": "Veriler yüklenirken hata oluştu",
-    "cancel": "İptal"
+    "cancel": "İptal",
+    "close": "Kapat"
   },
   "dashboard": {
     "welcome": "Hoş geldiniz, {{name}}",
@@ -33,6 +34,12 @@
     "leave_request": "İzin Talebi",
     "purchase": "Satın Alma",
     "other": "Diğer"
+  },
+  "status": {
+    "all": "Tüm Durumlar",
+    "pending": "Bekliyor",
+    "approved": "Onaylandı",
+    "rejected": "Reddedildi"
   },
   "filters": {
     "allPriorities": "Tüm Öncelikler",
@@ -63,6 +70,18 @@
       "title": "Talebi Reddet",
       "description": "Lütfen red sebebini belirtin",
       "placeholder": "Red sebebini yazın..."
+    }
+  },
+  "allRequests": {
+    "title": "Tüm Talepler",
+    "subtitle": "Sistemdeki tüm talepleri görüntüleyin",
+    "searchPlaceholder": "Başlık veya talep sahibi ara...",
+    "viewDetail": "Detay",
+    "noRequests": "Talep bulunamadı",
+    "detailDialog": {
+      "description": "Talep detayları",
+      "descriptionLabel": "Açıklama",
+      "rejectionReason": "Red Sebebi"
     }
   },
   "pagination": {
