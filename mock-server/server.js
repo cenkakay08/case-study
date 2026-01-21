@@ -23,7 +23,7 @@ app.use(
 app.use(bodyParser.json());
 
 // Delay middleware
-app.use((req, res, next) => setTimeout(next, 300));
+app.use((req, res, next) => setTimeout(next, 5000));
 
 // Load data from db.json
 const dbPath = path.join(__dirname, "db.json");
@@ -84,11 +84,9 @@ app.post("/api/auth/admin/login", (req, res) => {
 
   if (user) {
     if (user.role === "User") {
-      return res
-        .status(403)
-        .json({
-          message: "Unauthorized: User role not allowed in Admin Panel",
-        });
+      return res.status(403).json({
+        message: "Unauthorized: User role not allowed in Admin Panel",
+      });
     }
 
     const token = jwt.sign(
