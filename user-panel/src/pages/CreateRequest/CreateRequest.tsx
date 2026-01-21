@@ -15,12 +15,7 @@ const requestSchema = z.object({
   }),
 });
 
-const CATEGORIES = [
-  "Purchasing",
-  "Technical Support",
-  "Leave Request",
-  "Other",
-];
+const CATEGORIES = ["purchase", "technical_support", "leave_request", "other"];
 
 const PRIORITIES = ["low", "normal", "high", "urgent"] as const;
 

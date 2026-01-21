@@ -79,14 +79,10 @@
     }
   },
   "categories": {
-    "Satın Alma": "Satın Alma",
-    "Teknik Destek": "Teknik Destek",
-    "zin Talebi": "İzin Talebi",
-    "Diğer": "Diğer",
-    "Purchasing": "Satın Alma",
-    "Technical Support": "Teknik Destek",
-    "Leave Request": "İzin Talebi",
-    "Other": "Diğer"
+    "technical_support": "Teknik Destek",
+    "leave_request": "İzin Talebi",
+    "purchase": "Satın Alma",
+    "other": "Diğer"
   },
   "priorities": {
     "low": "Düşük",

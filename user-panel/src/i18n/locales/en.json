@@ -79,14 +79,10 @@
     }
   },
   "categories": {
-    "Satın Alma": "Purchasing",
-    "Teknik Destek": "Technical Support",
-    "zin Talebi": "Leave Request",
-    "Diğer": "Other",
-    "Purchasing": "Purchasing",
-    "Technical Support": "Technical Support",
-    "Leave Request": "Leave Request",
-    "Other": "Other"
+    "technical_support": "Technical Support",
+    "leave_request": "Leave Request",
+    "purchase": "Purchasing",
+    "other": "Other"
   },
   "priorities": {
     "low": "Low",
