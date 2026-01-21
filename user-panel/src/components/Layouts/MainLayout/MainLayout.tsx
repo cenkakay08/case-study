@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { logout } from "@/store/slices/authSlice";
 import styles from "./MainLayout.module.css";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
+import { Toast, ToastList } from "@case-study/ui";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +18,7 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <>
+    <Toast.Provider>
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
           <h2>User Panel</h2>
@@ -63,7 +64,10 @@ const MainLayout: React.FC = () => {
       <main className={styles.content}>
         <Outlet />
       </main>
-    </>
+      <Toast.Viewport>
+        <ToastList />
+      </Toast.Viewport>
+    </Toast.Provider>
   );
 };
 

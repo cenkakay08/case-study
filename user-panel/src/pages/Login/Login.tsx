@@ -1,25 +1,23 @@
 import React from "react";
 import { revalidateLogic, useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import * as Field from "@/components/Field/Field";
+import { Field, Button } from "@case-study/ui";
 import styles from "./Login.module.css";
-import { Button } from "@/components/Button/Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { loginAsyncThunk } from "@/store/slices/authSlice";
 
 import { useTranslation } from "react-i18next";
 
-const getLoginSchema = (t: (key: string) => string) =>
-  z.object({
-    email: z
-      .string()
-      .min(1, { message: t("login.emailRequired") })
-      .pipe(z.email({ message: t("login.emailInvalid") })),
-    password: z
-      .string()
-      .min(1, { message: t("login.passwordRequired") })
-      .min(6, { message: t("login.passwordMin") }),
-  });
+const loginSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: "login.emailRequired" })
+    .pipe(z.email({ message: "login.emailInvalid" })),
+  password: z
+    .string()
+    .min(1, { message: "login.passwordRequired" })
+    .min(6, { message: "login.passwordMin" }),
+});
 
 const loginDefaultValues = {
   email: "user1@test.com",
@@ -30,8 +28,6 @@ const Login: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isLoading, error } = useAppSelector((state) => state.auth);
-
-  const loginSchema = React.useMemo(() => getLoginSchema(t), [t]);
 
   const form = useForm({
     defaultValues: loginDefaultValues,
@@ -77,7 +73,7 @@ const Login: React.FC = () => {
                   placeholder={t("login.emailPlaceholder")}
                 />
                 <Field.Error match={!field.state.meta.isValid}>
-                  {field.state.meta.errors?.[0]?.message}
+                  {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
             )}
@@ -98,7 +94,7 @@ const Login: React.FC = () => {
                   placeholder="••••••"
                 />
                 <Field.Error match={!field.state.meta.isValid}>
-                  {field.state.meta.errors?.[0]?.message}
+                  {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
             )}

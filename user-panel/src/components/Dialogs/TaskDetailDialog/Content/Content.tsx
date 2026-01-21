@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import * as Dialog from "@/components/Dialog/Dialog";
-import { Badge } from "@/components/Badge/Badge";
+import { Dialog } from "@case-study/ui";
+import { Badge } from "@case-study/ui";
 import type { Task } from "@/api/tasks/taskController";
 import styles from "./Content.module.css";
 

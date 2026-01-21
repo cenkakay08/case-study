@@ -1,9 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
-import { Badge } from "@/components/Badge/Badge";
-import * as Select from "@/components/Select/Select";
-import { TaskDetailDialog } from "@/components/Dialogs/TaskDetailDialog/TaskDetailDialog";
+import { Badge, Select } from "@case-study/ui";
+import { TaskDetailDialog } from "../../components/Dialogs/TaskDetailDialog/TaskDetailDialog";
 import styles from "./MyRequests.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
