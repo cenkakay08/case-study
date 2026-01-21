@@ -48,7 +48,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// Login Route
+// Login Route (User)
 app.post("/api/auth/login", (req, res) => {
   const { email, password } = req.body;
   const user = db.users.find(
@@ -56,6 +56,41 @@ app.post("/api/auth/login", (req, res) => {
   );
 
   if (user) {
+    const token = jwt.sign(
+      { id: user.id, email: user.email, role: user.role, name: user.name },
+      SECRET_KEY,
+      { expiresIn: "1h" },
+    );
+    res.json({
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        name: user.name,
+      },
+    });
+  } else {
+    res.status(401).json({ message: "Invalid email or password" });
+  }
+});
+
+// Login Route (Admin Panel)
+app.post("/api/auth/admin/login", (req, res) => {
+  const { email, password } = req.body;
+  const user = db.users.find(
+    (u) => u.email === email && u.password === password,
+  );
+
+  if (user) {
+    if (user.role === "User") {
+      return res
+        .status(403)
+        .json({
+          message: "Unauthorized: User role not allowed in Admin Panel",
+        });
+    }
+
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role, name: user.name },
       SECRET_KEY,

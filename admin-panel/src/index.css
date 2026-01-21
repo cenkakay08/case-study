@@ -1,68 +1,119 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+html,
 body {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  display: block;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  background-color: var(--color-gray-50);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+button:not(:disabled),
+[role="button"]:not(:disabled) {
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+#root {
+  isolation: isolate;
+  display: flex;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  color-scheme: light dark;
+  --color-white: oklch(100% 0 0);
+  --color-black: oklch(0% 0 0);
+
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) & {
+      color-scheme: dark;
+      --color-white: oklch(20% 0.01 264);
+      --color-black: oklch(98% 0 0);
+
+      --color-blue-50: oklch(25% 0.04 264);
+      --color-blue-100: oklch(30% 0.06 264);
+      --color-blue-600: oklch(70% 0.18 264);
+      --color-blue-700: oklch(80% 0.14 264);
+
+      --color-red-50: oklch(25% 0.04 24);
+      --color-red-100: oklch(30% 0.06 24);
+      --color-red-200: oklch(35% 0.08 24);
+      --color-red-600: oklch(70% 0.18 24);
+      --color-red-700: oklch(80% 0.14 24);
+      --color-red-800: oklch(85% 0.12 24);
+
+      --color-green-50: oklch(25% 0.04 145);
+      --color-green-100: oklch(30% 0.06 145);
+      --color-green-700: oklch(80% 0.14 145);
+
+      --color-yellow-50: oklch(25% 0.04 85);
+      --color-yellow-100: oklch(30% 0.06 85);
+      --color-yellow-700: oklch(80% 0.14 85);
+
+      --color-orange-50: oklch(25% 0.04 60);
+      --color-orange-100: oklch(30% 0.06 60);
+      --color-orange-700: oklch(80% 0.14 60);
+
+      --color-gray-50: oklch(15% 0.01 264);
+      --color-gray-100: oklch(20% 0.01 264);
+      --color-gray-200: oklch(25% 0.01 264);
+      --color-gray-300: oklch(35% 0.01 264);
+      --color-gray-400: oklch(50% 0.01 264);
+      --color-gray-500: oklch(65% 0.01 264);
+      --color-gray-600: oklch(80% 0.01 264);
+      --color-gray-700: oklch(90% 0.01 264);
+      --color-gray-800: oklch(93% 0.01 264);
+      --color-gray-900: oklch(96% 0.01 264);
+      --color-gray-950: oklch(98% 0.01 264);
+    }
   }
-  a:hover {
-    color: #747bff;
+
+  &.dark {
+    color-scheme: dark;
+    --color-white: oklch(20% 0.01 264);
+    --color-black: oklch(98% 0 0);
+
+    --color-blue-50: oklch(25% 0.04 264);
+    --color-blue-100: oklch(30% 0.06 264);
+    --color-blue-600: oklch(70% 0.18 264);
+    --color-blue-700: oklch(80% 0.14 264);
+
+    --color-red-50: oklch(25% 0.04 24);
+    --color-red-100: oklch(30% 0.06 24);
+    --color-red-200: oklch(35% 0.08 24);
+    --color-red-600: oklch(70% 0.18 24);
+    --color-red-700: oklch(80% 0.14 24);
+    --color-red-800: oklch(85% 0.12 24);
+
+    --color-green-50: oklch(25% 0.04 145);
+    --color-green-100: oklch(30% 0.06 145);
+    --color-green-700: oklch(80% 0.14 145);
+
+    --color-yellow-50: oklch(25% 0.04 85);
+    --color-yellow-100: oklch(30% 0.06 85);
+    --color-yellow-700: oklch(80% 0.14 85);
+
+    --color-orange-50: oklch(25% 0.04 60);
+    --color-orange-100: oklch(30% 0.06 60);
+    --color-orange-700: oklch(80% 0.14 60);
+
+    --color-gray-50: oklch(15% 0.01 264);
+    --color-gray-100: oklch(20% 0.01 264);
+    --color-gray-200: oklch(25% 0.01 264);
+    --color-gray-300: oklch(35% 0.01 264);
+    --color-gray-400: oklch(50% 0.01 264);
+    --color-gray-500: oklch(65% 0.01 264);
+    --color-gray-600: oklch(80% 0.01 264);
+    --color-gray-700: oklch(90% 0.01 264);
+    --color-gray-800: oklch(93% 0.01 264);
+    --color-gray-900: oklch(96% 0.01 264);
+    --color-gray-950: oklch(98% 0.01 264);
   }
-  button {
-    background-color: #f9f9f9;
+
+  &.light {
+    color-scheme: light;
   }
 }
