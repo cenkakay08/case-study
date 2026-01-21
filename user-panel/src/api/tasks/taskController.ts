@@ -1,12 +1,18 @@
 import axiosInstance from "@/api/axios";
 
+export const TASK_STATUS = {
+  PENDING: "pending",
+  APPROVED: "approved",
+  REJECTED: "rejected",
+} as const;
+
 export interface Task {
   id: string;
   title: string;
   description: string;
   priority: "low" | "normal" | "high" | "urgent";
   category: string;
-  status: "pending" | "approved" | "rejected";
+  status: (typeof TASK_STATUS)[keyof typeof TASK_STATUS];
   createdBy: string;
   createdAt: string;
   rejectionReason?: string;

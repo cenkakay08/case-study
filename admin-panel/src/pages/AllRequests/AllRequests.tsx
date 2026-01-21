@@ -6,6 +6,7 @@ import type { Task } from "@/api/tasks/taskController";
 import styles from "./AllRequests.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
+import { TASK_STATUS } from "@/api/tasks/taskController";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -24,9 +25,9 @@ export default function AllRequests() {
 
   const STATUS_FILTERS = [
     { value: "all", label: t("status.all") },
-    { value: "pending", label: t("status.pending") },
-    { value: "approved", label: t("status.approved") },
-    { value: "rejected", label: t("status.rejected") },
+    { value: TASK_STATUS.PENDING, label: t("status.pending") },
+    { value: TASK_STATUS.APPROVED, label: t("status.approved") },
+    { value: TASK_STATUS.REJECTED, label: t("status.rejected") },
   ];
 
   const PRIORITY_FILTERS = [
