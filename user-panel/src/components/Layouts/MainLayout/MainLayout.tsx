@@ -33,21 +33,22 @@ const MainLayout: React.FC = () => {
             {t("common.dashboard")}
           </NavLink>
           <NavLink
-            to="/create-request"
+            to="/create-task"
             className={({ isActive }) =>
               isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
             }
           >
-            {t("common.createRequest")}
+            {t("common.createTask")}
           </NavLink>
           <NavLink
-            to="/my-requests"
+            to="/my-tasks"
             className={({ isActive }) =>
               isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
             }
           >
-            {t("common.myRequests")}
+            {t("common.myTasks")}
           </NavLink>
+
           <ThemeSwitcher />
           <LanguageSwitcher />
         </nav>

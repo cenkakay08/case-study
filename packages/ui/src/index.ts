@@ -2,6 +2,7 @@ export * from "./components/Button/Button";
 export * from "./components/Badge/Badge";
 export * as Tooltip from "./components/Tooltip/Tooltip";
 export * as Dialog from "./components/Dialog/Dialog";
+export * as AlertDialog from "./components/AlertDialog/AlertDialog";
 export * as Popover from "./components/Popover/Popover";
 export * as Select from "./components/Select/Select";
 export * as Switch from "./components/Switch/Switch";

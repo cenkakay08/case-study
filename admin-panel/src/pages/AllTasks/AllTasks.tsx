@@ -3,14 +3,14 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
 import { Badge, Select, Dialog } from "@case-study/ui";
 import type { Task } from "@/api/tasks/taskController";
-import styles from "./AllRequests.module.css";
+import styles from "./AllTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
 import { TASK_STATUS } from "@/api/tasks/taskController";
 
 const ITEMS_PER_PAGE = 10;
 
-export default function AllRequests() {
+export default function AllTasks() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { tasks, isLoading } = useAppSelector((state) => state.tasks);
@@ -78,15 +78,15 @@ export default function AllRequests() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>{t("allRequests.title")}</h1>
-        <p className={styles.subtitle}>{t("allRequests.subtitle")}</p>
+        <h1 className={styles.title}>{t("allTasks.title")}</h1>
+        <p className={styles.subtitle}>{t("allTasks.subtitle")}</p>
       </header>
 
       <div className={styles.controls}>
         <div className={styles.searchWrapper}>
           <input
             type="text"
-            placeholder={t("allRequests.searchPlaceholder")}
+            placeholder={t("allTasks.searchPlaceholder")}
             className={styles.searchInput}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -163,13 +163,13 @@ export default function AllRequests() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>{t("requests.table.title")}</th>
-              <th>{t("requests.table.owner")}</th>
-              <th>{t("requests.table.priority")}</th>
-              <th>{t("requests.table.status")}</th>
-              <th>{t("requests.table.date")}</th>
+              <th>{t("tasks.table.title")}</th>
+              <th>{t("tasks.table.owner")}</th>
+              <th>{t("tasks.table.priority")}</th>
+              <th>{t("tasks.table.status")}</th>
+              <th>{t("tasks.table.date")}</th>
               <th className={styles.stickyColumn}>
-                {t("requests.table.actions")}
+                {t("tasks.table.actions")}
               </th>
             </tr>
           </thead>
@@ -200,7 +200,7 @@ export default function AllRequests() {
                       className={styles.viewButton}
                       onClick={() => handleViewDetail(task)}
                     >
-                      {t("allRequests.viewDetail")}
+                      {t("allTasks.viewDetail")}
                     </button>
                   </td>
                 </tr>
@@ -208,9 +208,7 @@ export default function AllRequests() {
             ) : (
               <tr>
                 <td colSpan={6} className={styles.emptyState}>
-                  {isLoading
-                    ? t("common.loading")
-                    : t("allRequests.noRequests")}
+                  {isLoading ? t("common.loading") : t("allTasks.noTasks")}
                 </td>
               </tr>
             )}
@@ -250,7 +248,7 @@ export default function AllRequests() {
           <Dialog.Popup>
             <Dialog.Title>{selectedTask?.title}</Dialog.Title>
             <Dialog.Description>
-              {t("allRequests.detailDialog.description")}
+              {t("allTasks.detailDialog.description")}
             </Dialog.Description>
             {selectedTask && (
               <div className={styles.detailGrid}>
@@ -296,7 +294,7 @@ export default function AllRequests() {
                 </div>
                 <div className={styles.detailRow}>
                   <span className={styles.detailLabel}>
-                    {t("allRequests.detailDialog.descriptionLabel")}:
+                    {t("allTasks.detailDialog.descriptionLabel")}:
                   </span>
                   <span className={styles.detailValue}>
                     {selectedTask.description}
@@ -306,7 +304,7 @@ export default function AllRequests() {
                   selectedTask.rejectionReason && (
                     <div>
                       <span className={styles.detailLabel}>
-                        {t("allRequests.detailDialog.rejectionReason")}:
+                        {t("allTasks.detailDialog.rejectionReason")}:
                       </span>
                       <div className={styles.rejectionReason}>
                         {selectedTask.rejectionReason}

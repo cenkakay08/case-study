@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import Login from "@/pages/Login/Login";
 import Dashboard from "@/pages/Dashboard/Dashboard";
-import CreateRequest from "@/pages/CreateRequest/CreateRequest";
-import MyRequests from "@/pages/MyRequests/MyRequests";
+import CreateTask from "@/pages/CreateTask/CreateTask";
+import MyTasks from "@/pages/MyTasks/MyTasks";
 import ProviderLayout from "@/components/Layouts/ProviderLayout/ProviderLayout";
 import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
@@ -38,12 +38,12 @@ export const router = createBrowserRouter([
                 element: <Dashboard />,
               },
               {
-                path: "create-request",
-                element: <CreateRequest />,
+                path: "create-task",
+                element: <CreateTask />,
               },
               {
-                path: "my-requests",
-                element: <MyRequests />,
+                path: "my-tasks",
+                element: <MyTasks />,
               },
             ],
           },

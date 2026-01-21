@@ -5,8 +5,8 @@
     "dashboard": "Dashboard",
     "error": "Error",
     "success": "Success",
-    "pendingRequests": "Pending Requests",
-    "allRequests": "All Requests",
+    "pendingTasks": "Pending Requests",
+    "allTasks": "All Requests",
     "userManagement": "User Management",
     "darkMode": "Dark Mode",
     "loading": "Loading...",
@@ -21,7 +21,7 @@
     "todayRejected": "Today Rejected",
     "priorityDistribution": "Priority Distribution",
     "recentPending": "Recent Pending Requests",
-    "noPendingRequests": "No pending requests"
+    "noPendingTasks": "No pending requests"
   },
   "priorities": {
     "urgent": "Urgent",
@@ -31,7 +31,7 @@
   },
   "categories": {
     "technical_support": "Technical Support",
-    "leave_request": "Leave Request",
+    "leave_task": "Leave Request",
     "purchase": "Purchase",
     "other": "Other"
   },
@@ -45,7 +45,7 @@
     "allPriorities": "All Priorities",
     "allCategories": "All Categories"
   },
-  "requests": {
+  "tasks": {
     "table": {
       "title": "Title",
       "owner": "Owner",
@@ -56,7 +56,7 @@
       "actions": "Actions"
     }
   },
-  "pendingRequests": {
+  "pendingTasks": {
     "title": "Pending Requests",
     "subtitle": "View and manage requests awaiting approval",
     "searchPlaceholder": "Search by title or owner...",
@@ -65,19 +65,19 @@
     "approveSuccess": "Request approved successfully",
     "rejectSuccess": "Request rejected successfully",
     "noPermission": "You don't have permission for this action",
-    "noRequests": "No pending requests found",
+    "noTasks": "No pending requests found",
     "rejectDialog": {
       "title": "Reject Request",
       "description": "Please provide a reason for rejection",
       "placeholder": "Enter rejection reason..."
     }
   },
-  "allRequests": {
+  "allTasks": {
     "title": "All Requests",
     "subtitle": "View all requests in the system",
     "searchPlaceholder": "Search by title or owner...",
     "viewDetail": "Details",
-    "noRequests": "No requests found",
+    "noTasks": "No requests found",
     "detailDialog": {
       "description": "Request details",
       "descriptionLabel": "Description",

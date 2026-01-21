@@ -5,8 +5,8 @@
     "dashboard": "Panel",
     "error": "Hata",
     "success": "Başarılı",
-    "pendingRequests": "Bekleyen Talepler",
-    "allRequests": "Tüm Talepler",
+    "pendingTasks": "Bekleyen Talepler",
+    "allTasks": "Tüm Talepler",
     "userManagement": "Kullanıcı Yönetimi",
     "darkMode": "Karanlık Mod",
     "loading": "Yükleniyor...",
@@ -21,7 +21,7 @@
     "todayRejected": "Bugün Reddedilen",
     "priorityDistribution": "Öncelik Dağılımı",
     "recentPending": "Son Bekleyen Talepler",
-    "noPendingRequests": "Bekleyen talep yok"
+    "noPendingTasks": "Bekleyen talep yok"
   },
   "priorities": {
     "urgent": "Acil",
@@ -31,7 +31,7 @@
   },
   "categories": {
     "technical_support": "Teknik Destek",
-    "leave_request": "İzin Talebi",
+    "leave_task": "İzin Talebi",
     "purchase": "Satın Alma",
     "other": "Diğer"
   },
@@ -45,7 +45,7 @@
     "allPriorities": "Tüm Öncelikler",
     "allCategories": "Tüm Kategoriler"
   },
-  "requests": {
+  "tasks": {
     "table": {
       "title": "Başlık",
       "owner": "Talep Sahibi",
@@ -56,7 +56,7 @@
       "actions": "İşlemler"
     }
   },
-  "pendingRequests": {
+  "pendingTasks": {
     "title": "Bekleyen Talepler",
     "subtitle": "Onay bekleyen talepleri görüntüleyin ve yönetin",
     "searchPlaceholder": "Başlık veya talep sahibi ara...",
@@ -65,19 +65,19 @@
     "approveSuccess": "Talep başarıyla onaylandı",
     "rejectSuccess": "Talep başarıyla reddedildi",
     "noPermission": "Bu işlem için yetkiniz yok",
-    "noRequests": "Bekleyen talep bulunamadı",
+    "noTasks": "Bekleyen talep bulunamadı",
     "rejectDialog": {
       "title": "Talebi Reddet",
       "description": "Lütfen red sebebini belirtin",
       "placeholder": "Red sebebini yazın..."
     }
   },
-  "allRequests": {
+  "allTasks": {
     "title": "Tüm Talepler",
     "subtitle": "Sistemdeki tüm talepleri görüntüleyin",
     "searchPlaceholder": "Başlık veya talep sahibi ara...",
     "viewDetail": "Detay",
-    "noRequests": "Talep bulunamadı",
+    "noTasks": "Talep bulunamadı",
     "detailDialog": {
       "description": "Talep detayları",
       "descriptionLabel": "Açıklama",

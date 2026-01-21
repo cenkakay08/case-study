@@ -37,24 +37,24 @@ const MainLayout: React.FC = () => {
               {t("common.dashboard")}
             </NavLink>
             <NavLink
-              to="/pending-requests"
+              to="/pending-tasks"
               className={({ isActive }) =>
                 isActive ? `${styles.navItem} ${styles.active}` : styles.navItem
               }
             >
-              {t("common.pendingRequests")}
+              {t("common.pendingTasks")}
             </NavLink>
 
             {(isAdmin || isModerator) && (
               <NavLink
-                to="/all-requests"
+                to="/all-tasks"
                 className={({ isActive }) =>
                   isActive
                     ? `${styles.navItem} ${styles.active}`
                     : styles.navItem
                 }
               >
-                {t("common.allRequests")}
+                {t("common.allTasks")}
               </NavLink>
             )}
 

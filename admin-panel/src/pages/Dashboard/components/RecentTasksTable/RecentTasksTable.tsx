@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import { Badge } from "@case-study/ui";
 import { formatDate } from "@/utils/date";
 import type { Task } from "@/api/tasks/taskController";
-import styles from "./RecentRequestsTable.module.css";
+import styles from "./RecentTasksTable.module.css";
 
-interface RecentRequestsTableProps {
+interface RecentTasksTableProps {
   tasks: Task[];
 }
 
-export const RecentRequestsTable: React.FC<RecentRequestsTableProps> = ({
+export const RecentTasksTable: React.FC<RecentTasksTableProps> = ({
   tasks,
 }) => {
   const { t, i18n } = useTranslation();

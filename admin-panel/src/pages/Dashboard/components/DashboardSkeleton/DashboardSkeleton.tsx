@@ -3,7 +3,7 @@ import { Skeleton } from "@case-study/ui";
 import styles from "../../Dashboard.module.css";
 import statsStyles from "../StatsOverview/StatsOverview.module.css";
 import priorityStyles from "../PriorityDistribution/PriorityDistribution.module.css";
-import recentStyles from "../RecentRequestsTable/RecentRequestsTable.module.css";
+import recentStyles from "../RecentTasksTable/RecentTasksTable.module.css";
 
 export const DashboardSkeleton: React.FC = () => {
   return (
