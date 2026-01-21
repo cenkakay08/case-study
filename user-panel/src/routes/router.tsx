@@ -7,6 +7,8 @@ import ProviderLayout from "@/components/Layouts/ProviderLayout/ProviderLayout";
 import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
 
+import LoginGuardLayout from "@/components/Layouts/LoginGuardLayout/LoginGuardLayout";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -17,8 +19,13 @@ export const router = createBrowserRouter([
         element: <Navigate to="/dashboard" replace />,
       },
       {
-        path: "login",
-        element: <Login />,
+        element: <LoginGuardLayout />,
+        children: [
+          {
+            path: "login",
+            element: <Login />,
+          },
+        ],
       },
       {
         element: <AuthGuardLayout />,
