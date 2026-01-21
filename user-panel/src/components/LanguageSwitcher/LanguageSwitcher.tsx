@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import * as Switch from "@/components/Switch/Switch";
+import { Switch } from "@case-study/ui";
 import styles from "./LanguageSwitcher.module.css";
 
 export function LanguageSwitcher() {

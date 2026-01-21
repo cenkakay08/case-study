@@ -1,6 +1,7 @@
-import * as Toast from "@/components/Toast/Toast";
+import * as Toast from "../Toast/Toast";
 import { Toast as BaseToast } from "@base-ui/react/toast";
 import styles from "./ToastList.module.css";
+import React from "react";
 
 export function ToastList() {
   const { toasts } = BaseToast.useToastManager();

@@ -1,0 +1,15 @@
+{
+  "name": "case-study",
+  "private": true,
+  "description": "Task Approval System Case Study",
+  "workspaces": [
+    "user-panel",
+    "admin-panel",
+    "packages/*"
+  ],
+  "scripts": {
+    "user-panel:dev": "npm run dev -w user-panel",
+    "admin-panel:dev": "npm run dev -w admin-panel",
+    "ui:build": "npm run build -w @case-study/ui"
+  }
+}

@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { toastManager } from "@/components/Toast/Toast";
+import { Toast } from "@case-study/ui";
 import {
   fetchTasksApi,
   createTaskApi,
@@ -49,7 +49,7 @@ export const createTaskAsync = createAsyncThunk(
     try {
       const response = await createTaskApi(task);
 
-      toastManager.add({
+      Toast.toastManager.add({
         title: i18n.t("common.success"),
         description: i18n.t("success.requestCreated"),
       });
@@ -58,7 +58,7 @@ export const createTaskAsync = createAsyncThunk(
     } catch (error: any) {
       const messageKey = error.response?.data?.message || "common.createError";
 
-      toastManager.add({
+      Toast.toastManager.add({
         title: i18n.t("common.error"),
         description: i18n.t(messageKey),
       });

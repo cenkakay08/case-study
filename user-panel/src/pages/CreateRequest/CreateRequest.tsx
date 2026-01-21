@@ -1,25 +1,19 @@
-import React from "react";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import * as Field from "@/components/Field/Field";
-import * as Select from "@/components/Select/Select";
-import { Button } from "@/components/Button/Button";
+import { Field, Select, Button } from "@case-study/ui";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createTaskAsync } from "@/store/slices/taskSlice";
 import styles from "./CreateRequest.module.css";
 import { useTranslation } from "react-i18next";
 
-const getRequestSchema = (t: (key: string) => string) =>
-  z.object({
-    title: z.string().min(3, t("createRequest.validation.titleMin")),
-    description: z
-      .string()
-      .min(10, t("createRequest.validation.descriptionMin")),
-    category: z.string().min(1, t("createRequest.validation.categoryRequired")),
-    priority: z.enum(["low", "normal", "high", "urgent"] as const, {
-      message: t("createRequest.validation.priorityRequired"),
-    }),
-  });
+const requestSchema = z.object({
+  title: z.string().min(3, "createRequest.validation.titleMin"),
+  description: z.string().min(10, "createRequest.validation.descriptionMin"),
+  category: z.string().min(1, "createRequest.validation.categoryRequired"),
+  priority: z.enum(["low", "normal", "high", "urgent"] as const, {
+    message: "createRequest.validation.priorityRequired",
+  }),
+});
 
 const CATEGORIES = [
   "Purchasing",
@@ -41,8 +35,6 @@ export default function CreateRequest() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.tasks);
-
-  const requestSchema = React.useMemo(() => getRequestSchema(t), [t]);
 
   const form = useForm({
     defaultValues: createRequestDefaultValues,
@@ -88,7 +80,7 @@ export default function CreateRequest() {
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
                 <Field.Error match={field.state.meta.errors.length > 0}>
-                  {field.state.meta.errors?.[0]?.message}
+                  {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
             )}
@@ -137,7 +129,7 @@ export default function CreateRequest() {
                   </Select.Portal>
                 </Select.Root>
                 <Field.Error match={field.state.meta.errors.length > 0}>
-                  {field.state.meta.errors?.[0]?.message}
+                  {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
             )}
@@ -188,7 +180,7 @@ export default function CreateRequest() {
                   </Select.Portal>
                 </Select.Root>
                 <Field.Error match={field.state.meta.errors.length > 0}>
-                  {field.state.meta.errors?.[0]?.message}
+                  {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
             )}
@@ -217,7 +209,7 @@ export default function CreateRequest() {
                   onChange={(e: any) => field.handleChange(e.target.value)}
                 />
                 <Field.Error match={field.state.meta.errors.length > 0}>
-                  {field.state.meta.errors?.[0]?.message}
+                  {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
             )}

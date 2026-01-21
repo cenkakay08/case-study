@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
-import styles from "./index.module.css";
+import styles from "./Tooltip.module.css";
 
 export const Provider = BaseTooltip.Provider;
 export const Root = BaseTooltip.Root;

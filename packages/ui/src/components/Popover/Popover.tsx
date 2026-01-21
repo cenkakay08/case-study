@@ -7,7 +7,7 @@ export const Portal = BasePopover.Portal;
 export function Trigger({ className, ...props }: BasePopover.Trigger.Props) {
   return (
     <BasePopover.Trigger
-      className={`${styles.IconButton} ${className}`}
+      className={`${styles.IconButton} ${className || ""}`}
       {...props}
     />
   );
@@ -22,19 +22,28 @@ export function Positioner({
 
 export function Popup({ className, ...props }: BasePopover.Popup.Props) {
   return (
-    <BasePopover.Popup className={`${styles.Popup} ${className}`} {...props} />
+    <BasePopover.Popup
+      className={`${styles.Popup} ${className || ""}`}
+      {...props}
+    />
   );
 }
 
 export function Arrow({ className, ...props }: BasePopover.Arrow.Props) {
   return (
-    <BasePopover.Arrow className={`${styles.Arrow} ${className}`} {...props} />
+    <BasePopover.Arrow
+      className={`${styles.Arrow} ${className || ""}`}
+      {...props}
+    />
   );
 }
 
 export function Title({ className, ...props }: BasePopover.Title.Props) {
   return (
-    <BasePopover.Title className={`${styles.Title} ${className}`} {...props} />
+    <BasePopover.Title
+      className={`${styles.Title} ${className || ""}`}
+      {...props}
+    />
   );
 }
 
@@ -44,7 +53,7 @@ export function Description({
 }: BasePopover.Description.Props) {
   return (
     <BasePopover.Description
-      className={`${styles.Description} ${className}`}
+      className={`${styles.Description} ${className || ""}`}
       {...props}
     />
   );

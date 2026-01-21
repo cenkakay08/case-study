@@ -1,6 +1,6 @@
 .Viewport {
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   width: 250px;
   margin: 0 auto;
   bottom: 1rem;

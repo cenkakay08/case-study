@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { toastManager } from "@/components/Toast/Toast";
+import { Toast } from "@case-study/ui";
 import { router } from "@/routes/router";
 import {
   loginApi,
@@ -46,7 +46,7 @@ export const loginAsyncThunk = createAsyncThunk(
       const response = await loginApi(credentials);
       const { user, token } = response.data;
 
-      toastManager.add({
+      Toast.toastManager.add({
         title: "Başarılı",
         description: "Giriş yapıldı, hoş geldiniz!",
       });
@@ -57,7 +57,7 @@ export const loginAsyncThunk = createAsyncThunk(
     } catch (error: any) {
       const message = error.response?.data?.message || "Giriş başarısız oldu";
 
-      toastManager.add({
+      Toast.toastManager.add({
         title: "Hata",
         description: message,
       });

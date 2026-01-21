@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
-import { Badge } from "@/components/Badge/Badge";
-import { TaskDetailDialog } from "@/components/Dialogs/TaskDetailDialog/TaskDetailDialog";
+import { Badge } from "@case-study/ui";
+import { TaskDetailDialog } from "../../components/Dialogs/TaskDetailDialog/TaskDetailDialog";
 import styles from "./Dashboard.module.css";
 import { formatDate } from "@/utils/date";
 

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import * as Dialog from "@/components/Dialog/Dialog";
+import { Dialog } from "@case-study/ui";
 import type { Task } from "@/api/tasks/taskController";
 import { Content } from "./Content/Content";
 import styles from "./TaskDetailDialog.module.css";
