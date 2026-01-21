@@ -3,12 +3,12 @@ import Login from "@/pages/Login/Login";
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import PendingRequests from "@/pages/PendingRequests/PendingRequests";
 import AllRequests from "@/pages/AllRequests/AllRequests";
+import UserManagement from "@/pages/UserManagement/UserManagement";
 import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayout";
 import LoginGuardLayout from "@/components/Layouts/LoginGuardLayout/LoginGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
 
 // Temporary components until implemented
-const UserManagement = () => <div>User Management (Work in Progress)</div>;
 
 export const router = createBrowserRouter([
   {

@@ -89,6 +89,47 @@
     "next": "Sonraki",
     "pageInfo": "Sayfa {{current}} / {{total}}"
   },
+  "userManagement": {
+    "title": "Kullanıcı Yönetimi",
+    "subtitle": "Admin paneli kullanıcılarını yönetin",
+    "addUser": "Kullanıcı Ekle",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "create": "Oluştur",
+    "save": "Kaydet",
+    "noUsers": "Kullanıcı bulunamadı",
+    "createSuccess": "Kullanıcı başarıyla oluşturuldu",
+    "updateSuccess": "Kullanıcı başarıyla güncellendi",
+    "deleteSuccess": "Kullanıcı başarıyla silindi",
+    "table": {
+      "name": "Ad",
+      "email": "E-posta",
+      "role": "Rol"
+    },
+    "form": {
+      "name": "Ad",
+      "namePlaceholder": "Kullanıcı adını girin",
+      "email": "E-posta",
+      "emailPlaceholder": "E-posta adresini girin",
+      "password": "Şifre",
+      "passwordPlaceholder": "Şifre girin",
+      "newPassword": "Yeni Şifre (opsiyonel)",
+      "newPasswordPlaceholder": "Boş bırakılırsa değişmez",
+      "role": "Rol"
+    },
+    "createDialog": {
+      "title": "Yeni Kullanıcı Ekle",
+      "description": "Yeni bir admin paneli kullanıcısı oluşturun"
+    },
+    "editDialog": {
+      "title": "Kullanıcıyı Düzenle",
+      "description": "Kullanıcı bilgilerini güncelleyin"
+    },
+    "deleteDialog": {
+      "title": "Kullanıcıyı Sil",
+      "description": "{{name}} kullanıcısını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+    }
+  },
   "login": {
     "title": "Yönetici Paneli",
     "subtitle": "Yönetici hesabınızla giriş yapın",
