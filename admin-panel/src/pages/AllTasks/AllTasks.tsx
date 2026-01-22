@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
-import { Badge, Select, Dialog } from "@case-study/ui";
+import { Badge, Select, Dialog, Button } from "@case-study/ui";
 import type { Task } from "@/api/tasks/taskController";
 import styles from "./AllTasks.module.css";
 import { useTranslation } from "react-i18next";
@@ -196,12 +196,12 @@ export default function AllTasks() {
                   </td>
                   <td>{formatDate(task.createdAt, i18n.language)}</td>
                   <td className={styles.stickyColumn}>
-                    <button
+                    <Button
                       className={styles.viewButton}
                       onClick={() => handleViewDetail(task)}
                     >
                       {t("allTasks.viewDetail")}
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))
@@ -218,26 +218,26 @@ export default function AllTasks() {
 
       {totalPages > 1 && (
         <div className={styles.pagination}>
-          <button
+          <Button
             className={styles.pageButton}
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
           >
             {t("pagination.previous")}
-          </button>
+          </Button>
           <span className={styles.pageInfo}>
             {t("pagination.pageInfo", {
               current: currentPage,
               total: totalPages,
             })}
           </span>
-          <button
+          <Button
             className={styles.pageButton}
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
           >
             {t("pagination.next")}
-          </button>
+          </Button>
         </div>
       )}
 
@@ -320,10 +320,8 @@ export default function AllTasks() {
                 marginTop: "1.5rem",
               }}
             >
-              <Dialog.Close>
-                <button className={styles.pageButton}>
-                  {t("common.close")}
-                </button>
+              <Dialog.Close className={styles.pageButton}>
+                {t("common.close")}
               </Dialog.Close>
             </div>
           </Dialog.Popup>
