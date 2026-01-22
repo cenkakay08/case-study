@@ -3,16 +3,15 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Navigate } from "react-router";
 import {
   fetchUsersAsync,
-  createUserAsync,
   updateUserAsync,
   deleteUserAsync,
 } from "@/store/slices/userSlice";
 import { Button, Dialog, Select } from "@case-study/ui";
 import type {
   AdminUser,
-  CreateAdminUserPayload,
   UpdateAdminUserPayload,
 } from "@/api/users/userController";
+import { UserCreateDialog } from "@/components/Dialogs/UserCreateDialog/UserCreateDialog";
 import styles from "./UserManagement.module.css";
 import { useTranslation } from "react-i18next";
 
@@ -31,7 +30,6 @@ export default function UserManagement() {
   }
 
   // Dialog states
-  const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -61,11 +59,6 @@ export default function UserManagement() {
     setSelectedUser(null);
   };
 
-  const handleOpenCreate = () => {
-    resetForm();
-    setCreateDialogOpen(true);
-  };
-
   const handleOpenEdit = (user: AdminUser) => {
     setSelectedUser(user);
     setFormData({
@@ -80,21 +73,6 @@ export default function UserManagement() {
   const handleOpenDelete = (user: AdminUser) => {
     setSelectedUser(user);
     setDeleteDialogOpen(true);
-  };
-
-  const handleCreate = async () => {
-    if (!formData.name || !formData.email || !formData.password) return;
-
-    const payload: CreateAdminUserPayload = {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-      role: formData.role,
-    };
-
-    await dispatch(createUserAsync(payload));
-    setCreateDialogOpen(false);
-    resetForm();
   };
 
   const handleUpdate = async () => {
@@ -141,9 +119,7 @@ export default function UserManagement() {
           <h1 className={styles.title}>{t("userManagement.title")}</h1>
           <p className={styles.subtitle}>{t("userManagement.subtitle")}</p>
         </div>
-        <Button className={styles.addButton} onClick={handleOpenCreate}>
-          {t("userManagement.addUser")}
-        </Button>
+        <UserCreateDialog />
       </header>
 
       <div className={styles.tableContainer}>
@@ -203,116 +179,6 @@ export default function UserManagement() {
           </tbody>
         </table>
       </div>
-
-      {/* Create User Dialog */}
-      <Dialog.Root open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-        <Dialog.Portal>
-          <Dialog.Backdrop />
-          <Dialog.Popup>
-            <Dialog.Title>
-              {t("userManagement.createDialog.title")}
-            </Dialog.Title>
-            <Dialog.Description>
-              {t("userManagement.createDialog.description")}
-            </Dialog.Description>
-            <div className={styles.form}>
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>
-                  {t("userManagement.form.name")}
-                </label>
-                <input
-                  type="text"
-                  className={styles.formInput}
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  placeholder={t("userManagement.form.namePlaceholder")}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>
-                  {t("userManagement.form.email")}
-                </label>
-                <input
-                  type="email"
-                  className={styles.formInput}
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  placeholder={t("userManagement.form.emailPlaceholder")}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>
-                  {t("userManagement.form.password")}
-                </label>
-                <input
-                  type="password"
-                  className={styles.formInput}
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                  placeholder={t("userManagement.form.passwordPlaceholder")}
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>
-                  {t("userManagement.form.role")}
-                </label>
-                <Select.Root
-                  value={formData.role}
-                  onValueChange={(val) =>
-                    setFormData({
-                      ...formData,
-                      role: (val as UserRole) ?? "Viewer",
-                    })
-                  }
-                >
-                  <Select.Trigger>
-                    <Select.Value>{formData.role}</Select.Value>
-                    <Select.Icon>
-                      <Select.ChevronUpDownIcon />
-                    </Select.Icon>
-                  </Select.Trigger>
-                  <Select.Portal>
-                    <Select.Positioner sideOffset={8}>
-                      <Select.Popup>
-                        <Select.List>
-                          {ROLES.map((role) => (
-                            <Select.Item key={role} value={role}>
-                              <Select.ItemText>{role}</Select.ItemText>
-                              <Select.ItemIndicator>
-                                <Select.CheckIcon />
-                              </Select.ItemIndicator>
-                            </Select.Item>
-                          ))}
-                        </Select.List>
-                      </Select.Popup>
-                    </Select.Positioner>
-                  </Select.Portal>
-                </Select.Root>
-              </div>
-            </div>
-            <div className={styles.formActions}>
-              <Dialog.Close className={styles.cancelButton}>
-                {t("common.cancel")}
-              </Dialog.Close>
-              <Button
-                className={styles.submitButton}
-                onClick={handleCreate}
-                disabled={
-                  !formData.name || !formData.email || !formData.password
-                }
-              >
-                {t("userManagement.create")}
-              </Button>
-            </div>
-          </Dialog.Popup>
-        </Dialog.Portal>
-      </Dialog.Root>
 
       {/* Edit User Dialog */}
       <Dialog.Root open={editDialogOpen} onOpenChange={setEditDialogOpen}>

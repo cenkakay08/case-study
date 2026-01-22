@@ -34,6 +34,13 @@
       "password": "viewer123",
       "role": "Viewer",
       "name": "Viewer User"
+    },
+    {
+      "id": "a6",
+      "name": "Cenk Akay",
+      "email": "cenk_akay08@hotmail.com",
+      "password": "123456",
+      "role": "Viewer"
     }
   ],
   "tasks": [

@@ -114,6 +114,7 @@
     },
     "form": {
       "name": "Ad",
+      "nameRequired": "Ad gereklidir",
       "namePlaceholder": "Kullanıcı adını girin",
       "email": "E-posta",
       "emailPlaceholder": "E-posta adresini girin",
