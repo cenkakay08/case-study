@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { logout } from "@/store/slices/authSlice";
 import styles from "./MainLayout.module.css";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
-import { Toast, ToastList } from "@case-study/ui";
+import { Button, Toast, ToastList } from "@case-study/ui";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
@@ -57,9 +57,9 @@ const MainLayout: React.FC = () => {
             <span className={styles.userName}>{user?.name}</span>
             <span className={styles.userEmail}>{user?.email}</span>
           </div>
-          <button onClick={handleLogout} className={styles.logoutButton}>
+          <Button onClick={handleLogout} className={styles.logoutButton}>
             {t("common.logout")}
-          </button>
+          </Button>
         </div>
       </aside>
       <main className={styles.content}>

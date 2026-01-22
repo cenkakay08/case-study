@@ -68,6 +68,8 @@
   transform: translate(-50%, -50%);
   width: 24rem;
   max-width: calc(100vw - 3rem);
+  max-height: calc(100% - 2rem);
+  overflow: auto;
   margin-top: -2rem;
   padding: 1.5rem;
   border-radius: 0.5rem;

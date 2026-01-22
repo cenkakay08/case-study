@@ -7,7 +7,7 @@ import {
   updateUserAsync,
   deleteUserAsync,
 } from "@/store/slices/userSlice";
-import { Dialog, Select } from "@case-study/ui";
+import { Button, Dialog, Select } from "@case-study/ui";
 import type {
   AdminUser,
   CreateAdminUserPayload,
@@ -141,9 +141,9 @@ export default function UserManagement() {
           <h1 className={styles.title}>{t("userManagement.title")}</h1>
           <p className={styles.subtitle}>{t("userManagement.subtitle")}</p>
         </div>
-        <button className={styles.addButton} onClick={handleOpenCreate}>
+        <Button className={styles.addButton} onClick={handleOpenCreate}>
           {t("userManagement.addUser")}
-        </button>
+        </Button>
       </header>
 
       <div className={styles.tableContainer}>
@@ -175,18 +175,18 @@ export default function UserManagement() {
                   </td>
                   <td className={styles.stickyColumn}>
                     <div className={styles.actionButtons}>
-                      <button
+                      <Button
                         className={styles.editButton}
                         onClick={() => handleOpenEdit(user)}
                       >
                         {t("userManagement.edit")}
-                      </button>
-                      <button
+                      </Button>
+                      <Button
                         className={styles.deleteButton}
                         onClick={() => handleOpenDelete(user)}
                       >
                         {t("userManagement.delete")}
-                      </button>
+                      </Button>
                     </div>
                   </td>
                 </tr>
@@ -297,12 +297,10 @@ export default function UserManagement() {
               </div>
             </div>
             <div className={styles.formActions}>
-              <Dialog.Close>
-                <button className={styles.cancelButton}>
-                  {t("common.cancel")}
-                </button>
+              <Dialog.Close className={styles.cancelButton}>
+                {t("common.cancel")}
               </Dialog.Close>
-              <button
+              <Button
                 className={styles.submitButton}
                 onClick={handleCreate}
                 disabled={
@@ -310,7 +308,7 @@ export default function UserManagement() {
                 }
               >
                 {t("userManagement.create")}
-              </button>
+              </Button>
             </div>
           </Dialog.Popup>
         </Dialog.Portal>
@@ -405,18 +403,16 @@ export default function UserManagement() {
               </div>
             </div>
             <div className={styles.formActions}>
-              <Dialog.Close>
-                <button className={styles.cancelButton}>
-                  {t("common.cancel")}
-                </button>
+              <Dialog.Close className={styles.cancelButton}>
+                {t("common.cancel")}
               </Dialog.Close>
-              <button
+              <Button
                 className={styles.submitButton}
                 onClick={handleUpdate}
                 disabled={!formData.name || !formData.email}
               >
                 {t("userManagement.save")}
-              </button>
+              </Button>
             </div>
           </Dialog.Popup>
         </Dialog.Portal>
@@ -436,14 +432,12 @@ export default function UserManagement() {
               })}
             </p>
             <div className={styles.deleteConfirmActions}>
-              <Dialog.Close>
-                <button className={styles.cancelButton}>
-                  {t("common.cancel")}
-                </button>
+              <Dialog.Close className={styles.cancelButton}>
+                {t("common.cancel")}
               </Dialog.Close>
-              <button className={styles.deleteButton} onClick={handleDelete}>
+              <Button className={styles.deleteButton} onClick={handleDelete}>
                 {t("userManagement.delete")}
-              </button>
+              </Button>
             </div>
           </Dialog.Popup>
         </Dialog.Portal>
