@@ -5,13 +5,54 @@ import jwt from "jsonwebtoken";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createServer } from "http";
+import { WebSocketServer, WebSocket } from "ws";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const httpServer = createServer(app);
 const PORT = 5000;
 const SECRET_KEY = "super-secret-key";
+
+// WebSocket Server Setup
+const wss = new WebSocketServer({ server: httpServer });
+const clients = new Set();
+
+wss.on("connection", (ws, req) => {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const token = url.searchParams.get("token");
+
+  if (!token) {
+    ws.close(1008, "Token required");
+    return;
+  }
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) {
+      ws.close(1008, "Invalid token");
+      return;
+    }
+    ws.user = user;
+    clients.add(ws);
+    console.log(`Client connected: ${user.email} (Total: ${clients.size})`);
+  });
+
+  ws.on("close", () => {
+    clients.delete(ws);
+    console.log("Client disconnected");
+  });
+});
+
+const broadcast = (type, payload) => {
+  const message = JSON.stringify({ type, payload });
+  clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(message);
+    }
+  });
+};
 
 app.use(
   cors({
@@ -125,6 +166,7 @@ app.post("/api/tasks", authenticateToken, (req, res) => {
   };
   db.tasks.push(newTask);
   updateDb();
+  broadcast("TASK_CREATED", newTask);
   res.status(201).json(newTask);
 });
 
@@ -137,9 +179,32 @@ app.patch("/api/tasks/:id", authenticateToken, (req, res) => {
     if (req.user.role === "Admin" || req.user.role === "Moderator") {
       db.tasks[index] = { ...db.tasks[index], ...req.body };
       updateDb();
+      broadcast("TASK_UPDATED", db.tasks[index]);
       res.json(db.tasks[index]);
     } else {
       res.status(403).json({ message: "Unauthorized to update task status" });
+    }
+  } else {
+    res.status(404).json({ message: "Task not found" });
+  }
+});
+
+app.delete("/api/tasks/:id", authenticateToken, (req, res) => {
+  const { id } = req.params;
+  const index = db.tasks.findIndex((t) => t.id === id);
+
+  if (index !== -1) {
+    // Only Admin or the creator can delete their task
+    if (
+      req.user.role === "Admin" ||
+      db.tasks[index].createdBy === req.user.id
+    ) {
+      db.tasks.splice(index, 1);
+      updateDb();
+      broadcast("TASK_DELETED", { id });
+      res.status(204).send();
+    } else {
+      res.status(403).json({ message: "Unauthorized to delete task" });
     }
   } else {
     res.status(404).json({ message: "Task not found" });
@@ -164,6 +229,7 @@ app.post("/api/admin-users", authenticateToken, (req, res) => {
   };
   db.admin_users.push(newUser);
   updateDb();
+  broadcast("USER_CREATED", newUser);
   res.status(201).json(newUser);
 });
 
@@ -177,6 +243,7 @@ app.patch("/api/admin-users/:id", authenticateToken, (req, res) => {
   if (index !== -1) {
     db.admin_users[index] = { ...db.admin_users[index], ...req.body };
     updateDb();
+    broadcast("USER_UPDATED", db.admin_users[index]);
     res.json(db.admin_users[index]);
   } else {
     res.status(404).json({ message: "User not found" });
@@ -193,12 +260,13 @@ app.delete("/api/admin-users/:id", authenticateToken, (req, res) => {
   if (index !== -1) {
     db.admin_users.splice(index, 1);
     updateDb();
+    broadcast("USER_DELETED", { id });
     res.status(204).send();
   } else {
     res.status(404).json({ message: "User not found" });
   }
 });
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Mock server running at http://localhost:${PORT}`);
 });
