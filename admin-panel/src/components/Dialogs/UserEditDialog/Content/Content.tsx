@@ -1,13 +1,11 @@
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { revalidateLogic, useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { Field, Select, Button, Dialog } from "@case-study/ui";
 import { useAppDispatch } from "@/store/hooks";
 import { updateUserAsync } from "@/store/slices/userSlice";
-import type {
-  AdminUser,
-  UpdateAdminUserPayload,
-} from "@/api/users/userController";
+import type { AdminUser } from "@/api/users/userController";
 import styles from "./Content.module.css";
 
 const editUserSchema = z.object({
@@ -34,6 +32,8 @@ export function Content({ user, setOpen }: ContentProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
+  const abortController = useRef<AbortController | null>(null);
+
   const form = useForm({
     defaultValues: {
       name: user.name,
@@ -50,24 +50,29 @@ export function Content({ user, setOpen }: ContentProps) {
       onSubmit: editUserSchema,
     },
     onSubmit: async ({ value }) => {
-      const payload: UpdateAdminUserPayload = {
-        name: value.name,
-        email: value.email,
-        role: value.role,
-      };
+      abortController.current = new AbortController();
 
       if (value.password) {
-        payload.password = value.password;
+        value.password = value.password;
       }
 
       const result = await dispatch(
-        updateUserAsync({ userId: user.id, user: payload }),
+        updateUserAsync(
+          { userId: user.id, user: value },
+          { signal: abortController.current.signal },
+        ),
       );
       if (updateUserAsync.fulfilled.match(result)) {
         setOpen(false);
       }
     },
   });
+
+  useEffect(() => {
+    return () => {
+      abortController.current?.abort();
+    };
+  }, []);
 
   return (
     <form
