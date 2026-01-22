@@ -54,7 +54,7 @@ export default function UserManagement() {
               <th>{t("userManagement.table.email")}</th>
               <th>{t("userManagement.table.role")}</th>
               <th className={styles.stickyColumn}>
-                {t("requests.table.actions")}
+                {t("tasks.table.actions")}
               </th>
             </tr>
           </thead>
