@@ -1,10 +1,10 @@
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { revalidateLogic, useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { Field, Select, Button, Dialog } from "@case-study/ui";
 import { useAppDispatch } from "@/store/hooks";
 import { createUserAsync } from "@/store/slices/userSlice";
-import type { CreateAdminUserPayload } from "@/api/users/userController";
 import styles from "./Content.module.css";
 
 const userSchema = z.object({
@@ -28,6 +28,8 @@ interface ContentProps {
 }
 
 export function Content({ setOpen }: ContentProps) {
+  const abortController = useRef<AbortController | null>(null);
+
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -47,14 +49,21 @@ export function Content({ setOpen }: ContentProps) {
       onSubmit: userSchema,
     },
     onSubmit: async ({ value }) => {
-      const payload: CreateAdminUserPayload = value;
-      const result = await dispatch(createUserAsync(payload));
+      abortController.current = new AbortController();
+      const result = await dispatch(
+        createUserAsync(value, { signal: abortController.current.signal }),
+      );
       if (createUserAsync.fulfilled.match(result)) {
         setOpen(false);
-        form.reset();
       }
     },
   });
+
+  useEffect(() => {
+    return () => {
+      abortController.current?.abort();
+    };
+  }, []);
 
   return (
     <form

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Dialog } from "@case-study/ui";
 import { useAppDispatch } from "@/store/hooks";
@@ -13,13 +14,23 @@ interface ContentProps {
 export function Content({ user, setOpen }: ContentProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const abortController = useRef<AbortController | null>(null);
 
   const handleDelete = async () => {
-    const result = await dispatch(deleteUserAsync(user.id));
+    abortController.current = new AbortController();
+    const result = await dispatch(
+      deleteUserAsync(user.id, { signal: abortController.current.signal }),
+    );
     if (deleteUserAsync.fulfilled.match(result)) {
       setOpen(false);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      abortController.current?.abort();
+    };
+  }, []);
 
   return (
     <div className={styles.dialogContent}>
