@@ -51,13 +51,14 @@ const authenticateToken = (req, res, next) => {
 // Login Route (User)
 app.post("/api/auth/login", (req, res) => {
   const { email, password } = req.body;
-  const user = db.users.find(
+  const user = db.panel_users.find(
     (u) => u.email === email && u.password === password,
   );
 
   if (user) {
+    // Regular users don't have roles in DB, assign "User" role for token
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role, name: user.name },
+      { id: user.id, email: user.email, role: "User", name: user.name },
       SECRET_KEY,
       { expiresIn: "1h" },
     );
@@ -66,7 +67,7 @@ app.post("/api/auth/login", (req, res) => {
       user: {
         id: user.id,
         email: user.email,
-        role: user.role,
+        role: "User",
         name: user.name,
       },
     });
@@ -78,17 +79,11 @@ app.post("/api/auth/login", (req, res) => {
 // Login Route (Admin Panel)
 app.post("/api/auth/admin/login", (req, res) => {
   const { email, password } = req.body;
-  const user = db.users.find(
+  const user = db.admin_users.find(
     (u) => u.email === email && u.password === password,
   );
 
   if (user) {
-    if (user.role === "User") {
-      return res.status(403).json({
-        message: "Unauthorized: User role not allowed in Admin Panel",
-      });
-    }
-
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role, name: user.name },
       SECRET_KEY,
@@ -156,8 +151,7 @@ app.get("/api/admin-users", authenticateToken, (req, res) => {
   if (req.user.role !== "Admin") {
     return res.status(403).json({ message: "Only Admin can manage users" });
   }
-  const adminUsers = db.users.filter((u) => u.role !== "User");
-  res.json(adminUsers);
+  res.json(db.admin_users);
 });
 
 app.post("/api/admin-users", authenticateToken, (req, res) => {
@@ -165,10 +159,10 @@ app.post("/api/admin-users", authenticateToken, (req, res) => {
     return res.status(403).json({ message: "Only Admin can manage users" });
   }
   const newUser = {
-    id: "a" + (db.users.length + 1),
+    id: "a" + (db.admin_users.length + 1),
     ...req.body,
   };
-  db.users.push(newUser);
+  db.admin_users.push(newUser);
   updateDb();
   res.status(201).json(newUser);
 });
@@ -178,12 +172,12 @@ app.patch("/api/admin-users/:id", authenticateToken, (req, res) => {
     return res.status(403).json({ message: "Only Admin can manage users" });
   }
   const { id } = req.params;
-  const index = db.users.findIndex((u) => u.id === id);
+  const index = db.admin_users.findIndex((u) => u.id === id);
 
   if (index !== -1) {
-    db.users[index] = { ...db.users[index], ...req.body };
+    db.admin_users[index] = { ...db.admin_users[index], ...req.body };
     updateDb();
-    res.json(db.users[index]);
+    res.json(db.admin_users[index]);
   } else {
     res.status(404).json({ message: "User not found" });
   }
@@ -194,10 +188,10 @@ app.delete("/api/admin-users/:id", authenticateToken, (req, res) => {
     return res.status(403).json({ message: "Only Admin can manage users" });
   }
   const { id } = req.params;
-  const index = db.users.findIndex((u) => u.id === id);
+  const index = db.admin_users.findIndex((u) => u.id === id);
 
   if (index !== -1) {
-    db.users.splice(index, 1);
+    db.admin_users.splice(index, 1);
     updateDb();
     res.status(204).send();
   } else {

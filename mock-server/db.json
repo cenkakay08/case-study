@@ -1,19 +1,5 @@
 {
-  "users": [
-    {
-      "id": "u1",
-      "email": "user1@test.com",
-      "password": "123456",
-      "role": "User",
-      "name": "User One"
-    },
-    {
-      "id": "u2",
-      "email": "user2@test.com",
-      "password": "123456",
-      "role": "User",
-      "name": "User Two"
-    },
+  "admin_users": [
     {
       "id": "a1",
       "email": "admin@test.com",
@@ -41,6 +27,20 @@
       "email": "cenk_akay08@hotmail.com",
       "password": "123456",
       "role": "Viewer"
+    }
+  ],
+  "panel_users": [
+    {
+      "id": "u1",
+      "email": "user1@test.com",
+      "password": "123456",
+      "name": "User One"
+    },
+    {
+      "id": "u2",
+      "email": "user2@test.com",
+      "password": "123456",
+      "name": "User Two"
     }
   ],
   "tasks": [
@@ -99,32 +99,31 @@
       "id": "t6",
       "title": "Örnek Talep 6",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 6",
-      "priority": "high",
-      "category": "leave_request",
-      "status": "approved",
+      "priority": "low",
+      "category": "purchase",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-09T09:11:04.399Z"
+      "createdAt": "2026-01-04T09:11:04.399Z"
     },
     {
       "id": "t7",
       "title": "Örnek Talep 7",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 7",
-      "priority": "high",
+      "priority": "normal",
       "category": "technical_support",
       "status": "approved",
       "createdBy": "u1",
-      "createdAt": "2025-12-28T09:11:04.399Z"
+      "createdAt": "2026-01-05T09:11:04.399Z"
     },
     {
       "id": "t8",
       "title": "Örnek Talep 8",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 8",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-04T09:11:04.399Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
+      "priority": "low",
+      "category": "purchase",
+      "status": "pending",
+      "createdBy": "u1",
+      "createdAt": "2026-01-05T09:11:04.399Z"
     },
     {
       "id": "t9",
@@ -132,981 +131,188 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 9",
       "priority": "urgent",
       "category": "leave_request",
-      "status": "approved",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2025-12-30T09:11:04.399Z"
+      "createdAt": "2026-01-07T09:11:04.399Z"
     },
     {
       "id": "t10",
       "title": "Örnek Talep 10",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 10",
-      "priority": "high",
+      "priority": "normal",
       "category": "technical_support",
-      "status": "rejected",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-03T09:11:04.399Z",
-      "rejectionReason": "asdasdasdasd"
+      "createdAt": "2026-01-08T09:11:04.399Z"
     },
     {
       "id": "t11",
       "title": "Örnek Talep 11",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 11",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "rejected",
+      "priority": "normal",
+      "category": "leave_request",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2025-12-29T09:11:04.399Z",
-      "rejectionReason": "123123"
+      "createdAt": "2026-01-09T09:11:04.399Z"
     },
     {
       "id": "t12",
       "title": "Örnek Talep 12",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 12",
-      "priority": "urgent",
+      "priority": "normal",
       "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-16T09:11:04.399Z",
-      "rejectionReason": "123123123"
+      "status": "pending",
+      "createdBy": "u1",
+      "createdAt": "2026-01-10T09:11:04.399Z"
     },
     {
       "id": "t13",
       "title": "Örnek Talep 13",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 13",
       "priority": "high",
-      "category": "technical_support",
-      "status": "rejected",
+      "category": "leave_request",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-08T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
+      "createdAt": "2026-01-11T09:11:04.399Z"
     },
     {
       "id": "t14",
       "title": "Örnek Talep 14",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 14",
-      "priority": "urgent",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-09T09:11:04.400Z"
+      "priority": "low",
+      "category": "other",
+      "status": "pending",
+      "createdBy": "u1",
+      "createdAt": "2026-01-12T09:11:04.399Z"
     },
     {
       "id": "t15",
       "title": "Örnek Talep 15",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 15",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-03T09:11:04.400Z"
+      "priority": "high",
+      "category": "leave_request",
+      "status": "pending",
+      "createdBy": "u1",
+      "createdAt": "2026-01-13T09:11:04.399Z"
     },
     {
       "id": "t16",
       "title": "Örnek Talep 16",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 16",
-      "priority": "high",
-      "category": "purchase",
-      "status": "approved",
+      "priority": "urgent",
+      "category": "leave_request",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2025-12-30T09:11:04.400Z"
+      "createdAt": "2026-01-15T09:11:04.399Z"
     },
     {
       "id": "t17",
       "title": "Örnek Talep 17",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 17",
-      "priority": "high",
-      "category": "purchase",
-      "status": "rejected",
+      "priority": "urgent",
+      "category": "leave_request",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2025-12-22T09:11:04.400Z",
-      "rejectionReason": "sdasdasd"
+      "createdAt": "2026-01-15T09:11:04.399Z"
     },
     {
       "id": "t18",
       "title": "Örnek Talep 18",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 18",
       "priority": "low",
-      "category": "technical_support",
+      "category": "leave_request",
       "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z"
+      "createdAt": "2026-01-15T09:11:04.399Z"
     },
     {
       "id": "t19",
       "title": "Örnek Talep 19",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 19",
       "priority": "urgent",
-      "category": "leave_request",
-      "status": "rejected",
+      "category": "technical_support",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2025-12-25T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
+      "createdAt": "2026-01-15T09:11:04.399Z"
     },
     {
       "id": "t20",
       "title": "Örnek Talep 20",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 20",
-      "priority": "high",
-      "category": "purchase",
-      "status": "rejected",
+      "priority": "normal",
+      "category": "other",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-08T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
+      "createdAt": "2026-01-16T09:11:04.399Z"
     },
     {
       "id": "t21",
       "title": "Örnek Talep 21",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 21",
       "priority": "normal",
-      "category": "other",
-      "status": "rejected",
+      "category": "technical_support",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-17T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
+      "createdAt": "2026-01-17T09:11:04.399Z"
     },
     {
       "id": "t22",
       "title": "Örnek Talep 22",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 22",
-      "priority": "normal",
+      "priority": "urgent",
       "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-15T09:11:04.400Z"
+      "status": "pending",
+      "createdBy": "u1",
+      "createdAt": "2026-01-15T09:11:04.399Z"
     },
     {
       "id": "t23",
       "title": "Örnek Talep 23",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 23",
-      "priority": "high",
-      "category": "leave_request",
-      "status": "approved",
+      "priority": "low",
+      "category": "technical_support",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-10T09:11:04.400Z"
+      "createdAt": "2026-01-15T09:11:04.399Z"
     },
     {
       "id": "t24",
       "title": "Örnek Talep 24",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 24",
-      "priority": "high",
-      "category": "technical_support",
-      "status": "rejected",
+      "priority": "low",
+      "category": "purchase",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-19T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
+      "createdAt": "2026-01-17T09:11:04.399Z"
     },
     {
       "id": "t25",
       "title": "Örnek Talep 25",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 25",
       "priority": "high",
-      "category": "purchase",
-      "status": "rejected",
+      "category": "other",
+      "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2026-01-17T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
+      "createdAt": "2026-01-17T09:11:04.399Z"
     },
     {
       "id": "t26",
       "title": "Örnek Talep 26",
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 26",
-      "priority": "high",
-      "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-17T09:11:04.400Z"
-    },
-    {
-      "id": "t27",
-      "title": "Örnek Talep 27",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 27",
-      "priority": "normal",
-      "category": "other",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2025-12-31T09:11:04.400Z"
-    },
-    {
-      "id": "t28",
-      "title": "Örnek Talep 28",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 28",
-      "priority": "urgent",
-      "category": "other",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-13T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t29",
-      "title": "Örnek Talep 29",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 29",
-      "priority": "normal",
-      "category": "other",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z"
-    },
-    {
-      "id": "t30",
-      "title": "Örnek Talep 30",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 30",
-      "priority": "high",
-      "category": "technical_support",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2026-01-12T09:11:04.400Z"
-    },
-    {
-      "id": "t31",
-      "title": "Örnek Talep 31",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 31",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-12T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t32",
-      "title": "Örnek Talep 32",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 32",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-03T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t33",
-      "title": "Örnek Talep 33",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 33",
-      "priority": "normal",
-      "category": "purchase",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2025-12-31T09:11:04.400Z"
-    },
-    {
-      "id": "t34",
-      "title": "Örnek Talep 34",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 34",
-      "priority": "low",
-      "category": "purchase",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-20T09:11:04.400Z"
-    },
-    {
-      "id": "t35",
-      "title": "Örnek Talep 35",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 35",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z"
-    },
-    {
-      "id": "t36",
-      "title": "Örnek Talep 36",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 36",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-04T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t37",
-      "title": "Örnek Talep 37",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 37",
-      "priority": "low",
-      "category": "other",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2025-12-29T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t38",
-      "title": "Örnek Talep 38",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 38",
-      "priority": "urgent",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-06T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t39",
-      "title": "Örnek Talep 39",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 39",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-17T09:11:04.400Z"
-    },
-    {
-      "id": "t40",
-      "title": "Örnek Talep 40",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 40",
-      "priority": "low",
-      "category": "purchase",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2025-12-23T09:11:04.400Z"
-    },
-    {
-      "id": "t41",
-      "title": "Örnek Talep 41",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 41",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2026-01-10T09:11:04.400Z"
-    },
-    {
-      "id": "t42",
-      "title": "Örnek Talep 42",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 42",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t43",
-      "title": "Örnek Talep 43",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 43",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-13T09:11:04.400Z"
-    },
-    {
-      "id": "t44",
-      "title": "Örnek Talep 44",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 44",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z"
-    },
-    {
-      "id": "t45",
-      "title": "Örnek Talep 45",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 45",
-      "priority": "urgent",
-      "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2025-12-28T09:11:04.400Z"
-    },
-    {
-      "id": "t46",
-      "title": "Örnek Talep 46",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 46",
-      "priority": "normal",
-      "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2025-12-25T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t47",
-      "title": "Örnek Talep 47",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 47",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2025-12-29T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t48",
-      "title": "Örnek Talep 48",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 48",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-04T09:11:04.400Z"
-    },
-    {
-      "id": "t49",
-      "title": "Örnek Talep 49",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 49",
-      "priority": "urgent",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-10T09:11:04.400Z"
-    },
-    {
-      "id": "t50",
-      "title": "Örnek Talep 50",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 50",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2026-01-09T09:11:04.400Z"
-    },
-    {
-      "id": "t51",
-      "title": "Örnek Talep 51",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 51",
-      "priority": "low",
-      "category": "other",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-05T09:11:04.400Z"
-    },
-    {
-      "id": "t52",
-      "title": "Örnek Talep 52",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 52",
-      "priority": "high",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-07T09:11:04.400Z"
-    },
-    {
-      "id": "t53",
-      "title": "Örnek Talep 53",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 53",
-      "priority": "high",
-      "category": "other",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2025-12-30T09:11:04.400Z"
-    },
-    {
-      "id": "t54",
-      "title": "Örnek Talep 54",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 54",
-      "priority": "urgent",
-      "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-19T09:11:04.400Z"
-    },
-    {
-      "id": "t55",
-      "title": "Örnek Talep 55",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 55",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-02T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t56",
-      "title": "Örnek Talep 56",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 56",
-      "priority": "high",
-      "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2025-12-29T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t57",
-      "title": "Örnek Talep 57",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 57",
-      "priority": "urgent",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-09T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t58",
-      "title": "Örnek Talep 58",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 58",
-      "priority": "high",
-      "category": "technical_support",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2026-01-11T09:11:04.400Z"
-    },
-    {
-      "id": "t59",
-      "title": "Örnek Talep 59",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 59",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "pending",
-      "createdBy": "u2",
-      "createdAt": "2026-01-10T09:11:04.400Z"
-    },
-    {
-      "id": "t60",
-      "title": "Örnek Talep 60",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 60",
-      "priority": "low",
-      "category": "purchase",
-      "status": "pending",
-      "createdBy": "u2",
-      "createdAt": "2025-12-30T09:11:04.400Z"
-    },
-    {
-      "id": "t61",
-      "title": "Örnek Talep 61",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 61",
-      "priority": "urgent",
-      "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-06T09:11:04.400Z"
-    },
-    {
-      "id": "t62",
-      "title": "Örnek Talep 62",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 62",
-      "priority": "low",
-      "category": "other",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-04T09:11:04.400Z"
-    },
-    {
-      "id": "t63",
-      "title": "Örnek Talep 63",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 63",
-      "priority": "normal",
-      "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-14T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t64",
-      "title": "Örnek Talep 64",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 64",
-      "priority": "high",
-      "category": "technical_support",
-      "status": "pending",
-      "createdBy": "u2",
-      "createdAt": "2026-01-15T09:11:04.400Z"
-    },
-    {
-      "id": "t65",
-      "title": "Örnek Talep 65",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 65",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-17T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t66",
-      "title": "Örnek Talep 66",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 66",
-      "priority": "urgent",
-      "category": "other",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t67",
-      "title": "Örnek Talep 67",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 67",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-02T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t68",
-      "title": "Örnek Talep 68",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 68",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t69",
-      "title": "Örnek Talep 69",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 69",
-      "priority": "high",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2025-12-28T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t70",
-      "title": "Örnek Talep 70",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 70",
-      "priority": "high",
-      "category": "purchase",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-16T09:11:04.400Z"
-    },
-    {
-      "id": "t71",
-      "title": "Örnek Talep 71",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 71",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2025-12-27T09:11:04.400Z"
-    },
-    {
-      "id": "t72",
-      "title": "Örnek Talep 72",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 72",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2026-01-08T09:11:04.400Z"
-    },
-    {
-      "id": "t73",
-      "title": "Örnek Talep 73",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 73",
-      "priority": "high",
-      "category": "leave_request",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2025-12-26T09:11:04.400Z"
-    },
-    {
-      "id": "t74",
-      "title": "Örnek Talep 74",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 74",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-03T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t75",
-      "title": "Örnek Talep 75",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 75",
-      "priority": "high",
-      "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-19T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t76",
-      "title": "Örnek Talep 76",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 76",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2026-01-17T09:11:04.400Z"
-    },
-    {
-      "id": "t77",
-      "title": "Örnek Talep 77",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 77",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "pending",
-      "createdBy": "u2",
-      "createdAt": "2025-12-25T09:11:04.400Z"
-    },
-    {
-      "id": "t78",
-      "title": "Örnek Talep 78",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 78",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-14T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t79",
-      "title": "Örnek Talep 79",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 79",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-08T09:11:04.400Z"
-    },
-    {
-      "id": "t80",
-      "title": "Örnek Talep 80",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 80",
-      "priority": "high",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-15T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t81",
-      "title": "Örnek Talep 81",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 81",
-      "priority": "low",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2025-12-30T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t82",
-      "title": "Örnek Talep 82",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 82",
-      "priority": "urgent",
-      "category": "other",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2025-12-25T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t83",
-      "title": "Örnek Talep 83",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 83",
-      "priority": "high",
-      "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-03T09:11:04.400Z"
-    },
-    {
-      "id": "t84",
-      "title": "Örnek Talep 84",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 84",
-      "priority": "urgent",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2025-12-24T09:11:04.400Z"
-    },
-    {
-      "id": "t85",
-      "title": "Örnek Talep 85",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 85",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2025-12-27T09:11:04.400Z"
-    },
-    {
-      "id": "t86",
-      "title": "Örnek Talep 86",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 86",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t87",
-      "title": "Örnek Talep 87",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 87",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-13T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t88",
-      "title": "Örnek Talep 88",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 88",
-      "priority": "urgent",
-      "category": "purchase",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-13T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t89",
-      "title": "Örnek Talep 89",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 89",
-      "priority": "low",
-      "category": "other",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-07T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t90",
-      "title": "Örnek Talep 90",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 90",
       "priority": "normal",
       "category": "leave_request",
-      "status": "approved",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z"
-    },
-    {
-      "id": "t91",
-      "title": "Örnek Talep 91",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 91",
-      "priority": "normal",
-      "category": "leave_request",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2026-01-04T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t92",
-      "title": "Örnek Talep 92",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 92",
-      "priority": "high",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-07T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t93",
-      "title": "Örnek Talep 93",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 93",
-      "priority": "high",
-      "category": "other",
-      "status": "approved",
-      "createdBy": "u2",
-      "createdAt": "2026-01-04T09:11:04.400Z"
-    },
-    {
-      "id": "t94",
-      "title": "Örnek Talep 94",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 94",
-      "priority": "normal",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u2",
-      "createdAt": "2025-12-24T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t95",
-      "title": "Örnek Talep 95",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 95",
-      "priority": "normal",
-      "category": "other",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-20T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t96",
-      "title": "Örnek Talep 96",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 96",
-      "priority": "low",
-      "category": "technical_support",
-      "status": "rejected",
-      "createdBy": "u1",
-      "createdAt": "2026-01-03T09:11:04.400Z",
-      "rejectionReason": "Bütçe kısıtlamaları veya öncelik değişimi."
-    },
-    {
-      "id": "t97",
-      "title": "Örnek Talep 97",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 97",
-      "priority": "urgent",
-      "category": "purchase",
       "status": "pending",
       "createdBy": "u1",
-      "createdAt": "2025-12-27T09:11:04.400Z"
+      "createdAt": "2026-01-18T09:11:04.399Z"
     },
     {
-      "id": "t98",
-      "title": "Örnek Talep 98",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 98",
-      "priority": "high",
-      "category": "other",
-      "status": "pending",
-      "createdBy": "u2",
-      "createdAt": "2026-01-04T09:11:04.400Z"
-    },
-    {
-      "id": "t99",
-      "title": "Örnek Talep 99",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 99",
-      "priority": "high",
-      "category": "other",
-      "status": "pending",
-      "createdBy": "u2",
-      "createdAt": "2026-01-08T09:11:04.400Z"
-    },
-    {
-      "id": "t100",
-      "title": "Örnek Talep 100",
-      "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 100",
+      "id": "6d9e",
+      "title": "asd",
+      "description": "asd",
       "priority": "normal",
-      "category": "purchase",
-      "status": "pending",
-      "createdBy": "u1",
-      "createdAt": "2025-12-31T09:11:04.400Z"
-    },
-    {
-      "id": "t101",
-      "title": "asdsadad",
-      "description": "asdadsadadsasdasdasd",
       "category": "technical_support",
-      "priority": "high",
       "createdBy": "u1",
-      "createdAt": "2026-01-20T13:00:51.011Z",
-      "status": "pending"
-    },
-    {
-      "id": "t102",
-      "title": "asdadaasda",
-      "description": "asdasdasdasdsadad",
-      "category": "leave_request",
-      "priority": "urgent",
-      "createdBy": "u1",
-      "createdAt": "2026-01-20T13:01:00.756Z",
+      "createdAt": "2026-01-19T13:46:27.765Z",
       "status": "pending"
     }
   ]
