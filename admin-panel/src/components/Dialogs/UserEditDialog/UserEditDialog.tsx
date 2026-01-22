@@ -2,18 +2,23 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Dialog } from "@case-study/ui";
 import { Content } from "./Content/Content.tsx";
+import type { AdminUser } from "@/api/users/userController";
 
-export function UserCreateDialog() {
+interface UserEditDialogProps {
+  user: AdminUser;
+}
+
+export function UserEditDialog({ user }: UserEditDialogProps) {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>{t("userManagement.addUser")}</Dialog.Trigger>
+      <Dialog.Trigger>{t("userManagement.edit")}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop />
         <Dialog.Popup>
-          <Content setOpen={setOpen} />
+          <Content user={user} setOpen={setOpen} />
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>
