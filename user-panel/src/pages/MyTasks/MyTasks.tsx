@@ -6,6 +6,15 @@ import { TaskDetailDialog } from "../../components/Dialogs/TaskDetailDialog/Task
 import styles from "./MyTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
+import { TableSkeleton } from "@/components/Skeletons/TableSkeleton";
+import { TASK_STATUS } from "@/api/tasks/taskController";
+
+const STATUS_FILTERS = [
+  { value: "all", labelKey: "status.all" },
+  { value: TASK_STATUS.PENDING, labelKey: "status.pending" },
+  { value: TASK_STATUS.APPROVED, labelKey: "status.approved" },
+  { value: TASK_STATUS.REJECTED, labelKey: "status.rejected" },
+];
 
 export default function MyTasks() {
   const { t, i18n } = useTranslation();
@@ -13,20 +22,6 @@ export default function MyTasks() {
   const { tasks, isLoading } = useAppSelector((state) => state.tasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-
-  const STATUS_FILTERS = [
-    { value: "all", label: t("status.all") },
-    { value: "pending", label: t("status.pending") },
-    { value: "approved", label: t("status.approved") },
-    { value: "rejected", label: t("status.rejected") },
-  ];
-
-  useEffect(() => {
-    const promise = dispatch(fetchTasksAsync());
-    return () => {
-      promise.abort();
-    };
-  }, [dispatch]);
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
@@ -39,6 +34,13 @@ export default function MyTasks() {
     });
   }, [tasks, searchTerm, statusFilter]);
 
+  useEffect(() => {
+    const promise = dispatch(fetchTasksAsync());
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch]);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -47,15 +49,13 @@ export default function MyTasks() {
       </header>
 
       <div className={styles.controls}>
-        <div className={styles.searchWrapper}>
-          <input
-            type="text"
-            placeholder={t("myTasks.searchPlaceholder")}
-            className={styles.searchInput}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder={t("myTasks.searchPlaceholder")}
+          className={styles.searchInput}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
         <div className={styles.filters}>
           <Select.Root
@@ -64,7 +64,10 @@ export default function MyTasks() {
           >
             <Select.Trigger style={{ minWidth: "12rem" }}>
               <Select.Value placeholder={t("myTasks.statusFilterPlaceholder")}>
-                {STATUS_FILTERS.find((f) => f.value === statusFilter)?.label}
+                {t(
+                  STATUS_FILTERS.find((f) => f.value === statusFilter)
+                    ?.labelKey ?? "",
+                )}
               </Select.Value>
               <Select.Icon>
                 <Select.ChevronUpDownIcon />
@@ -76,7 +79,7 @@ export default function MyTasks() {
                   <Select.List>
                     {STATUS_FILTERS.map((f) => (
                       <Select.Item key={f.value} value={f.value}>
-                        <Select.ItemText>{f.label}</Select.ItemText>
+                        <Select.ItemText>{t(f.labelKey)}</Select.ItemText>
                         <Select.ItemIndicator>
                           <Select.CheckIcon />
                         </Select.ItemIndicator>
@@ -105,7 +108,9 @@ export default function MyTasks() {
             </tr>
           </thead>
           <tbody>
-            {filteredTasks.length > 0 ? (
+            {isLoading ? (
+              <TableSkeleton columns={6} rows={10} />
+            ) : filteredTasks.length > 0 ? (
               filteredTasks.map((task) => (
                 <tr key={task.id}>
                   <td>
@@ -134,9 +139,7 @@ export default function MyTasks() {
             ) : (
               <tr>
                 <td colSpan={6} className={styles.emptyState}>
-                  {isLoading
-                    ? t("common.loading")
-                    : t("dashboard.noRecentTasks")}
+                  {t("dashboard.noRecentTasks")}
                 </td>
               </tr>
             )}

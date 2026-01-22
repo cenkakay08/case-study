@@ -1,22 +1,29 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { Navigate } from "react-router";
 import { fetchUsersAsync } from "@/store/slices/userSlice";
 import { UserCreateDialog } from "@/components/Dialogs/UserCreateDialog/UserCreateDialog";
 import { UserEditDialog } from "@/components/Dialogs/UserEditDialog/UserEditDialog";
 import { UserDeleteDialog } from "@/components/Dialogs/UserDeleteDialog/UserDeleteDialog";
 import styles from "./UserManagement.module.css";
+import { TableSkeleton } from "@/components/Skeletons/TableSkeleton";
 import { useTranslation } from "react-i18next";
+import { USER_ROLES } from "@/api/users/userController";
 
 export default function UserManagement() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { users, isLoading } = useAppSelector((state) => state.users);
-  const { user } = useAppSelector((state) => state.auth);
 
-  if (user?.role !== "Admin") {
-    return <Navigate to="/dashboard" replace />;
-  }
+  const getRoleBadgeClass = (role: string) => {
+    switch (role) {
+      case USER_ROLES.ADMIN:
+        return styles.admin;
+      case USER_ROLES.MODERATOR:
+        return styles.moderator;
+      default:
+        return styles.viewer;
+    }
+  };
 
   useEffect(() => {
     const promise = dispatch(fetchUsersAsync());
@@ -24,17 +31,6 @@ export default function UserManagement() {
       promise.abort();
     };
   }, [dispatch]);
-
-  const getRoleBadgeClass = (role: string) => {
-    switch (role) {
-      case "Admin":
-        return styles.admin;
-      case "Moderator":
-        return styles.moderator;
-      default:
-        return styles.viewer;
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -59,7 +55,9 @@ export default function UserManagement() {
             </tr>
           </thead>
           <tbody>
-            {users.length > 0 ? (
+            {isLoading ? (
+              <TableSkeleton columns={4} rows={10} />
+            ) : users.length > 0 ? (
               users.map((user) => (
                 <tr key={user.id}>
                   <td>
@@ -84,9 +82,7 @@ export default function UserManagement() {
             ) : (
               <tr>
                 <td colSpan={4} className={styles.emptyState}>
-                  {isLoading
-                    ? t("common.loading")
-                    : t("userManagement.noUsers")}
+                  {t("userManagement.noUsers")}
                 </td>
               </tr>
             )}

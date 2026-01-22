@@ -6,7 +6,23 @@ import styles from "./AllTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { TaskDetailDialog } from "@/components/Dialogs/TaskDetailDialog/TaskDetailDialog";
 import { formatDate } from "@/utils/date";
-import { TASK_STATUS } from "@/api/tasks/taskController";
+import { TableSkeleton } from "@/components/Skeletons/TableSkeleton";
+import { TASK_STATUS, TASK_PRIORITY } from "@/api/tasks/taskController";
+
+const STATUS_FILTERS = [
+  { value: "all", labelKey: "status.all" },
+  { value: TASK_STATUS.PENDING, labelKey: "status.pending" },
+  { value: TASK_STATUS.APPROVED, labelKey: "status.approved" },
+  { value: TASK_STATUS.REJECTED, labelKey: "status.rejected" },
+];
+
+const PRIORITY_FILTERS = [
+  { value: "all", labelKey: "filters.allPriorities" },
+  { value: TASK_PRIORITY.URGENT, labelKey: "priorities.urgent" },
+  { value: TASK_PRIORITY.HIGH, labelKey: "priorities.high" },
+  { value: TASK_PRIORITY.NORMAL, labelKey: "priorities.normal" },
+  { value: TASK_PRIORITY.LOW, labelKey: "priorities.low" },
+];
 
 const ITEMS_PER_PAGE = 10;
 
@@ -18,21 +34,6 @@ export default function AllTasks() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const STATUS_FILTERS = [
-    { value: "all", label: t("status.all") },
-    { value: TASK_STATUS.PENDING, label: t("status.pending") },
-    { value: TASK_STATUS.APPROVED, label: t("status.approved") },
-    { value: TASK_STATUS.REJECTED, label: t("status.rejected") },
-  ];
-
-  const PRIORITY_FILTERS = [
-    { value: "all", label: t("filters.allPriorities") },
-    { value: "urgent", label: t("priorities.urgent") },
-    { value: "high", label: t("priorities.high") },
-    { value: "normal", label: t("priorities.normal") },
-    { value: "low", label: t("priorities.low") },
-  ];
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
@@ -69,18 +70,16 @@ export default function AllTasks() {
       </header>
 
       <div className={styles.controls}>
-        <div className={styles.searchWrapper}>
-          <input
-            type="text"
-            placeholder={t("allTasks.searchPlaceholder")}
-            className={styles.searchInput}
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1);
-            }}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder={t("allTasks.searchPlaceholder")}
+          className={styles.searchInput}
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
+        />
 
         <div className={styles.filters}>
           <Select.Root
@@ -92,7 +91,10 @@ export default function AllTasks() {
           >
             <Select.Trigger style={{ minWidth: "10rem" }}>
               <Select.Value>
-                {STATUS_FILTERS.find((f) => f.value === statusFilter)?.label}
+                {t(
+                  STATUS_FILTERS.find((f) => f.value === statusFilter)
+                    ?.labelKey ?? "",
+                )}
               </Select.Value>
               <Select.Icon>
                 <Select.ChevronUpDownIcon />
@@ -104,7 +106,7 @@ export default function AllTasks() {
                   <Select.List>
                     {STATUS_FILTERS.map((f) => (
                       <Select.Item key={f.value} value={f.value}>
-                        <Select.ItemText>{f.label}</Select.ItemText>
+                        <Select.ItemText>{t(f.labelKey)}</Select.ItemText>
                         <Select.ItemIndicator>
                           <Select.CheckIcon />
                         </Select.ItemIndicator>
@@ -125,10 +127,10 @@ export default function AllTasks() {
           >
             <Select.Trigger style={{ minWidth: "10rem" }}>
               <Select.Value>
-                {
+                {t(
                   PRIORITY_FILTERS.find((f) => f.value === priorityFilter)
-                    ?.label
-                }
+                    ?.labelKey ?? "",
+                )}
               </Select.Value>
               <Select.Icon>
                 <Select.ChevronUpDownIcon />
@@ -140,7 +142,7 @@ export default function AllTasks() {
                   <Select.List>
                     {PRIORITY_FILTERS.map((f) => (
                       <Select.Item key={f.value} value={f.value}>
-                        <Select.ItemText>{f.label}</Select.ItemText>
+                        <Select.ItemText>{t(f.labelKey)}</Select.ItemText>
                         <Select.ItemIndicator>
                           <Select.CheckIcon />
                         </Select.ItemIndicator>
@@ -169,7 +171,9 @@ export default function AllTasks() {
             </tr>
           </thead>
           <tbody>
-            {paginatedTasks.length > 0 ? (
+            {isLoading ? (
+              <TableSkeleton columns={6} rows={10} />
+            ) : paginatedTasks.length > 0 ? (
               paginatedTasks.map((task) => (
                 <tr key={task.id}>
                   <td>
@@ -198,7 +202,7 @@ export default function AllTasks() {
             ) : (
               <tr>
                 <td colSpan={6} className={styles.emptyState}>
-                  {isLoading ? t("common.loading") : t("allTasks.noTasks")}
+                  {t("allTasks.noTasks")}
                 </td>
               </tr>
             )}

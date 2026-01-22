@@ -3,14 +3,12 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import axiosInstance from "@/api/axios";
-
-export interface AdminUser {
-  id: string;
-  name: string;
-  email: string;
-  role: "Admin" | "Moderator" | "Viewer";
-}
+import { AxiosError } from "axios";
+import {
+  adminLoginApi,
+  type AdminUser,
+  type LoginPayload,
+} from "@/api/login/loginController";
 
 interface AuthState {
   user: AdminUser | null;
@@ -42,15 +40,15 @@ const initialState: AuthState = getInitialState();
 
 export const adminLoginAsync = createAsyncThunk(
   "auth/adminLogin",
-  async (credentials: any, { rejectWithValue }) => {
+  async (credentials: LoginPayload, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post(
-        "/auth/admin/login",
-        credentials,
-      );
+      const response = await adminLoginApi(credentials);
       return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || "Login failed");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.response?.data?.message || "Login failed");
+      }
+      return rejectWithValue("Login failed");
     }
   },
 );

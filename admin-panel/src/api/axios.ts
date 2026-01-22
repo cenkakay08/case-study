@@ -1,9 +1,15 @@
 import axios from "axios";
 import { logout } from "@/store/slices/authSlice";
+import type { AppDispatch, RootState } from "@/store/store";
 
-let store: any;
+interface InjectedStore {
+  getState: () => RootState;
+  dispatch: AppDispatch;
+}
 
-export const injectStore = (_store: any) => {
+let store: InjectedStore | null = null;
+
+export const injectStore = (_store: InjectedStore) => {
   store = _store;
 };
 
@@ -31,7 +37,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401 || error.response?.status === 403) {
+    if (error.response?.status === 401) {
       if (store) {
         store.dispatch(logout());
       }

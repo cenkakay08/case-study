@@ -1,8 +1,9 @@
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import { Field, Select, Button } from "@case-study/ui";
+import { Field, Select, Button, Tooltip } from "@case-study/ui";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createTaskAsync } from "@/store/slices/taskSlice";
+import { TASK_PRIORITY } from "@/api/tasks/taskController";
 import styles from "./CreateTask.module.css";
 import { useTranslation } from "react-i18next";
 
@@ -10,20 +11,34 @@ const requestSchema = z.object({
   title: z.string().min(3, "createTask.validation.titleMin"),
   description: z.string().min(10, "createTask.validation.descriptionMin"),
   category: z.string().min(1, "createTask.validation.categoryRequired"),
-  priority: z.enum(["low", "normal", "high", "urgent"] as const, {
-    message: "createTask.validation.priorityRequired",
-  }),
+  priority: z.enum(
+    [
+      TASK_PRIORITY.LOW,
+      TASK_PRIORITY.NORMAL,
+      TASK_PRIORITY.HIGH,
+      TASK_PRIORITY.URGENT,
+    ] as const,
+    {
+      message: "createTask.validation.priorityRequired",
+    },
+  ),
 });
 
 const CATEGORIES = ["purchase", "technical_support", "leave_request", "other"];
 
-const PRIORITIES = ["low", "normal", "high", "urgent"] as const;
+const PRIORITIES = [
+  TASK_PRIORITY.LOW,
+  TASK_PRIORITY.NORMAL,
+  TASK_PRIORITY.HIGH,
+  TASK_PRIORITY.URGENT,
+] as const;
 
 const createRequestDefaultValues = {
   title: "",
   description: "",
   category: "",
-  priority: "" as any,
+  priority:
+    TASK_PRIORITY.NORMAL as (typeof TASK_PRIORITY)[keyof typeof TASK_PRIORITY],
 };
 
 export default function CreateTask() {
@@ -74,7 +89,11 @@ export default function CreateTask() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
-                <Field.Error match={field.state.meta.errors.length > 0}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -123,7 +142,11 @@ export default function CreateTask() {
                     </Select.Positioner>
                   </Select.Portal>
                 </Select.Root>
-                <Field.Error match={field.state.meta.errors.length > 0}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -140,7 +163,7 @@ export default function CreateTask() {
                 <Select.Root
                   value={field.state.value}
                   onValueChange={(val) =>
-                    field.handleChange((val as any) ?? "")
+                    field.handleChange(val ?? TASK_PRIORITY.NORMAL)
                   }
                 >
                   <Select.Trigger>
@@ -174,7 +197,11 @@ export default function CreateTask() {
                     </Select.Positioner>
                   </Select.Portal>
                 </Select.Root>
-                <Field.Error match={field.state.meta.errors.length > 0}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -201,9 +228,13 @@ export default function CreateTask() {
                   placeholder={t("createTask.form.descriptionPlaceholder")}
                   value={field.state.value}
                   onBlur={field.handleBlur}
-                  onChange={(e: any) => field.handleChange(e.target.value)}
+                  onChange={(e) => field.handleChange(e.target.value)}
                 />
-                <Field.Error match={field.state.meta.errors.length > 0}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -211,19 +242,40 @@ export default function CreateTask() {
           />
 
           <div className={styles.actions}>
-            <form.Subscribe selector={(state) => [state.isSubmitting]}>
-              {(state) => {
-                const [isSubmitting] = state;
+            <form.Subscribe
+              selector={(state) => [state.canSubmit, state.isSubmitting]}
+            >
+              {([canSubmit, isSubmitting]) => {
                 return (
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting || isLoading}
-                    style={{ width: "100%" }}
-                  >
-                    {isSubmitting || isLoading
-                      ? t("createTask.form.submitting")
-                      : t("createTask.form.submitButton")}
-                  </Button>
+                  <Tooltip.Provider>
+                    <Tooltip.Root>
+                      <Tooltip.Trigger
+                        render={(props, triggerState) => (
+                          <span {...props} {...triggerState} tabIndex={-1}>
+                            <Button
+                              type="submit"
+                              disabled={!canSubmit || isSubmitting || isLoading}
+                              style={{ width: "100%" }}
+                            >
+                              {isSubmitting || isLoading
+                                ? t("createTask.form.submitting")
+                                : t("createTask.form.submitButton")}
+                            </Button>
+                          </span>
+                        )}
+                      />
+                      <Tooltip.Portal>
+                        <Tooltip.Positioner>
+                          <Tooltip.Popup>
+                            <Tooltip.Arrow />
+                            {canSubmit
+                              ? t("createTask.form.submitButton")
+                              : t("common.formInvalid")}
+                          </Tooltip.Popup>
+                        </Tooltip.Positioner>
+                      </Tooltip.Portal>
+                    </Tooltip.Root>
+                  </Tooltip.Provider>
                 );
               }}
             </form.Subscribe>

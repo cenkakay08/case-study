@@ -1,9 +1,16 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import type { InternalAxiosRequestConfig, AxiosResponse } from "axios";
 import { logout } from "@/store/slices/authSlice";
+import type { RootState, AppDispatch } from "@/store";
 
-let store: any;
+interface InjectedStore {
+  getState: () => RootState;
+  dispatch: AppDispatch;
+}
 
-export const injectStore = (_store: any) => {
+let store: InjectedStore;
+
+export const injectStore = (_store: InjectedStore) => {
   store = _store;
 };
 
@@ -17,7 +24,7 @@ const axiosInstance = axios.create({
 
 // Request interceptor (Optional - for adding tokens etc.)
 axiosInstance.interceptors.request.use(
-  (config) => {
+  (config: InternalAxiosRequestConfig) => {
     // Get token directly from store state
     const token = store?.getState()?.auth?.token;
     if (token) {
@@ -25,18 +32,20 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+  (error: unknown) => {
     return Promise.reject(error);
   },
 );
 
 // Response interceptor (Optional - for global error handling)
 axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401 || error.response?.status === 403) {
-      if (store) {
-        store.dispatch(logout());
+  (response: AxiosResponse) => response,
+  (error: unknown) => {
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 401) {
+        if (store) {
+          store.dispatch(logout());
+        }
       }
     }
     return Promise.reject(error);

@@ -1,24 +1,32 @@
 import axiosInstance from "@/api/axios";
 
+export const USER_ROLES = {
+  ADMIN: "Admin",
+  MODERATOR: "Moderator",
+  VIEWER: "Viewer",
+} as const;
+
+export type UserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];
+
 export interface AdminUser {
   id: string;
   name: string;
   email: string;
-  role: "Admin" | "Moderator" | "Viewer";
+  role: UserRole;
 }
 
 export interface CreateAdminUserPayload {
   name: string;
   email: string;
   password: string;
-  role: "Admin" | "Moderator" | "Viewer";
+  role: UserRole;
 }
 
 export interface UpdateAdminUserPayload {
   name?: string;
   email?: string;
   password?: string;
-  role?: "Admin" | "Moderator" | "Viewer";
+  role?: UserRole;
 }
 
 export const fetchAdminUsersApi = (abortSignal?: AbortSignal) => {

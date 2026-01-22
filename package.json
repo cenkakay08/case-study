@@ -10,6 +10,7 @@
   "scripts": {
     "user-panel:dev": "npm run dev -w user-panel",
     "admin-panel:dev": "npm run dev -w admin-panel",
-    "ui:build": "npm run build -w @case-study/ui"
+    "ui:build": "npm run build -w @case-study/ui",
+    "mock-server:dev": "npm start --prefix mock-server"
   }
 }

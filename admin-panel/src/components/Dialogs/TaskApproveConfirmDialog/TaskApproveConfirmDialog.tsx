@@ -5,6 +5,7 @@ import type { Task } from "@/api/tasks/taskController";
 import { Content } from "./Content/Content";
 import styles from "./TaskApproveConfirmDialog.module.css";
 import { useState } from "react";
+import { USER_ROLES } from "@/api/users/userController";
 
 interface TaskApproveConfirmDialogProps {
   task: Task;
@@ -18,7 +19,8 @@ export function TaskApproveConfirmDialog({
 
   const [open, setOpen] = useState(false);
 
-  const canApprove = user?.role === "Admin" || user?.role === "Moderator";
+  const canApprove =
+    user?.role === USER_ROLES.ADMIN || user?.role === USER_ROLES.MODERATOR;
 
   return (
     <AlertDialog.Root open={open} onOpenChange={setOpen}>

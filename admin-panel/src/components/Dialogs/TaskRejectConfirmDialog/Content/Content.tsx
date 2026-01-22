@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { AlertDialog, Button, Field } from "@case-study/ui";
+import { AlertDialog, Button, Field, Tooltip } from "@case-study/ui";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { rejectTaskAsync } from "@/store/slices/taskSlice";
 import type { Task } from "@/api/tasks/taskController";
@@ -119,10 +119,14 @@ export function Content({ task, setOpenDialog }: ContentProps) {
                     name={field.name}
                     value={field.state.value}
                     onBlur={field.handleBlur}
-                    onChange={(e: any) => field.handleChange(e.target.value)}
+                    onChange={(e) => field.handleChange(e.target.value)}
                     placeholder={t("pendingTasks.rejectDialog.placeholder")}
                   />
-                  <Field.Error match={field.state.meta.errors.length > 0}>
+                  <Field.Error
+                    match={
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    }
+                  >
                     {t(field.state.meta.errors?.[0]?.message ?? "")}
                   </Field.Error>
                 </Field.Root>
@@ -139,15 +143,35 @@ export function Content({ task, setOpenDialog }: ContentProps) {
             selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
             {([canSubmit, isSubmitting]) => (
-              <Button
-                type="submit"
-                className={styles.confirmButton}
-                disabled={!canSubmit || isSubmitting || isLoading}
-              >
-                {isSubmitting || isLoading
-                  ? t("common.loading")
-                  : t("pendingTasks.reject")}
-              </Button>
+              <Tooltip.Provider>
+                <Tooltip.Root>
+                  <Tooltip.Trigger
+                    render={(props, state) => (
+                      <span {...props} {...state} tabIndex={-1}>
+                        <Button
+                          type="submit"
+                          className={styles.confirmButton}
+                          disabled={!canSubmit || isSubmitting || isLoading}
+                        >
+                          {isSubmitting || isLoading
+                            ? t("common.loading")
+                            : t("pendingTasks.reject")}
+                        </Button>
+                      </span>
+                    )}
+                  />
+                  <Tooltip.Portal>
+                    <Tooltip.Positioner>
+                      <Tooltip.Popup>
+                        <Tooltip.Arrow />
+                        {canSubmit
+                          ? t("pendingTasks.reject")
+                          : t("common.formInvalid")}
+                      </Tooltip.Popup>
+                    </Tooltip.Positioner>
+                  </Tooltip.Portal>
+                </Tooltip.Root>
+              </Tooltip.Provider>
             )}
           </form.Subscribe>
         </div>

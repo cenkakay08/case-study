@@ -9,7 +9,8 @@
     "success": "Success",
     "error": "Error",
     "fetchError": "Failed to load requests",
-    "createError": "Failed to create request"
+    "createError": "Failed to create request",
+    "formInvalid": "Form is invalid, please check the fields"
   },
   "login": {
     "title": "Welcome Back",
@@ -53,6 +54,7 @@
     "validation": {
       "titleMin": "Title must be at least 3 characters",
       "descMin": "Description must be at least 10 characters",
+      "descriptionMin": "Description must be at least 10 characters",
       "categoryRequired": "Category must be selected",
       "priorityRequired": "Priority must be selected"
     }

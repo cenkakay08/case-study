@@ -2,7 +2,11 @@ import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
-import { TASK_STATUS, type Task } from "@/api/tasks/taskController";
+import {
+  TASK_STATUS,
+  TASK_PRIORITY,
+  type Task,
+} from "@/api/tasks/taskController";
 import styles from "./Dashboard.module.css";
 import { isToday } from "@/utils/date";
 import { StatsOverview } from "./components/StatsOverview/StatsOverview";
@@ -30,10 +34,10 @@ const Dashboard: React.FC = () => {
       todayRejected: number;
       pendingTasks: Task[];
       priorityCounts: {
-        urgent: number;
-        high: number;
-        normal: number;
-        low: number;
+        [TASK_PRIORITY.URGENT]: number;
+        [TASK_PRIORITY.HIGH]: number;
+        [TASK_PRIORITY.NORMAL]: number;
+        [TASK_PRIORITY.LOW]: number;
       };
     }>(
       (acc, task) => {
@@ -57,7 +61,12 @@ const Dashboard: React.FC = () => {
         todayApproved: 0,
         todayRejected: 0,
         pendingTasks: [],
-        priorityCounts: { urgent: 0, high: 0, normal: 0, low: 0 },
+        priorityCounts: {
+          [TASK_PRIORITY.URGENT]: 0,
+          [TASK_PRIORITY.HIGH]: 0,
+          [TASK_PRIORITY.NORMAL]: 0,
+          [TASK_PRIORITY.LOW]: 0,
+        },
       },
     );
 

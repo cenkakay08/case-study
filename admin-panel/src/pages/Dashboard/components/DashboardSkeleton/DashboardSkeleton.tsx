@@ -1,13 +1,12 @@
 import React from "react";
 import { Skeleton } from "@case-study/ui";
-import styles from "../../Dashboard.module.css";
 import statsStyles from "../StatsOverview/StatsOverview.module.css";
 import priorityStyles from "../PriorityDistribution/PriorityDistribution.module.css";
 import recentStyles from "../RecentTasksTable/RecentTasksTable.module.css";
 
 export const DashboardSkeleton: React.FC = () => {
   return (
-    <div className={styles.dashboardContainer}>
+    <>
       <div className={statsStyles.statsGrid}>
         <Skeleton height="110px" borderRadius="0.75rem" count={3} />
       </div>
@@ -28,6 +27,6 @@ export const DashboardSkeleton: React.FC = () => {
           <Skeleton height="40px" count={6} />
         </div>
       </section>
-    </div>
+    </>
   );
 };

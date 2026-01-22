@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
 import taskReducer from "./slices/taskSlice";
 import userReducer from "./slices/userSlice";
-import { injectStore } from "@/api/axios";
+import { injectStore as injectAxiosStore } from "@/api/axios";
+import { injectStore as injectWSStore } from "@/api/websocket";
 import { authListenerMiddleware } from "./listenerMiddleware";
 
 export const store = configureStore({
@@ -15,8 +16,16 @@ export const store = configureStore({
     getDefaultMiddleware().prepend(authListenerMiddleware.middleware),
 });
 
-// Inject store into axios instance to avoid circular dependencies
-injectStore(store);
+// Inject store into API utilities to avoid circular dependencies
+injectAxiosStore(store);
+injectWSStore(store);
+
+// Connect WebSocket on initial load if token exists
+if (store.getState().auth.token) {
+  import("@/api/websocket").then(({ connectWebSocket }) => {
+    connectWebSocket();
+  });
+}
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

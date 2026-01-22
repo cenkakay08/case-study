@@ -1,16 +1,23 @@
 .container {
   display: flex;
   flex: 1;
-  min-height: 0;
-  min-width: 0;
+  min-height: 0px;
+  min-width: 0px;
   justify-content: center;
   align-items: flex-start;
   background-color: var(--color-gray-50);
   padding: 2rem;
-  overflow-y: auto;
+  overflow: auto;
+  max-width: 1400px;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0px;
+  min-width: 0px;
+  overflow: auto;
   background: var(--color-gray-50);
   border: 1px solid var(--color-gray-200);
   border-radius: 1.5rem;
@@ -23,6 +30,7 @@
 }
 
 .header {
+  flex-shrink: 0;
   margin-bottom: 2.5rem;
   text-align: center;
 }
@@ -41,6 +49,7 @@
 }
 
 .form {
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
