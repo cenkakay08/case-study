@@ -151,6 +151,60 @@ app.patch("/api/tasks/:id", authenticateToken, (req, res) => {
   }
 });
 
+// Admin Users Routes (Only Admin role can access)
+app.get("/api/admin-users", authenticateToken, (req, res) => {
+  if (req.user.role !== "Admin") {
+    return res.status(403).json({ message: "Only Admin can manage users" });
+  }
+  const adminUsers = db.users.filter((u) => u.role !== "User");
+  res.json(adminUsers);
+});
+
+app.post("/api/admin-users", authenticateToken, (req, res) => {
+  if (req.user.role !== "Admin") {
+    return res.status(403).json({ message: "Only Admin can manage users" });
+  }
+  const newUser = {
+    id: "a" + (db.users.length + 1),
+    ...req.body,
+  };
+  db.users.push(newUser);
+  updateDb();
+  res.status(201).json(newUser);
+});
+
+app.patch("/api/admin-users/:id", authenticateToken, (req, res) => {
+  if (req.user.role !== "Admin") {
+    return res.status(403).json({ message: "Only Admin can manage users" });
+  }
+  const { id } = req.params;
+  const index = db.users.findIndex((u) => u.id === id);
+
+  if (index !== -1) {
+    db.users[index] = { ...db.users[index], ...req.body };
+    updateDb();
+    res.json(db.users[index]);
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
+app.delete("/api/admin-users/:id", authenticateToken, (req, res) => {
+  if (req.user.role !== "Admin") {
+    return res.status(403).json({ message: "Only Admin can manage users" });
+  }
+  const { id } = req.params;
+  const index = db.users.findIndex((u) => u.id === id);
+
+  if (index !== -1) {
+    db.users.splice(index, 1);
+    updateDb();
+    res.status(204).send();
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Mock server running at http://localhost:${PORT}`);
 });

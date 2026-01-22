@@ -114,6 +114,7 @@
     },
     "form": {
       "name": "Name",
+      "nameRequired": "Name is required",
       "namePlaceholder": "Enter user name",
       "email": "Email",
       "emailPlaceholder": "Enter email address",
