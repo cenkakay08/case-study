@@ -1,10 +1,10 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTasksAsync } from "@/store/slices/taskSlice";
-import { Badge, Select, Dialog, Button } from "@case-study/ui";
-import type { Task } from "@/api/tasks/taskController";
+import { Badge, Select, Button } from "@case-study/ui";
 import styles from "./AllTasks.module.css";
 import { useTranslation } from "react-i18next";
+import { TaskDetailDialog } from "@/components/Dialogs/TaskDetailDialog/TaskDetailDialog";
 import { formatDate } from "@/utils/date";
 import { TASK_STATUS } from "@/api/tasks/taskController";
 
@@ -18,10 +18,6 @@ export default function AllTasks() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-
-  // Detail dialog state
-  const [detailDialogOpen, setDetailDialogOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   const STATUS_FILTERS = [
     { value: "all", label: t("status.all") },
@@ -37,13 +33,6 @@ export default function AllTasks() {
     { value: "normal", label: t("priorities.normal") },
     { value: "low", label: t("priorities.low") },
   ];
-
-  useEffect(() => {
-    const promise = dispatch(fetchTasksAsync());
-    return () => {
-      promise.abort();
-    };
-  }, [dispatch]);
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
@@ -65,15 +54,12 @@ export default function AllTasks() {
     return filteredTasks.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredTasks, currentPage]);
 
-  // Reset to first page when filters change
   useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm, statusFilter, priorityFilter]);
-
-  const handleViewDetail = (task: Task) => {
-    setSelectedTask(task);
-    setDetailDialogOpen(true);
-  };
+    const promise = dispatch(fetchTasksAsync());
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>
@@ -89,14 +75,20 @@ export default function AllTasks() {
             placeholder={t("allTasks.searchPlaceholder")}
             className={styles.searchInput}
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
           />
         </div>
 
         <div className={styles.filters}>
           <Select.Root
             value={statusFilter}
-            onValueChange={(val) => setStatusFilter(val ?? "all")}
+            onValueChange={(val) => {
+              setStatusFilter(val ?? "all");
+              setCurrentPage(1);
+            }}
           >
             <Select.Trigger style={{ minWidth: "10rem" }}>
               <Select.Value>
@@ -126,7 +118,10 @@ export default function AllTasks() {
 
           <Select.Root
             value={priorityFilter}
-            onValueChange={(val) => setPriorityFilter(val ?? "all")}
+            onValueChange={(val) => {
+              setPriorityFilter(val ?? "all");
+              setCurrentPage(1);
+            }}
           >
             <Select.Trigger style={{ minWidth: "10rem" }}>
               <Select.Value>
@@ -196,12 +191,7 @@ export default function AllTasks() {
                   </td>
                   <td>{formatDate(task.createdAt, i18n.language)}</td>
                   <td className={styles.stickyColumn}>
-                    <Button
-                      className={styles.viewButton}
-                      onClick={() => handleViewDetail(task)}
-                    >
-                      {t("allTasks.viewDetail")}
-                    </Button>
+                    <TaskDetailDialog task={task} />
                   </td>
                 </tr>
               ))
@@ -240,93 +230,6 @@ export default function AllTasks() {
           </Button>
         </div>
       )}
-
-      {/* Detail Dialog */}
-      <Dialog.Root open={detailDialogOpen} onOpenChange={setDetailDialogOpen}>
-        <Dialog.Portal>
-          <Dialog.Backdrop />
-          <Dialog.Popup>
-            <Dialog.Title>{selectedTask?.title}</Dialog.Title>
-            <Dialog.Description>
-              {t("allTasks.detailDialog.description")}
-            </Dialog.Description>
-            {selectedTask && (
-              <div className={styles.detailGrid}>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>
-                    {t("tasks.table.owner")}:
-                  </span>
-                  <span className={styles.detailValue}>
-                    {selectedTask.createdBy}
-                  </span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>
-                    {t("tasks.table.category")}:
-                  </span>
-                  <span className={styles.detailValue}>
-                    {t(`categories.${selectedTask.category}`)}
-                  </span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>
-                    {t("tasks.table.priority")}:
-                  </span>
-                  <Badge type={selectedTask.priority}>
-                    {t(`priorities.${selectedTask.priority}`)}
-                  </Badge>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>
-                    {t("tasks.table.status")}:
-                  </span>
-                  <Badge type={selectedTask.status}>
-                    {t(`status.${selectedTask.status}`)}
-                  </Badge>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>
-                    {t("tasks.table.date")}:
-                  </span>
-                  <span className={styles.detailValue}>
-                    {formatDate(selectedTask.createdAt, i18n.language)}
-                  </span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>
-                    {t("allTasks.detailDialog.descriptionLabel")}:
-                  </span>
-                  <span className={styles.detailValue}>
-                    {selectedTask.description}
-                  </span>
-                </div>
-                {selectedTask.status === "rejected" &&
-                  selectedTask.rejectionReason && (
-                    <div>
-                      <span className={styles.detailLabel}>
-                        {t("allTasks.detailDialog.rejectionReason")}:
-                      </span>
-                      <div className={styles.rejectionReason}>
-                        {selectedTask.rejectionReason}
-                      </div>
-                    </div>
-                  )}
-              </div>
-            )}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginTop: "1.5rem",
-              }}
-            >
-              <Dialog.Close className={styles.pageButton}>
-                {t("common.close")}
-              </Dialog.Close>
-            </div>
-          </Dialog.Popup>
-        </Dialog.Portal>
-      </Dialog.Root>
     </div>
   );
 }
