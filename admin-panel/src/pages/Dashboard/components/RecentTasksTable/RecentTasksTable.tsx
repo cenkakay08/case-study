@@ -21,11 +21,11 @@ export const RecentTasksTable: React.FC<RecentTasksTableProps> = ({
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>{t("requests.table.title")}</th>
-              <th>{t("requests.table.owner")}</th>
-              <th>{t("requests.table.category")}</th>
-              <th>{t("requests.table.priority")}</th>
-              <th>{t("requests.table.date")}</th>
+              <th>{t("tasks.table.title")}</th>
+              <th>{t("tasks.table.owner")}</th>
+              <th>{t("tasks.table.category")}</th>
+              <th>{t("tasks.table.priority")}</th>
+              <th>{t("tasks.table.date")}</th>
             </tr>
           </thead>
           <tbody>
