@@ -32,10 +32,10 @@ export function Description({
   );
 }
 
-export const Control = React.forwardRef<any, Field.Control.Props>(
+export const Control = React.forwardRef<HTMLInputElement, Field.Control.Props>(
   function FieldControl(
     { className = "", ...props }: Field.Control.Props,
-    forwardedRef: React.ForwardedRef<any>,
+    forwardedRef: React.ForwardedRef<HTMLInputElement>,
   ) {
     return (
       <Field.Control

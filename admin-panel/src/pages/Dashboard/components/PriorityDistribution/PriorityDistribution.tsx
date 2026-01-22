@@ -1,13 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { TASK_PRIORITY } from "@/api/tasks/taskController";
 import styles from "./PriorityDistribution.module.css";
 
 interface PriorityDistributionProps {
   priorityCounts: {
-    urgent: number;
-    high: number;
-    normal: number;
-    low: number;
+    [K in (typeof TASK_PRIORITY)[keyof typeof TASK_PRIORITY]]: number;
   };
 }
 

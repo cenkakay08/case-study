@@ -22,6 +22,7 @@
   transition-property: background-position, box-shadow;
   transition-timing-function: cubic-bezier(0.26, 0.75, 0.38, 0.45);
   transition-duration: 125ms;
+  cursor: pointer;
 
   &:active {
     background-color: var(--color-gray-100);

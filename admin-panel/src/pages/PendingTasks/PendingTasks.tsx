@@ -5,9 +5,26 @@ import { Badge, Button, Select } from "@case-study/ui";
 import styles from "./PendingTasks.module.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/utils/date";
-import { TASK_STATUS } from "@/api/tasks/taskController";
+import { TASK_STATUS, TASK_PRIORITY } from "@/api/tasks/taskController";
 import { TaskApproveConfirmDialog } from "@/components/Dialogs/TaskApproveConfirmDialog/TaskApproveConfirmDialog";
 import { TaskRejectConfirmDialog } from "@/components/Dialogs/TaskRejectConfirmDialog/TaskRejectConfirmDialog";
+import { TableSkeleton } from "@/components/Skeletons/TableSkeleton";
+
+const PRIORITY_FILTERS = [
+  { value: "all", labelKey: "filters.allPriorities" },
+  { value: TASK_PRIORITY.URGENT, labelKey: "priorities.urgent" },
+  { value: TASK_PRIORITY.HIGH, labelKey: "priorities.high" },
+  { value: TASK_PRIORITY.NORMAL, labelKey: "priorities.normal" },
+  { value: TASK_PRIORITY.LOW, labelKey: "priorities.low" },
+];
+
+const CATEGORY_FILTERS = [
+  { value: "all", labelKey: "filters.allCategories" },
+  { value: "technical_support", labelKey: "categories.technical_support" },
+  { value: "leave_request", labelKey: "categories.leave_request" },
+  { value: "purchase", labelKey: "categories.purchase" },
+  { value: "other", labelKey: "categories.other" },
+];
 
 const ITEMS_PER_PAGE = 10;
 
@@ -19,29 +36,6 @@ export default function PendingTasks() {
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const PRIORITY_FILTERS = [
-    { value: "all", label: t("filters.allPriorities") },
-    { value: "urgent", label: t("priorities.urgent") },
-    { value: "high", label: t("priorities.high") },
-    { value: "normal", label: t("priorities.normal") },
-    { value: "low", label: t("priorities.low") },
-  ];
-
-  const CATEGORY_FILTERS = [
-    { value: "all", label: t("filters.allCategories") },
-    { value: "technical_support", label: t("categories.technical_support") },
-    { value: "leave_request", label: t("categories.leave_request") },
-    { value: "purchase", label: t("categories.purchase") },
-    { value: "other", label: t("categories.other") },
-  ];
-
-  useEffect(() => {
-    const promise = dispatch(fetchTasksAsync());
-    return () => {
-      promise.abort();
-    };
-  }, [dispatch]);
 
   // Filter only pending tasks
   const pendingTasks = useMemo(() => {
@@ -69,8 +63,11 @@ export default function PendingTasks() {
   }, [filteredTasks, currentPage]);
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm, priorityFilter, categoryFilter]);
+    const promise = dispatch(fetchTasksAsync());
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>
@@ -80,27 +77,31 @@ export default function PendingTasks() {
       </header>
 
       <div className={styles.controls}>
-        <div className={styles.searchWrapper}>
-          <input
-            type="text"
-            placeholder={t("pendingTasks.searchPlaceholder")}
-            className={styles.searchInput}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder={t("pendingTasks.searchPlaceholder")}
+          className={styles.searchInput}
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
+        />
 
         <div className={styles.filters}>
           <Select.Root
             value={priorityFilter}
-            onValueChange={(val) => setPriorityFilter(val ?? "all")}
+            onValueChange={(val) => {
+              setPriorityFilter(val ?? "all");
+              setCurrentPage(1);
+            }}
           >
             <Select.Trigger style={{ minWidth: "10rem" }}>
               <Select.Value>
-                {
+                {t(
                   PRIORITY_FILTERS.find((f) => f.value === priorityFilter)
-                    ?.label
-                }
+                    ?.labelKey ?? "",
+                )}
               </Select.Value>
               <Select.Icon>
                 <Select.ChevronUpDownIcon />
@@ -112,7 +113,7 @@ export default function PendingTasks() {
                   <Select.List>
                     {PRIORITY_FILTERS.map((f) => (
                       <Select.Item key={f.value} value={f.value}>
-                        <Select.ItemText>{f.label}</Select.ItemText>
+                        <Select.ItemText>{t(f.labelKey)}</Select.ItemText>
                         <Select.ItemIndicator>
                           <Select.CheckIcon />
                         </Select.ItemIndicator>
@@ -126,14 +127,17 @@ export default function PendingTasks() {
 
           <Select.Root
             value={categoryFilter}
-            onValueChange={(val) => setCategoryFilter(val ?? "all")}
+            onValueChange={(val) => {
+              setCategoryFilter(val ?? "all");
+              setCurrentPage(1);
+            }}
           >
             <Select.Trigger style={{ minWidth: "10rem" }}>
               <Select.Value>
-                {
+                {t(
                   CATEGORY_FILTERS.find((f) => f.value === categoryFilter)
-                    ?.label
-                }
+                    ?.labelKey ?? "",
+                )}
               </Select.Value>
               <Select.Icon>
                 <Select.ChevronUpDownIcon />
@@ -145,7 +149,7 @@ export default function PendingTasks() {
                   <Select.List>
                     {CATEGORY_FILTERS.map((f) => (
                       <Select.Item key={f.value} value={f.value}>
-                        <Select.ItemText>{f.label}</Select.ItemText>
+                        <Select.ItemText>{t(f.labelKey)}</Select.ItemText>
                         <Select.ItemIndicator>
                           <Select.CheckIcon />
                         </Select.ItemIndicator>
@@ -173,7 +177,9 @@ export default function PendingTasks() {
             </tr>
           </thead>
           <tbody>
-            {paginatedTasks.length > 0 ? (
+            {isLoading ? (
+              <TableSkeleton columns={5} rows={10} />
+            ) : paginatedTasks.length > 0 ? (
               paginatedTasks.map((task) => (
                 <tr key={task.id}>
                   <td>
@@ -200,7 +206,7 @@ export default function PendingTasks() {
             ) : (
               <tr>
                 <td colSpan={5} className={styles.emptyState}>
-                  {isLoading ? t("common.loading") : t("pendingTasks.noTasks")}
+                  {t("pendingTasks.noTasks")}
                 </td>
               </tr>
             )}

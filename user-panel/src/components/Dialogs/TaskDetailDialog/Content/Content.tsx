@@ -57,7 +57,7 @@ export function Content({ task }: ContentProps) {
 
           <div className={styles.detailRow}>
             <span className={styles.detailLabel}>
-              {t("myRequests.table.status")}
+              {t("myTasks.table.status")}
             </span>
             <div>
               <Badge type={task.status}>{t(`status.${task.status}`)}</Badge>
@@ -66,7 +66,7 @@ export function Content({ task }: ContentProps) {
 
           <div className={styles.detailRow}>
             <span className={styles.detailLabel}>
-              {t("myRequests.table.date")}
+              {t("myTasks.table.date")}
             </span>
             <span className={styles.detailValue}>
               {formatDate(task.createdAt, i18n.language)}

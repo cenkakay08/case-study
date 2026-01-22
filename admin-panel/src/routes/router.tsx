@@ -8,6 +8,8 @@ import AuthGuardLayout from "@/components/Layouts/AuthGuardLayout/AuthGuardLayou
 import LoginGuardLayout from "@/components/Layouts/LoginGuardLayout/LoginGuardLayout";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
 import ProviderLayout from "@/components/Layouts/ProviderLayout/ProviderLayout";
+import { RoleGuardLayout } from "@/components/Layouts/RoleGuardLayout/RoleGuardLayout";
+import { USER_ROLES } from "@/api/users/userController";
 
 export const router = createBrowserRouter([
   {
@@ -42,13 +44,32 @@ export const router = createBrowserRouter([
                 element: <PendingTasks />,
               },
               {
-                path: "all-tasks",
-                element: <AllTasks />,
+                element: (
+                  <RoleGuardLayout
+                    allowedRoles={[USER_ROLES.ADMIN, USER_ROLES.MODERATOR]}
+                    mode="OR"
+                  />
+                ),
+                children: [
+                  {
+                    path: "all-tasks",
+                    element: <AllTasks />,
+                  },
+                ],
               },
-
               {
-                path: "user-management",
-                element: <UserManagement />,
+                element: (
+                  <RoleGuardLayout
+                    allowedRoles={[USER_ROLES.ADMIN]}
+                    mode="AND"
+                  />
+                ),
+                children: [
+                  {
+                    path: "user-management",
+                    element: <UserManagement />,
+                  },
+                ],
               },
             ],
           },

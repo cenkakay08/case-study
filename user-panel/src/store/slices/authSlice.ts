@@ -10,6 +10,7 @@ import {
   type LoginPayload,
   type User,
 } from "@/api/login/loginController";
+import { AxiosError } from "axios";
 
 interface AuthState {
   user: User | null;
@@ -44,7 +45,6 @@ export const loginAsyncThunk = createAsyncThunk(
   async (credentials: LoginPayload, { rejectWithValue }) => {
     try {
       const response = await loginApi(credentials);
-      const { user, token } = response.data;
 
       Toast.toastManager.add({
         title: "Başarılı",
@@ -53,16 +53,25 @@ export const loginAsyncThunk = createAsyncThunk(
 
       router.navigate("/dashboard");
 
-      return { user, token };
-    } catch (error: any) {
-      const message = error.response?.data?.message || "Giriş başarısız oldu";
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const message = error.response?.data?.message || "Giriş başarısız oldu";
+
+        Toast.toastManager.add({
+          title: "Hata",
+          description: message,
+        });
+
+        return rejectWithValue(message);
+      }
 
       Toast.toastManager.add({
         title: "Hata",
-        description: message,
+        description: "Giriş başarısız oldu",
       });
 
-      return rejectWithValue(message);
+      return rejectWithValue("Giriş başarısız oldu");
     }
   },
 );

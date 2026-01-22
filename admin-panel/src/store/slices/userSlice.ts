@@ -14,6 +14,7 @@ import {
   type UpdateAdminUserPayload,
 } from "@/api/users/userController";
 import i18n from "@/i18n/config";
+import { AxiosError } from "axios";
 
 interface UserState {
   users: AdminUser[];
@@ -33,13 +34,22 @@ export const fetchUsersAsync = createAsyncThunk(
     try {
       const response = await fetchAdminUsersApi(signal);
       return response.data;
-    } catch (error: any) {
-      if (error.name === "CanceledError") {
-        return rejectWithValue("Aborted");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        if (error.name === "CanceledError") {
+          return rejectWithValue("Aborted");
+        }
+        return rejectWithValue(
+          error.response?.data?.message || "common.fetchError",
+        );
       }
-      return rejectWithValue(
-        error.response?.data?.message || "common.fetchError",
-      );
+
+      Toast.toastManager.add({
+        title: i18n.t("common.error"),
+        description: i18n.t("common.error"),
+      });
+
+      return rejectWithValue("common.error");
     }
   },
 );
@@ -56,15 +66,24 @@ export const createUserAsync = createAsyncThunk(
       });
 
       return response.data;
-    } catch (error: any) {
-      const messageKey = error.response?.data?.message || "common.error";
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const messageKey = error.response?.data?.message || "common.error";
+
+        Toast.toastManager.add({
+          title: i18n.t("common.error"),
+          description: i18n.t(messageKey),
+        });
+
+        return rejectWithValue(messageKey);
+      }
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t(messageKey),
+        description: i18n.t("common.error"),
       });
 
-      return rejectWithValue(messageKey);
+      return rejectWithValue("common.error");
     }
   },
 );
@@ -84,15 +103,24 @@ export const updateUserAsync = createAsyncThunk(
       });
 
       return response.data;
-    } catch (error: any) {
-      const messageKey = error.response?.data?.message || "common.error";
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const messageKey = error.response?.data?.message || "common.error";
+
+        Toast.toastManager.add({
+          title: i18n.t("common.error"),
+          description: i18n.t(messageKey),
+        });
+
+        return rejectWithValue(messageKey);
+      }
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t(messageKey),
+        description: i18n.t("common.error"),
       });
 
-      return rejectWithValue(messageKey);
+      return rejectWithValue("common.error");
     }
   },
 );
@@ -109,15 +137,24 @@ export const deleteUserAsync = createAsyncThunk(
       });
 
       return userId;
-    } catch (error: any) {
-      const messageKey = error.response?.data?.message || "common.error";
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const messageKey = error.response?.data?.message || "common.error";
+
+        Toast.toastManager.add({
+          title: i18n.t("common.error"),
+          description: i18n.t(messageKey),
+        });
+
+        return rejectWithValue(messageKey);
+      }
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t(messageKey),
+        description: i18n.t("common.error"),
       });
 
-      return rejectWithValue(messageKey);
+      return rejectWithValue("common.error");
     }
   },
 );
@@ -125,7 +162,23 @@ export const deleteUserAsync = createAsyncThunk(
 const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    userCreated: (state, action: PayloadAction<AdminUser>) => {
+      const exists = state.users.find((u) => u.id === action.payload.id);
+      if (!exists) {
+        state.users.push(action.payload);
+      }
+    },
+    userUpdated: (state, action: PayloadAction<AdminUser>) => {
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (user) {
+        Object.assign(user, action.payload);
+      }
+    },
+    userDeleted: (state, action: PayloadAction<{ id: string }>) => {
+      state.users = state.users.filter((u) => u.id !== action.payload.id);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsersAsync.pending, (state) => {
@@ -146,7 +199,7 @@ const userSlice = createSlice({
       .addCase(
         createUserAsync.fulfilled,
         (state, action: PayloadAction<AdminUser>) => {
-          state.users.unshift(action.payload);
+          state.users.push(action.payload);
         },
       )
       .addCase(
@@ -169,4 +222,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { userCreated, userUpdated, userDeleted } = userSlice.actions;
 export default userSlice.reducer;

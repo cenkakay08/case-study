@@ -1,11 +1,12 @@
 import React from "react";
 import { revalidateLogic, useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import { Field, Button } from "@case-study/ui";
+import { Field, Button, Tooltip } from "@case-study/ui";
 import styles from "./Login.module.css";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { loginAsyncThunk } from "@/store/slices/authSlice";
-
+import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
 const loginSchema = z.object({
@@ -20,8 +21,8 @@ const loginSchema = z.object({
 });
 
 const loginDefaultValues = {
-  email: "user1@test.com",
-  password: "123456",
+  email: "",
+  password: "",
 };
 
 const Login: React.FC = () => {
@@ -46,6 +47,10 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.switchers}>
+        <ThemeSwitcher />
+        <LanguageSwitcher />
+      </div>
       <div className={styles.loginCard}>
         <h1 className={styles.title}>{t("login.title")}</h1>
         <p className={styles.subtitle}>{t("login.subtitle")}</p>
@@ -72,7 +77,11 @@ const Login: React.FC = () => {
                   autoComplete="email"
                   placeholder={t("login.emailPlaceholder")}
                 />
-                <Field.Error match={!field.state.meta.isValid}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -93,20 +102,50 @@ const Login: React.FC = () => {
                   autoComplete="current-password"
                   placeholder="••••••"
                 />
-                <Field.Error match={!field.state.meta.isValid}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
             )}
           />
           <div className={styles.actions}>
-            <form.Subscribe selector={(state) => [state.isSubmitting]}>
-              {([isSubmitting]) => (
-                <Button type="submit" disabled={isSubmitting || isLoading}>
-                  {isSubmitting || isLoading
-                    ? t("login.signingIn")
-                    : t("login.submitButton")}
-                </Button>
+            <form.Subscribe
+              selector={(state) => [state.canSubmit, state.isSubmitting]}
+            >
+              {([canSubmit, isSubmitting]) => (
+                <Tooltip.Provider>
+                  <Tooltip.Root>
+                    <Tooltip.Trigger
+                      render={(props, state) => (
+                        <span {...props} {...state} tabIndex={-1}>
+                          <Button
+                            type="submit"
+                            disabled={!canSubmit || isSubmitting || isLoading}
+                            className={styles.submitButton}
+                          >
+                            {isSubmitting || isLoading
+                              ? t("login.signingIn")
+                              : t("login.submitButton")}
+                          </Button>
+                        </span>
+                      )}
+                    />
+                    <Tooltip.Portal>
+                      <Tooltip.Positioner>
+                        <Tooltip.Popup>
+                          <Tooltip.Arrow />
+                          {canSubmit
+                            ? t("login.submitButton")
+                            : t("common.formInvalid")}
+                        </Tooltip.Popup>
+                      </Tooltip.Positioner>
+                    </Tooltip.Portal>
+                  </Tooltip.Root>
+                </Tooltip.Provider>
               )}
             </form.Subscribe>
             {error && <div className={styles.generalError}>{t(error)}</div>}

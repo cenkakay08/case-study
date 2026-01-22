@@ -5,6 +5,7 @@ import { useAppSelector } from "@/store/hooks";
 import type { Task } from "@/api/tasks/taskController";
 import { Content } from "./Content/Content";
 import styles from "./TaskRejectConfirmDialog.module.css";
+import { USER_ROLES } from "@/api/users/userController";
 
 interface TaskRejectConfirmDialogProps {
   task: Task;
@@ -17,7 +18,8 @@ export function TaskRejectConfirmDialog({
   const { user } = useAppSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
 
-  const canReject = user?.role === "Admin" || user?.role === "Moderator";
+  const canReject =
+    user?.role === USER_ROLES.ADMIN || user?.role === USER_ROLES.MODERATOR;
 
   return (
     <AlertDialog.Root open={open} onOpenChange={setOpen}>

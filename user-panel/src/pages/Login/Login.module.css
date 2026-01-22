@@ -5,6 +5,16 @@
   flex: 1;
   background-color: var(--color-gray-50);
   padding: 1.5rem;
+  position: relative;
+}
+
+.switchers {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .loginCard {
@@ -49,6 +59,10 @@
   padding-bottom: 2rem; /* Space for absolute error below */
   display: flex;
   flex-direction: column;
+}
+
+.submitButton {
+  width: 100%;
 }
 
 .generalError {

@@ -6,11 +6,18 @@ export const TASK_STATUS = {
   REJECTED: "rejected",
 } as const;
 
+export const TASK_PRIORITY = {
+  LOW: "low",
+  NORMAL: "normal",
+  HIGH: "high",
+  URGENT: "urgent",
+} as const;
+
 export interface Task {
   id: string;
   title: string;
   description: string;
-  priority: "low" | "normal" | "high" | "urgent";
+  priority: (typeof TASK_PRIORITY)[keyof typeof TASK_PRIORITY];
   category: string;
   status: (typeof TASK_STATUS)[keyof typeof TASK_STATUS];
   createdBy: string;

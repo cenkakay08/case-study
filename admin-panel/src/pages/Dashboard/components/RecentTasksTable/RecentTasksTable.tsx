@@ -45,7 +45,7 @@ export const RecentTasksTable: React.FC<RecentTasksTableProps> = ({
             {tasks.length === 0 && (
               <tr>
                 <td colSpan={5} style={{ textAlign: "center" }}>
-                  {t("dashboard.noPendingRequests")}
+                  {t("dashboard.noPendingTasks")}
                 </td>
               </tr>
             )}

@@ -6,6 +6,7 @@ import { Badge } from "@case-study/ui";
 import { TaskDetailDialog } from "../../components/Dialogs/TaskDetailDialog/TaskDetailDialog";
 import styles from "./Dashboard.module.css";
 import { formatDate } from "@/utils/date";
+import { DashboardSkeleton } from "./components/DashboardSkeleton/DashboardSkeleton";
 
 const Dashboard: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -35,10 +36,6 @@ const Dashboard: React.FC = () => {
     )
     .slice(0, 10);
 
-  if (isLoading && tasks.length === 0) {
-    return <div className={styles.loading}>{t("common.loading")}</div>;
-  }
-
   return (
     <div className={styles.dashboardContainer}>
       <header className={styles.welcomeSection}>
@@ -46,81 +43,88 @@ const Dashboard: React.FC = () => {
         <p>{t("dashboard.welcome", { name: user?.name })}</p>
       </header>
 
-      {error && <div className={styles.error}>{t(error)}</div>}
+      {isLoading ? (
+        <DashboardSkeleton />
+      ) : (
+        <>
+          {error && <div className={styles.error}>{t(error)}</div>}
+          <div className={styles.statsGrid}>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>
+                {t("dashboard.totalTasks")}
+              </span>
+              <span className={styles.statValue}>{totalCount}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>
+                {t("dashboard.pendingTasks")}
+              </span>
+              <span className={styles.statValue}>{pendingCount}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>
+                {t("dashboard.approvedTasks")}
+              </span>
+              <span className={styles.statValue}>{approvedCount}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>
+                {t("dashboard.rejectedTasks")}
+              </span>
+              <span className={styles.statValue}>{rejectedCount}</span>
+            </div>
+          </div>
 
-      <div className={styles.statsGrid}>
-        <div className={styles.statCard}>
-          <span className={styles.statLabel}>{t("dashboard.totalTasks")}</span>
-          <span className={styles.statValue}>{totalCount}</span>
-        </div>
-        <div className={styles.statCard}>
-          <span className={styles.statLabel}>
-            {t("dashboard.pendingTasks")}
-          </span>
-          <span className={styles.statValue}>{pendingCount}</span>
-        </div>
-        <div className={styles.statCard}>
-          <span className={styles.statLabel}>
-            {t("dashboard.approvedTasks")}
-          </span>
-          <span className={styles.statValue}>{approvedCount}</span>
-        </div>
-        <div className={styles.statCard}>
-          <span className={styles.statLabel}>
-            {t("dashboard.rejectedTasks")}
-          </span>
-          <span className={styles.statValue}>{rejectedCount}</span>
-        </div>
-      </div>
-
-      <section className={styles.recentSection}>
-        <h2>{t("dashboard.recentTasks")}</h2>
-        <div className={styles.tableWrapper}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>{t("myTasks.table.task")}</th>
-                <th>{t("myTasks.table.category")}</th>
-                <th>{t("myTasks.table.priority")}</th>
-                <th>{t("myTasks.table.status")}</th>
-                <th>{t("myTasks.table.date")}</th>
-                <th className={styles.stickyColumn}>
-                  {t("myTasks.table.actions")}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {recentTasks.map((task) => (
-                <tr key={task.id}>
-                  <td>{task.title}</td>
-                  <td>{t(`categories.${task.category}`)}</td>
-                  <td>
-                    <Badge type={task.priority}>
-                      {t(`priorities.${task.priority}`)}
-                    </Badge>
-                  </td>
-                  <td>
-                    <Badge type={task.status}>
-                      {t(`status.${task.status}`)}
-                    </Badge>
-                  </td>
-                  <td>{formatDate(task.createdAt, i18n.language)}</td>
-                  <td className={styles.stickyColumn}>
-                    <TaskDetailDialog task={task} />
-                  </td>
-                </tr>
-              ))}
-              {recentTasks.length === 0 && (
-                <tr>
-                  <td colSpan={6} style={{ textAlign: "center" }}>
-                    {t("dashboard.noRecentTasks")}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
+          <section className={styles.recentSection}>
+            <h2>{t("dashboard.recentTasks")}</h2>
+            <div className={styles.tableWrapper}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>{t("myTasks.table.task")}</th>
+                    <th>{t("myTasks.table.category")}</th>
+                    <th>{t("myTasks.table.priority")}</th>
+                    <th>{t("myTasks.table.status")}</th>
+                    <th>{t("myTasks.table.date")}</th>
+                    <th className={styles.stickyColumn}>
+                      {t("myTasks.table.actions")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentTasks.map((task) => (
+                    <tr key={task.id}>
+                      <td>{task.title}</td>
+                      <td>{t(`categories.${task.category}`)}</td>
+                      <td>
+                        <Badge type={task.priority}>
+                          {t(`priorities.${task.priority}`)}
+                        </Badge>
+                      </td>
+                      <td>
+                        <Badge type={task.status}>
+                          {t(`status.${task.status}`)}
+                        </Badge>
+                      </td>
+                      <td>{formatDate(task.createdAt, i18n.language)}</td>
+                      <td className={styles.stickyColumn}>
+                        <TaskDetailDialog task={task} />
+                      </td>
+                    </tr>
+                  ))}
+                  {recentTasks.length === 0 && (
+                    <tr>
+                      <td colSpan={6} style={{ textAlign: "center" }}>
+                        {t("dashboard.noRecentTasks")}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 };

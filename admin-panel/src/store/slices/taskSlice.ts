@@ -11,6 +11,7 @@ import {
   type Task,
 } from "@/api/tasks/taskController";
 import i18n from "@/i18n/config";
+import { AxiosError } from "axios";
 
 interface TaskState {
   tasks: Task[];
@@ -32,13 +33,14 @@ export const fetchTasksAsync = createAsyncThunk(
     try {
       const response = await fetchTasksApi(signal);
       return response.data;
-    } catch (error: any) {
-      if (error.name === "CanceledError") {
-        return rejectWithValue("Aborted");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        return rejectWithValue(
+          error.response?.data?.message || "common.fetchError",
+        );
       }
-      return rejectWithValue(
-        error.response?.data?.message || "common.fetchError",
-      );
+
+      return rejectWithValue("common.fetchError");
     }
   },
 );
@@ -55,15 +57,24 @@ export const approveTaskAsync = createAsyncThunk(
       });
 
       return response.data;
-    } catch (error: any) {
-      const messageKey = error.response?.data?.message || "common.error";
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const messageKey = error.response?.data?.message || "common.error";
+
+        Toast.toastManager.add({
+          title: i18n.t("common.error"),
+          description: i18n.t(messageKey),
+        });
+
+        return rejectWithValue(messageKey);
+      }
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t(messageKey),
+        description: i18n.t("common.error"),
       });
 
-      return rejectWithValue(messageKey);
+      return rejectWithValue("common.error");
     }
   },
 );
@@ -83,15 +94,24 @@ export const rejectTaskAsync = createAsyncThunk(
       });
 
       return response.data;
-    } catch (error: any) {
-      const messageKey = error.response?.data?.message || "common.error";
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const messageKey = error.response?.data?.message || "common.error";
+
+        Toast.toastManager.add({
+          title: i18n.t("common.error"),
+          description: i18n.t(messageKey),
+        });
+
+        return rejectWithValue(messageKey);
+      }
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t(messageKey),
+        description: i18n.t("common.error"),
       });
 
-      return rejectWithValue(messageKey);
+      return rejectWithValue("common.error");
     }
   },
 );
@@ -99,7 +119,23 @@ export const rejectTaskAsync = createAsyncThunk(
 const taskSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    taskCreated: (state, action: PayloadAction<Task>) => {
+      const exists = state.tasks.find((t) => t.id === action.payload.id);
+      if (!exists) {
+        state.tasks.unshift(action.payload);
+      }
+    },
+    taskUpdated: (state, action: PayloadAction<Task>) => {
+      const task = state.tasks.find((t) => t.id === action.payload.id);
+      if (task) {
+        Object.assign(task, action.payload);
+      }
+    },
+    taskDeleted: (state, action: PayloadAction<{ id: string }>) => {
+      state.tasks = state.tasks.filter((t) => t.id !== action.payload.id);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasksAsync.pending, (state, action) => {
@@ -146,4 +182,5 @@ const taskSlice = createSlice({
   },
 });
 
+export const { taskCreated, taskUpdated, taskDeleted } = taskSlice.actions;
 export default taskSlice.reducer;

@@ -1,6 +1,7 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { loginAsyncThunk, logout } from "@/store/slices/authSlice";
 import type { RootState } from "@/store/index";
+import { connectWebSocket, disconnectWebSocket } from "@/api/websocket";
 
 export const authListenerMiddleware = createListenerMiddleware();
 
@@ -12,5 +13,11 @@ authListenerMiddleware.startListening({
 
     // Persist entire auth slice
     localStorage.setItem("authState", JSON.stringify(authState));
+
+    if (authState.isAuthenticated && authState.token) {
+      connectWebSocket();
+    } else {
+      disconnectWebSocket();
+    }
   },
 });

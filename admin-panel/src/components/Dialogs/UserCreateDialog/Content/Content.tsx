@@ -2,9 +2,10 @@ import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { revalidateLogic, useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import { Field, Select, Button, Dialog } from "@case-study/ui";
+import { Field, Select, Button, Dialog, Tooltip } from "@case-study/ui";
 import { useAppDispatch } from "@/store/hooks";
 import { createUserAsync } from "@/store/slices/userSlice";
+import { USER_ROLES, type UserRole } from "@/api/users/userController";
 import styles from "./Content.module.css";
 
 const userSchema = z.object({
@@ -17,11 +18,14 @@ const userSchema = z.object({
     .string()
     .min(1, { message: "login.passwordRequired" })
     .min(6, { message: "login.passwordMin" }),
-  role: z.enum(["Admin", "Moderator", "Viewer"]),
+  role: z.enum([USER_ROLES.ADMIN, USER_ROLES.MODERATOR, USER_ROLES.VIEWER]),
 });
 
-type UserRole = "Admin" | "Moderator" | "Viewer";
-const ROLES: UserRole[] = ["Admin", "Moderator", "Viewer"];
+const ROLES: UserRole[] = [
+  USER_ROLES.ADMIN,
+  USER_ROLES.MODERATOR,
+  USER_ROLES.VIEWER,
+];
 
 interface ContentProps {
   setOpen: (open: boolean) => void;
@@ -38,7 +42,7 @@ export function Content({ setOpen }: ContentProps) {
       name: "",
       email: "",
       password: "",
-      role: "Viewer" as UserRole,
+      role: USER_ROLES.VIEWER as UserRole,
     },
     validationLogic: revalidateLogic({
       mode: "submit",
@@ -100,7 +104,11 @@ export function Content({ setOpen }: ContentProps) {
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder={t("userManagement.form.namePlaceholder")}
                 />
-                <Field.Error match={field.state.meta.errors.length > 0}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -123,7 +131,11 @@ export function Content({ setOpen }: ContentProps) {
                   type="email"
                   placeholder={t("userManagement.form.emailPlaceholder")}
                 />
-                <Field.Error match={field.state.meta.errors.length > 0}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -146,7 +158,11 @@ export function Content({ setOpen }: ContentProps) {
                   type="password"
                   placeholder={t("userManagement.form.passwordPlaceholder")}
                 />
-                <Field.Error match={field.state.meta.errors.length > 0}>
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
                   {t(field.state.meta.errors?.[0]?.message ?? "")}
                 </Field.Error>
               </Field.Root>
@@ -197,15 +213,39 @@ export function Content({ setOpen }: ContentProps) {
         <Dialog.Close className={styles.cancelButton}>
           {t("common.cancel")}
         </Dialog.Close>
-        <form.Subscribe selector={(state) => [state.isSubmitting]}>
-          {([isSubmitting]) => (
-            <Button
-              type="submit"
-              className={styles.submitButton}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? t("common.loading") : t("userManagement.create")}
-            </Button>
+        <form.Subscribe
+          selector={(state) => [state.canSubmit, state.isSubmitting]}
+        >
+          {([canSubmit, isSubmitting]) => (
+            <Tooltip.Provider>
+              <Tooltip.Root>
+                <Tooltip.Trigger
+                  render={(props, state) => (
+                    <span {...props} {...state} tabIndex={-1}>
+                      <Button
+                        type="submit"
+                        className={styles.submitButton}
+                        disabled={!canSubmit || isSubmitting}
+                      >
+                        {isSubmitting
+                          ? t("common.loading")
+                          : t("userManagement.create")}
+                      </Button>
+                    </span>
+                  )}
+                />
+                <Tooltip.Portal>
+                  <Tooltip.Positioner>
+                    <Tooltip.Popup>
+                      <Tooltip.Arrow />
+                      {canSubmit
+                        ? t("userManagement.create")
+                        : t("common.formInvalid")}
+                    </Tooltip.Popup>
+                  </Tooltip.Positioner>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+            </Tooltip.Provider>
           )}
         </form.Subscribe>
       </div>
