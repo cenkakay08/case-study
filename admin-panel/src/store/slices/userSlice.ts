@@ -20,12 +20,14 @@ interface UserState {
   users: AdminUser[];
   isLoading: boolean;
   error: string | null;
+  currentRequestId: string | null;
 }
 
 const initialState: UserState = {
   users: [],
   isLoading: false,
   error: null,
+  currentRequestId: null,
 };
 
 export const fetchUsersAsync = createAsyncThunk(
@@ -157,20 +159,36 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsersAsync.pending, (state) => {
+      .addCase(fetchUsersAsync.pending, (state, action) => {
         state.isLoading = true;
         state.error = null;
+        state.currentRequestId = action.meta.requestId;
       })
       .addCase(
         fetchUsersAsync.fulfilled,
-        (state, action: PayloadAction<AdminUser[]>) => {
-          state.isLoading = false;
-          state.users = action.payload;
+        (
+          state,
+          action: PayloadAction<AdminUser[], string, { requestId: string }>,
+        ) => {
+          if (
+            state.currentRequestId === action.meta.requestId ||
+            state.currentRequestId === null
+          ) {
+            state.isLoading = false;
+            state.currentRequestId = null;
+            state.users = action.payload;
+          }
         },
       )
       .addCase(fetchUsersAsync.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload as string;
+        if (
+          state.currentRequestId === action.meta.requestId ||
+          state.currentRequestId === null
+        ) {
+          state.isLoading = false;
+          state.currentRequestId = null;
+          state.error = action.payload as string;
+        }
       })
       .addCase(
         createUserAsync.fulfilled,

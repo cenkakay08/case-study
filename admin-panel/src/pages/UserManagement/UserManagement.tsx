@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 export default function UserManagement() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { users, isLoading } = useAppSelector((state) => state.users);
+  const { users, isLoading, error } = useAppSelector((state) => state.users);
 
   useEffect(() => {
     const promise = dispatch(fetchUsersAsync());
@@ -30,6 +30,8 @@ export default function UserManagement() {
         </div>
         <UserCreateDialog />
       </header>
+
+      {error && <div className={styles.error}>{t(error)}</div>}
 
       <div className={styles.tableContainer}>
         <table className={styles.table}>
