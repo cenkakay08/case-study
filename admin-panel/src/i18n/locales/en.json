@@ -1,0 +1,164 @@
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "error": "Error",
+    "success": "Success",
+    "pendingTasks": "Pending Requests",
+    "allTasks": "All Requests",
+    "userManagement": "User Management",
+    "darkMode": "Dark Mode",
+    "loading": "Loading...",
+    "fetchError": "Error loading data",
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "totalPending": "Total Pending",
+    "todayApproved": "Today Approved",
+    "todayRejected": "Today Rejected",
+    "priorityDistribution": "Priority Distribution",
+    "recentPending": "Recent Pending Requests",
+    "noPendingTasks": "No pending requests"
+  },
+  "priorities": {
+    "urgent": "Urgent",
+    "high": "High",
+    "normal": "Normal",
+    "low": "Low"
+  },
+  "categories": {
+    "technical_support": "Technical Support",
+    "leave_request": "Leave Request",
+    "purchase": "Purchase",
+    "other": "Other"
+  },
+  "status": {
+    "all": "All Statuses",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "filters": {
+    "allPriorities": "All Priorities",
+    "allCategories": "All Categories"
+  },
+  "tasks": {
+    "table": {
+      "title": "Title",
+      "owner": "Owner",
+      "category": "Category",
+      "priority": "Priority",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions"
+    }
+  },
+  "pendingTasks": {
+    "title": "Pending Requests",
+    "subtitle": "View and manage requests awaiting approval",
+    "searchPlaceholder": "Search by title or owner...",
+    "approve": "Approve",
+    "reject": "Reject",
+    "approveSuccess": "Request approved successfully",
+    "rejectSuccess": "Request rejected successfully",
+    "fetchError": "An error occurred while loading requests",
+    "approveError": "An error occurred while approving the request",
+    "rejectError": "An error occurred while rejecting the request",
+    "noPermission": "You don't have permission for this action",
+    "noTasks": "No pending requests found",
+    "rejectDialog": {
+      "title": "Reject Request",
+      "description": "Please provide a reason for rejection",
+      "placeholder": "Enter rejection reason...",
+      "reasonLabel": "Rejection Reason",
+      "reasonMin": "Rejection reason must be at least 3 characters"
+    },
+    "approveDialog": {
+      "title": "Approve Request",
+      "description": "Are you sure you want to approve this request?"
+    }
+  },
+  "allTasks": {
+    "title": "All Requests",
+    "subtitle": "View all requests in the system",
+    "searchPlaceholder": "Search by title or owner...",
+    "viewDetail": "Details",
+    "noTasks": "No requests found",
+    "detailDialog": {
+      "description": "Request details",
+      "descriptionLabel": "Description",
+      "rejectionReason": "Rejection Reason"
+    }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageInfo": "Page {{current}} of {{total}}"
+  },
+  "userManagement": {
+    "title": "User Management",
+    "subtitle": "Manage admin panel users",
+    "addUser": "Add User",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "save": "Save",
+    "noUsers": "No users found",
+    "createSuccess": "User created successfully",
+    "updateSuccess": "User updated successfully",
+    "deleteSuccess": "User deleted successfully",
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role"
+    },
+    "form": {
+      "name": "Name",
+      "nameRequired": "Name is required",
+      "namePlaceholder": "Enter user name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "newPassword": "New Password (optional)",
+      "newPasswordPlaceholder": "Leave blank to keep current",
+      "confirmNewPassword": "Confirm New Password",
+      "confirmNewPasswordPlaceholder": "Re-enter new password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Re-enter password",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "role": "Role"
+    },
+    "createDialog": {
+      "title": "Add New User",
+      "description": "Create a new admin panel user"
+    },
+    "editDialog": {
+      "title": "Edit User",
+      "description": "Update user information"
+    },
+    "deleteDialog": {
+      "title": "Delete User",
+      "description": "Are you sure you want to delete user {{name}}? This action cannot be undone.",
+      "cannotDeleteSelf": "You cannot delete your own account"
+    }
+  },
+  "login": {
+    "title": "Admin Panel",
+    "subtitle": "Sign in to your administrative account",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "admin@test.com",
+    "passwordLabel": "Password",
+    "submitButton": "Sign In",
+    "signingIn": "Signing In...",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email address",
+    "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 6 characters",
+    "success": "Login successful",
+    "error": "Login failed"
+  }
+}

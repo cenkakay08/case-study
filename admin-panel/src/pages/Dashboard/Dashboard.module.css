@@ -1,0 +1,43 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  max-width: 1400px;
+}
+
+.welcomeSection {
+  flex-shrink: 0;
+  margin-bottom: 2rem;
+}
+
+.welcomeSection h1 {
+  font-size: 2rem;
+  color: var(--color-gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.welcomeSection p {
+  color: var(--color-gray-600);
+  font-size: 1.125rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 1.25rem;
+  color: var(--color-gray-500);
+}
+
+.error {
+  padding: 1rem;
+  background-color: var(--color-red-50);
+  color: var(--color-red-600);
+  border-radius: 0.375rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-red-200);
+}

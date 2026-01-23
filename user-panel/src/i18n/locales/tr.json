@@ -1,0 +1,107 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "createTask": "Talep Oluştur",
+    "myTasks": "Taleplerim",
+    "logout": "Çıkış Yap",
+    "darkMode": "Karanlık Mod",
+    "loading": "Yükleniyor...",
+    "success": "Başarılı",
+    "error": "Hata",
+    "fetchError": "Talepler yüklenemedi",
+    "createError": "Talep oluşturulamadı",
+    "listError": "Talep listesi alınırken bir hata oluştu",
+    "formInvalid": "Form geçersiz, lütfen alanları kontrol edin"
+  },
+  "login": {
+    "title": "Tekrar Hoş Geldiniz",
+    "subtitle": "Kullanıcı panelinize erişmek için giriş yapın",
+    "emailLabel": "E-posta Adresi",
+    "emailPlaceholder": "örnek@eposta.com",
+    "passwordLabel": "Şifre",
+    "submitButton": "Giriş Yap",
+    "signingIn": "Giriş Yapılıyor...",
+    "invalidCredentials": "Geçersiz e-posta veya şifre",
+    "emailRequired": "E-posta alanı zorunludur",
+    "emailInvalid": "Geçerli bir e-posta adresi giriniz",
+    "passwordRequired": "Şifre alanı zorunludur",
+    "passwordMin": "Şifre en az 6 karakter olmalıdır",
+    "success": "Başarıyla giriş yapıldı, hoş geldiniz!",
+    "error": "Giriş başarısız oldu"
+  },
+  "dashboard": {
+    "welcome": "Hoş geldin, {{name}}!",
+    "subtitle": "Taleplerinizin ve sistem durumunun genel bir özetini burada bulabilirsiniz.",
+    "totalTasks": "Toplam Talep",
+    "pendingTasks": "Bekleyen",
+    "approvedTasks": "Onaylanan",
+    "rejectedTasks": "Reddedilen",
+    "recentTasks": "Son Taleplerim",
+    "noRecentTasks": "Henüz talep bulunmuyor."
+  },
+  "createTask": {
+    "title": "Talep Oluştur",
+    "subtitle": "İhtiyacınız olan desteği belirtin",
+    "form": {
+      "titleLabel": "Başlık",
+      "titlePlaceholder": "Talep başlığı...",
+      "categoryLabel": "Kategori",
+      "categoryPlaceholder": "Kategori seçin",
+      "priorityLabel": "Öncelik",
+      "priorityPlaceholder": "Öncelik seçin",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Talebiniz hakkında detaylı bilgi verin...",
+      "submitButton": "Talep Gönder",
+      "submitting": "Oluşturuluyor..."
+    },
+    "validation": {
+      "titleMin": "Başlık en az 3 karakter olmalıdır",
+      "descMin": "Açıklama en az 10 karakter olmalıdır",
+      "descriptionMin": "Açıklama en az 10 karakter olmalıdır",
+      "categoryRequired": "Kategori seçilmelidir",
+      "priorityRequired": "Öncelik seçilmelidir"
+    }
+  },
+  "myTasks": {
+    "title": "Taleplerim",
+    "subtitle": "Oluşturduğunuz taleplerin güncel durumunu buradan takip edebilirsiniz",
+    "searchPlaceholder": "Talep ara...",
+    "statusFilterPlaceholder": "Tüm Durumlar",
+    "table": {
+      "task": "TALEP",
+      "category": "KATEGORİ",
+      "priority": "ÖNCELİK",
+      "status": "DURUM",
+      "date": "TARİH",
+      "actions": "İŞLEMLER"
+    },
+    "details": {
+      "title": "Talep Detayı",
+      "viewDetails": "Detaylar",
+      "description": "Açıklama",
+      "rejectionReason": "Red Nedeni",
+      "close": "Kapat"
+    }
+  },
+  "categories": {
+    "technical_support": "Teknik Destek",
+    "leave_request": "İzin Talebi",
+    "purchase": "Satın Alma",
+    "other": "Diğer"
+  },
+  "priorities": {
+    "low": "Düşük",
+    "normal": "Normal",
+    "high": "Yüksek",
+    "urgent": "Acil"
+  },
+  "status": {
+    "all": "Tüm Durumlar",
+    "pending": "Bekleyenler",
+    "approved": "Onaylananlar",
+    "rejected": "Reddedilenler"
+  },
+  "success": {
+    "taskCreated": "Talebiniz başarıyla oluşturuldu."
+  }
+}
