@@ -19,7 +19,7 @@ const STATUS_FILTERS = [
 export default function MyTasks() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
-  const { tasks, isLoading } = useAppSelector((state) => state.tasks);
+  const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
@@ -47,6 +47,8 @@ export default function MyTasks() {
         <h1 className={styles.title}>{t("myTasks.title")}</h1>
         <p className={styles.subtitle}>{t("myTasks.subtitle")}</p>
       </header>
+
+      {error && <div className={styles.error}>{t(error)}</div>}
 
       <div className={styles.controls}>
         <input

@@ -101,6 +101,20 @@
     left: 0;
     height: calc(var(--gap) + 1px);
   }
+
+  &[data-type="success"] {
+    background: var(--color-green-50);
+    color: var(--color-green-700);
+    border-color: var(--color-green-100);
+    box-shadow: 0 4px 12px oklch(140 0.05 0.1 / 0.05);
+  }
+
+  &[data-type="error"] {
+    background: var(--color-red-50);
+    color: var(--color-red-700);
+    border-color: var(--color-red-100);
+    box-shadow: 0 4px 12px oklch(0 0.05 0.1 / 0.05);
+  }
 }
 
 .Content {

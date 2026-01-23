@@ -12,17 +12,23 @@ import {
 } from "@/api/users/userController";
 import styles from "./Content.module.css";
 
-const editUserSchema = z.object({
-  name: z.string().min(1, { message: "userManagement.form.nameRequired" }),
-  email: z
-    .string()
-    .min(1, { message: "login.emailRequired" })
-    .pipe(z.email({ message: "login.emailInvalid" })),
-  password: z.string().refine((val) => !val || val.length >= 6, {
-    message: "login.passwordMin",
-  }),
-  role: z.enum([USER_ROLES.ADMIN, USER_ROLES.MODERATOR, USER_ROLES.VIEWER]),
-});
+const editUserSchema = z
+  .object({
+    name: z.string().min(1, { message: "userManagement.form.nameRequired" }),
+    email: z
+      .string()
+      .min(1, { message: "login.emailRequired" })
+      .pipe(z.email({ message: "login.emailInvalid" })),
+    password: z.string().refine((val) => !val || val.length >= 6, {
+      message: "login.passwordMin",
+    }),
+    confirmPassword: z.string(),
+    role: z.enum([USER_ROLES.ADMIN, USER_ROLES.MODERATOR, USER_ROLES.VIEWER]),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "userManagement.form.passwordsDoNotMatch",
+    path: ["confirmPassword"],
+  });
 
 const ROLES: UserRole[] = [
   USER_ROLES.ADMIN,
@@ -46,6 +52,7 @@ export function Content({ user, setOpen }: ContentProps) {
       name: user.name,
       email: user.email,
       password: "",
+      confirmPassword: "",
       role: user.role as UserRole,
     },
     validationLogic: revalidateLogic({
@@ -61,7 +68,15 @@ export function Content({ user, setOpen }: ContentProps) {
 
       const result = await dispatch(
         updateUserAsync(
-          { userId: user.id, user: value },
+          {
+            userId: user.id,
+            user: {
+              name: value.name,
+              email: value.email,
+              password: value.password,
+              role: value.role,
+            },
+          },
           { signal: abortController.current.signal },
         ),
       );
@@ -164,7 +179,38 @@ export function Content({ user, setOpen }: ContentProps) {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   type="password"
+                  autoComplete="new-password"
                   placeholder={t("userManagement.form.newPasswordPlaceholder")}
+                />
+                <Field.Error
+                  match={
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  }
+                >
+                  {t(field.state.meta.errors?.[0]?.message ?? "")}
+                </Field.Error>
+              </Field.Root>
+            )}
+          />
+
+          <form.Field
+            name="confirmPassword"
+            children={(field) => (
+              <Field.Root>
+                <Field.Label>
+                  {t("userManagement.form.confirmNewPassword")}
+                </Field.Label>
+                <Field.Control
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  type="password"
+                  autoComplete="new-password"
+                  placeholder={t(
+                    "userManagement.form.confirmNewPasswordPlaceholder",
+                  )}
                 />
                 <Field.Error
                   match={

@@ -23,9 +23,51 @@
     },
     {
       "id": "a6",
-      "name": "Cenk Akayv2",
+      "name": "Cenk Akayv3",
       "email": "cenk_akay08@hotmail.com",
-      "password": "123456",
+      "password": "",
+      "role": "Viewer"
+    },
+    {
+      "id": "a5",
+      "name": "123123123",
+      "email": "test123123@213123.com",
+      "password": "1232131231",
+      "role": "Admin"
+    },
+    {
+      "id": "a6",
+      "name": "test",
+      "email": "asdasd@asdfsada.com",
+      "password": "13456213",
+      "role": "Viewer"
+    },
+    {
+      "id": "a7",
+      "name": "qwewqe",
+      "email": "asdajskhd@kalsjdklasd.com",
+      "password": "15646846",
+      "role": "Viewer"
+    },
+    {
+      "id": "a8",
+      "name": "asdasd12312",
+      "email": "asdasd@sadsdad.com",
+      "password": "165456",
+      "role": "Viewer"
+    },
+    {
+      "id": "a9",
+      "name": "213213123",
+      "email": "cnek@hotm.com",
+      "password": "asdakljdalkdj\"",
+      "role": "Viewer"
+    },
+    {
+      "id": "a10",
+      "name": "asdasd123123v2",
+      "email": "1231@sdaklsdjsald.com",
+      "password": "",
       "role": "Viewer"
     }
   ],
@@ -101,7 +143,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 6",
       "priority": "low",
       "category": "purchase",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-04T09:11:04.399Z"
     },
@@ -121,7 +163,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 8",
       "priority": "low",
       "category": "purchase",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-05T09:11:04.399Z"
     },
@@ -131,9 +173,10 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 9",
       "priority": "urgent",
       "category": "leave_request",
-      "status": "pending",
+      "status": "rejected",
       "createdBy": "u1",
-      "createdAt": "2026-01-07T09:11:04.399Z"
+      "createdAt": "2026-01-07T09:11:04.399Z",
+      "rejectionReason": "asd asd 12 e21 "
     },
     {
       "id": "t10",
@@ -141,7 +184,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 10",
       "priority": "normal",
       "category": "technical_support",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-08T09:11:04.399Z"
     },
@@ -151,7 +194,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 11",
       "priority": "normal",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-09T09:11:04.399Z"
     },
@@ -161,7 +204,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 12",
       "priority": "normal",
       "category": "purchase",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-10T09:11:04.399Z"
     },
@@ -171,7 +214,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 13",
       "priority": "high",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-11T09:11:04.399Z"
     },
@@ -181,7 +224,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 14",
       "priority": "low",
       "category": "other",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-12T09:11:04.399Z"
     },
@@ -191,7 +234,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 15",
       "priority": "high",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-13T09:11:04.399Z"
     },
@@ -201,7 +244,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 16",
       "priority": "urgent",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-15T09:11:04.399Z"
     },
@@ -211,7 +254,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 17",
       "priority": "urgent",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-15T09:11:04.399Z"
     },
@@ -221,7 +264,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 18",
       "priority": "low",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-15T09:11:04.399Z"
     },
@@ -231,7 +274,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 19",
       "priority": "urgent",
       "category": "technical_support",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-15T09:11:04.399Z"
     },
@@ -241,7 +284,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 20",
       "priority": "normal",
       "category": "other",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-16T09:11:04.399Z"
     },
@@ -251,7 +294,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 21",
       "priority": "normal",
       "category": "technical_support",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-17T09:11:04.399Z"
     },
@@ -261,7 +304,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 22",
       "priority": "urgent",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-15T09:11:04.399Z"
     },
@@ -271,7 +314,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 23",
       "priority": "low",
       "category": "technical_support",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-15T09:11:04.399Z"
     },
@@ -281,7 +324,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 24",
       "priority": "low",
       "category": "purchase",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-17T09:11:04.399Z"
     },
@@ -291,7 +334,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 25",
       "priority": "high",
       "category": "other",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-17T09:11:04.399Z"
     },
@@ -301,7 +344,7 @@
       "description": "Bu bir otomatik oluşturulmuş açıklama metnidir. Talep numarası: 26",
       "priority": "normal",
       "category": "leave_request",
-      "status": "pending",
+      "status": "approved",
       "createdBy": "u1",
       "createdAt": "2026-01-18T09:11:04.399Z"
     },
@@ -313,16 +356,168 @@
       "category": "technical_support",
       "createdBy": "u1",
       "createdAt": "2026-01-19T13:46:27.765Z",
-      "status": "pending"
+      "status": "rejected",
+      "rejectionReason": "sadsad asd sad asd"
     },
     {
       "id": "t28",
-      "title": "213123123",
-      "description": "12312312321edsadsadsa",
+      "title": "dasdada",
+      "description": "asdasdsada dadas dsa d",
+      "category": "technical_support",
+      "priority": "normal",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:40:59.800Z",
+      "status": "rejected",
+      "rejectionReason": "asdas sdas "
+    },
+    {
+      "id": "t29",
+      "title": "sadsadsad",
+      "description": "asdsadasdasdasdsad",
       "category": "leave_request",
       "priority": "high",
       "createdBy": "u1",
-      "createdAt": "2026-01-22T17:35:29.974Z",
+      "createdAt": "2026-01-22T22:41:17.147Z",
+      "status": "pending"
+    },
+    {
+      "id": "t30",
+      "title": "asdad",
+      "description": "asdadadadsadadsadsad",
+      "category": "other",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:41:35.353Z",
+      "status": "pending"
+    },
+    {
+      "id": "t31",
+      "title": "asdasdasd",
+      "description": "asdasdasdsad",
+      "category": "technical_support",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:42:41.481Z",
+      "status": "pending"
+    },
+    {
+      "id": "t32",
+      "title": "asdsads",
+      "description": "asdasdsadasd",
+      "category": "technical_support",
+      "priority": "normal",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:43:19.089Z",
+      "status": "pending"
+    },
+    {
+      "id": "t33",
+      "title": "sadsad",
+      "description": "asdasdasdasdsadasd",
+      "category": "technical_support",
+      "priority": "urgent",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:43:46.332Z",
+      "status": "pending"
+    },
+    {
+      "id": "t34",
+      "title": "asdadsa",
+      "description": "asdsadsadasdsad",
+      "category": "leave_request",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:44:15.556Z",
+      "status": "pending"
+    },
+    {
+      "id": "t35",
+      "title": "asdsadsadsad",
+      "description": "asdasdasdasdasdasd",
+      "category": "leave_request",
+      "priority": "normal",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:47:06.629Z",
+      "status": "pending"
+    },
+    {
+      "id": "t36",
+      "title": "21321313",
+      "description": "qweqwewqe qe qwe qw e",
+      "category": "leave_request",
+      "priority": "normal",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:49:56.252Z",
+      "status": "pending"
+    },
+    {
+      "id": "t37",
+      "title": "asdadad",
+      "description": "21312321312ed asd",
+      "category": "other",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:51:33.528Z",
+      "status": "pending"
+    },
+    {
+      "id": "t38",
+      "title": "111",
+      "description": "213213 213 123123",
+      "category": "leave_request",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:51:40.366Z",
+      "status": "pending"
+    },
+    {
+      "id": "t39",
+      "title": "sadasdasd",
+      "description": "3123123 12 3123 123 123 ",
+      "category": "technical_support",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:51:55.567Z",
+      "status": "pending"
+    },
+    {
+      "id": "t40",
+      "title": "22222",
+      "description": "2ee2wqed  21 1",
+      "category": "technical_support",
+      "priority": "urgent",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:52:39.361Z",
+      "status": "pending"
+    },
+    {
+      "id": "t41",
+      "title": "12321312",
+      "description": "123123 12 312 312 312 ",
+      "category": "technical_support",
+      "priority": "urgent",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T22:53:02.885Z",
+      "status": "pending"
+    },
+    {
+      "id": "t42",
+      "title": "dsfsdfsdfs",
+      "description": "sdfsdfdsf sf sdf sd",
+      "category": "technical_support",
+      "priority": "urgent",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T23:30:22.222Z",
+      "status": "pending"
+    },
+    {
+      "id": "t43",
+      "title": "zxcsd 32 412 312 ",
+      "description": "wasdsa  asd as das d",
+      "category": "technical_support",
+      "priority": "high",
+      "createdBy": "u1",
+      "createdAt": "2026-01-22T23:32:46.887Z",
       "status": "pending"
     }
   ]

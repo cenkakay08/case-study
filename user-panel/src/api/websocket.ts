@@ -3,6 +3,7 @@ import {
   taskUpdated,
   taskDeleted,
 } from "@/store/slices/taskSlice";
+
 import type { RootState, AppDispatch } from "@/store";
 import type { Task } from "@/api/tasks/taskController";
 
@@ -16,6 +17,7 @@ type WSMessage = {
   [K in keyof WSEventMap]: {
     type: K;
     payload: WSEventMap[K];
+    clientId?: string;
   };
 }[keyof WSEventMap];
 
@@ -26,12 +28,17 @@ interface InjectedStore {
 
 let store: InjectedStore;
 let socket: WebSocket | null = null;
+let clientId: string | null = null;
 let reconnectAttempts = 0;
 const MAX_RECONNECT_ATTEMPTS = 5;
 const RECONNECT_INTERVAL = 3000;
 
-export const injectStore = (_store: InjectedStore) => {
+export const injectWebSocketStore = (
+  _store: InjectedStore,
+  _clientId: string,
+) => {
   store = _store;
+  clientId = _clientId;
 };
 
 const getWSUrl = (token: string) => {
@@ -53,14 +60,19 @@ export const connectWebSocket = (token?: string) => {
   socket = new WebSocket(url);
 
   socket.onopen = () => {
-    console.log("WebSocket connected");
     reconnectAttempts = 0;
   };
 
   socket.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data) satisfies WSMessage;
-      const { type, payload } = data;
+      const { type, payload, clientId: eventClientId } = data;
+
+      // Ignore self-triggered events
+      if (eventClientId === clientId) {
+        console.log(`[WS] Ignoring self-triggered event: ${type}`);
+        return;
+      }
 
       // Handle specific events with Redux dispatch
       switch (type) {
@@ -80,8 +92,6 @@ export const connectWebSocket = (token?: string) => {
   };
 
   socket.onclose = (event) => {
-    console.log("WebSocket disconnected", event.reason);
-
     if (event.code === 1008) {
       // Token required or invalid
       console.error("WebSocket auth error, logging out...");
@@ -91,9 +101,6 @@ export const connectWebSocket = (token?: string) => {
     if (reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
       setTimeout(() => {
         reconnectAttempts++;
-        console.log(
-          `Attempting to reconnect (${reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS})...`,
-        );
         connectWebSocket();
       }, RECONNECT_INTERVAL);
     }

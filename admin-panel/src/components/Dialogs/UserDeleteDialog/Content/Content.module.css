@@ -46,37 +46,11 @@
 
 .dialogFooter {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
   background-color: var(--color-gray-50);
   border-top: 1px solid var(--color-gray-200);
   border-bottom-left-radius: 0.75rem;
   border-bottom-right-radius: 0.75rem;
-}
-
-.cancelButton {
-  padding: 0.625rem 1.25rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  background: var(--color-gray-100);
-  color: var(--color-gray-700);
-  border: 1px solid var(--color-gray-200);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.cancelButton:hover {
-  background: var(--color-gray-200);
-  color: var(--color-gray-900);
-}
-
-.deleteButton {
-  background-color: var(--color-error-500) !important;
-  color: white !important;
-}
-
-.deleteButton:hover {
-  background-color: var(--color-error-600) !important;
 }

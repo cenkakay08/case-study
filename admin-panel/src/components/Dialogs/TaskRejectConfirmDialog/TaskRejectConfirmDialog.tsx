@@ -30,6 +30,7 @@ export function TaskRejectConfirmDialog({
               <span {...props} {...state} tabIndex={-1}>
                 <AlertDialog.Trigger
                   disabled={!canReject}
+                  data-variant="danger"
                   className={styles.rejectButton}
                 >
                   {t("pendingTasks.reject")}

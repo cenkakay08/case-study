@@ -45,11 +45,16 @@ wss.on("connection", (ws, req) => {
   });
 });
 
-const broadcast = (type, payload) => {
-  const message = JSON.stringify({ type, payload });
+const broadcast = (type, payload, clientId = null) => {
+  const message = JSON.stringify({ type, payload, clientId });
+  console.log(
+    `[WS] Broadcasting ${type} to ${clients.size} clients. ClientID: ${clientId || "N/A"}`,
+  );
   clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(message);
+    } else {
+      console.log(`[WS] Skipping client (State: ${client.readyState})`);
     }
   });
 };
@@ -58,7 +63,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000", "http://localhost:3001"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-client-id"],
   }),
 );
 app.use(bodyParser.json());
@@ -166,7 +171,7 @@ app.post("/api/tasks", authenticateToken, (req, res) => {
   };
   db.tasks.push(newTask);
   updateDb();
-  broadcast("TASK_CREATED", newTask);
+  broadcast("TASK_CREATED", newTask, req.headers["x-client-id"]);
   res.status(201).json(newTask);
 });
 
@@ -179,7 +184,7 @@ app.patch("/api/tasks/:id", authenticateToken, (req, res) => {
     if (req.user.role === "Admin" || req.user.role === "Moderator") {
       db.tasks[index] = { ...db.tasks[index], ...req.body };
       updateDb();
-      broadcast("TASK_UPDATED", db.tasks[index]);
+      broadcast("TASK_UPDATED", db.tasks[index], req.headers["x-client-id"]);
       res.json(db.tasks[index]);
     } else {
       res.status(403).json({ message: "Unauthorized to update task status" });
@@ -201,7 +206,7 @@ app.delete("/api/tasks/:id", authenticateToken, (req, res) => {
     ) {
       db.tasks.splice(index, 1);
       updateDb();
-      broadcast("TASK_DELETED", { id });
+      broadcast("TASK_DELETED", { id }, req.headers["x-client-id"]);
       res.status(204).send();
     } else {
       res.status(403).json({ message: "Unauthorized to delete task" });
@@ -229,7 +234,7 @@ app.post("/api/admin-users", authenticateToken, (req, res) => {
   };
   db.admin_users.push(newUser);
   updateDb();
-  broadcast("USER_CREATED", newUser);
+  broadcast("USER_CREATED", newUser, req.headers["x-client-id"]);
   res.status(201).json(newUser);
 });
 
@@ -243,7 +248,11 @@ app.patch("/api/admin-users/:id", authenticateToken, (req, res) => {
   if (index !== -1) {
     db.admin_users[index] = { ...db.admin_users[index], ...req.body };
     updateDb();
-    broadcast("USER_UPDATED", db.admin_users[index]);
+    broadcast(
+      "USER_UPDATED",
+      db.admin_users[index],
+      req.headers["x-client-id"],
+    );
     res.json(db.admin_users[index]);
   } else {
     res.status(404).json({ message: "User not found" });
@@ -260,7 +269,7 @@ app.delete("/api/admin-users/:id", authenticateToken, (req, res) => {
   if (index !== -1) {
     db.admin_users.splice(index, 1);
     updateDb();
-    broadcast("USER_DELETED", { id });
+    broadcast("USER_DELETED", { id }, req.headers["x-client-id"]);
     res.status(204).send();
   } else {
     res.status(404).json({ message: "User not found" });

@@ -64,6 +64,9 @@
     "reject": "Reject",
     "approveSuccess": "Request approved successfully",
     "rejectSuccess": "Request rejected successfully",
+    "fetchError": "An error occurred while loading requests",
+    "approveError": "An error occurred while approving the request",
+    "rejectError": "An error occurred while rejecting the request",
     "noPermission": "You don't have permission for this action",
     "noTasks": "No pending requests found",
     "rejectDialog": {
@@ -122,6 +125,11 @@
       "passwordPlaceholder": "Enter password",
       "newPassword": "New Password (optional)",
       "newPasswordPlaceholder": "Leave blank to keep current",
+      "confirmNewPassword": "Confirm New Password",
+      "confirmNewPasswordPlaceholder": "Re-enter new password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Re-enter password",
+      "passwordsDoNotMatch": "Passwords do not match",
       "role": "Role"
     },
     "createDialog": {
@@ -134,7 +142,8 @@
     },
     "deleteDialog": {
       "title": "Delete User",
-      "description": "Are you sure you want to delete user {{name}}? This action cannot be undone."
+      "description": "Are you sure you want to delete user {{name}}? This action cannot be undone.",
+      "cannotDeleteSelf": "You cannot delete your own account"
     }
   },
   "login": {
@@ -148,6 +157,8 @@
     "emailRequired": "Email is required",
     "emailInvalid": "Invalid email address",
     "passwordRequired": "Password is required",
-    "passwordMin": "Password must be at least 6 characters"
+    "passwordMin": "Password must be at least 6 characters",
+    "success": "Login successful",
+    "error": "Login failed"
   }
 }

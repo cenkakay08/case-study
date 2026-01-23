@@ -10,6 +10,7 @@
     "error": "Error",
     "fetchError": "Failed to load requests",
     "createError": "Failed to create request",
+    "listError": "An error occurred while fetching the request list",
     "formInvalid": "Form is invalid, please check the fields"
   },
   "login": {
@@ -24,7 +25,9 @@
     "emailRequired": "Email is required",
     "emailInvalid": "Please enter a valid email address",
     "passwordRequired": "Password is required",
-    "passwordMin": "Password must be at least 6 characters"
+    "passwordMin": "Password must be at least 6 characters",
+    "success": "Login successful, welcome back!",
+    "error": "Login failed"
   },
   "dashboard": {
     "welcome": "Welcome, {{name}}!",

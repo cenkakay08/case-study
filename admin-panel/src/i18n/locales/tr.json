@@ -64,6 +64,9 @@
     "reject": "Reddet",
     "approveSuccess": "Talep başarıyla onaylandı",
     "rejectSuccess": "Talep başarıyla reddedildi",
+    "fetchError": "Talepler yüklenirken bir hata oluştu",
+    "approveError": "Talep onaylanırken bir hata oluştu",
+    "rejectError": "Talep reddedilirken bir hata oluştu",
     "noPermission": "Bu işlem için yetkiniz yok",
     "noTasks": "Bekleyen talep bulunamadı",
     "rejectDialog": {
@@ -122,6 +125,11 @@
       "passwordPlaceholder": "Şifre girin",
       "newPassword": "Yeni Şifre (opsiyonel)",
       "newPasswordPlaceholder": "Boş bırakılırsa değişmez",
+      "confirmNewPassword": "Yeni Şifreyi Tekrarla",
+      "confirmNewPasswordPlaceholder": "Yeni şifreyi tekrar girin",
+      "confirmPassword": "Şifreyi Tekrarla",
+      "confirmPasswordPlaceholder": "Şifreyi tekrar girin",
+      "passwordsDoNotMatch": "Şifreler eşleşmiyor",
       "role": "Rol"
     },
     "createDialog": {
@@ -134,7 +142,8 @@
     },
     "deleteDialog": {
       "title": "Kullanıcıyı Sil",
-      "description": "{{name}} kullanıcısını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+      "description": "{{name}} kullanıcısını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+      "cannotDeleteSelf": "Kendi hesabınızı silemezsiniz"
     }
   },
   "login": {
@@ -148,6 +157,8 @@
     "emailRequired": "E-posta gereklidir",
     "emailInvalid": "Geçersiz e-posta adresi",
     "passwordRequired": "Şifre gereklidir",
-    "passwordMin": "Şifre en az 6 karakter olmalıdır"
+    "passwordMin": "Şifre en az 6 karakter olmalıdır",
+    "success": "Başarıyla giriş yapıldı",
+    "error": "Giriş başarısız oldu"
   }
 }

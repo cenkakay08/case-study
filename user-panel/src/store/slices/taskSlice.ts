@@ -33,17 +33,11 @@ export const fetchTasksAsync = createAsyncThunk(
       const response = await fetchTasksApi(signal);
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        if (error.name === "CanceledError") {
-          return rejectWithValue("Aborted");
-        }
-
-        return rejectWithValue(
-          error.response?.data?.message || "common.fetchError",
-        );
-      }
-
-      return rejectWithValue("common.fetchError");
+      return rejectWithValue(
+        error instanceof AxiosError
+          ? error.response?.data?.message || "common.listError"
+          : "common.listError",
+      );
     }
   },
 );
@@ -59,24 +53,24 @@ export const createTaskAsync = createAsyncThunk(
 
       Toast.toastManager.add({
         title: i18n.t("common.success"),
-        description: i18n.t("success.requestCreated"),
+        description: i18n.t("success.taskCreated"),
+        type: "success",
       });
 
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        const messageKey =
-          error.response?.data?.message || "common.createError";
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "common.createError"
+          : "common.createError";
 
-        Toast.toastManager.add({
-          title: i18n.t("common.error"),
-          description: i18n.t(messageKey),
-        });
+      Toast.toastManager.add({
+        title: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+        type: "error",
+      });
 
-        return rejectWithValue(messageKey);
-      }
-
-      return rejectWithValue("common.createError");
+      return rejectWithValue(messageKey);
     }
   },
 );
@@ -89,7 +83,7 @@ const taskSlice = createSlice({
       // Avoid double unshift if the task was already added by the async thunk
       const exists = state.tasks.find((t) => t.id === action.payload.id);
       if (!exists) {
-        state.tasks.unshift(action.payload);
+        state.tasks.push(action.payload);
       }
     },
     taskUpdated: (state, action: PayloadAction<Task>) => {
@@ -131,7 +125,10 @@ const taskSlice = createSlice({
         createTaskAsync.fulfilled,
         (state, action: PayloadAction<Task>) => {
           state.isLoading = false;
-          state.tasks.unshift(action.payload);
+          const exists = state.tasks.find((t) => t.id === action.payload.id);
+          if (!exists) {
+            state.tasks.push(action.payload);
+          }
         },
       )
       .addCase(createTaskAsync.rejected, (state, action) => {

@@ -37,4 +37,40 @@
   &[data-disabled] {
     color: var(--color-gray-500);
   }
+
+  /* Success Variant */
+  &[data-variant="success"] {
+    background-color: var(--color-green-50);
+    border-color: var(--color-green-100);
+    color: var(--color-green-700);
+
+    @media (hover: hover) {
+      &:hover:not([data-disabled]) {
+        background-color: var(--color-green-100);
+      }
+    }
+
+    &:active:not([data-disabled]) {
+      background-color: var(--color-green-100);
+      border-top-color: var(--color-green-700);
+    }
+  }
+
+  /* Danger Variant */
+  &[data-variant="danger"] {
+    background-color: var(--color-red-50);
+    border-color: var(--color-red-100);
+    color: var(--color-red-600);
+
+    @media (hover: hover) {
+      &:hover:not([data-disabled]) {
+        background-color: var(--color-red-100);
+      }
+    }
+
+    &:active:not([data-disabled]) {
+      background-color: var(--color-red-100);
+      border-top-color: var(--color-red-600);
+    }
+  }
 }

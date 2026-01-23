@@ -35,21 +35,11 @@ export const fetchUsersAsync = createAsyncThunk(
       const response = await fetchAdminUsersApi(signal);
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        if (error.name === "CanceledError") {
-          return rejectWithValue("Aborted");
-        }
-        return rejectWithValue(
-          error.response?.data?.message || "common.fetchError",
-        );
-      }
-
-      Toast.toastManager.add({
-        title: i18n.t("common.error"),
-        description: i18n.t("common.error"),
-      });
-
-      return rejectWithValue("common.error");
+      return rejectWithValue(
+        error instanceof AxiosError
+          ? error.response?.data?.message || "common.fetchError"
+          : "common.error",
+      );
     }
   },
 );
@@ -63,27 +53,22 @@ export const createUserAsync = createAsyncThunk(
       Toast.toastManager.add({
         title: i18n.t("common.success"),
         description: i18n.t("userManagement.createSuccess"),
+        type: "success",
       });
 
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        const messageKey = error.response?.data?.message || "common.error";
-
-        Toast.toastManager.add({
-          title: i18n.t("common.error"),
-          description: i18n.t(messageKey),
-        });
-
-        return rejectWithValue(messageKey);
-      }
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "common.error"
+          : "common.error";
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t("common.error"),
+        description: i18n.t(messageKey),
       });
 
-      return rejectWithValue("common.error");
+      return rejectWithValue(messageKey);
     }
   },
 );
@@ -100,27 +85,22 @@ export const updateUserAsync = createAsyncThunk(
       Toast.toastManager.add({
         title: i18n.t("common.success"),
         description: i18n.t("userManagement.updateSuccess"),
+        type: "success",
       });
 
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        const messageKey = error.response?.data?.message || "common.error";
-
-        Toast.toastManager.add({
-          title: i18n.t("common.error"),
-          description: i18n.t(messageKey),
-        });
-
-        return rejectWithValue(messageKey);
-      }
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "common.error"
+          : "common.error";
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t("common.error"),
+        description: i18n.t(messageKey),
       });
 
-      return rejectWithValue("common.error");
+      return rejectWithValue(messageKey);
     }
   },
 );
@@ -134,27 +114,23 @@ export const deleteUserAsync = createAsyncThunk(
       Toast.toastManager.add({
         title: i18n.t("common.success"),
         description: i18n.t("userManagement.deleteSuccess"),
+        type: "success",
       });
 
       return userId;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        const messageKey = error.response?.data?.message || "common.error";
-
-        Toast.toastManager.add({
-          title: i18n.t("common.error"),
-          description: i18n.t(messageKey),
-        });
-
-        return rejectWithValue(messageKey);
-      }
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "common.error"
+          : "common.error";
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+        type: "error",
       });
 
-      return rejectWithValue("common.error");
+      return rejectWithValue(messageKey);
     }
   },
 );
@@ -199,7 +175,10 @@ const userSlice = createSlice({
       .addCase(
         createUserAsync.fulfilled,
         (state, action: PayloadAction<AdminUser>) => {
-          state.users.push(action.payload);
+          const exists = state.users.find((u) => u.id === action.payload.id);
+          if (!exists) {
+            state.users.push(action.payload);
+          }
         },
       )
       .addCase(

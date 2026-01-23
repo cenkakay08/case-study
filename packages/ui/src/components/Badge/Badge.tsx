@@ -8,7 +8,10 @@ export type BadgeType =
   | "urgent"
   | "pending"
   | "approved"
-  | "rejected";
+  | "rejected"
+  | "admin"
+  | "moderator"
+  | "viewer";
 
 interface BadgeProps {
   type: BadgeType;

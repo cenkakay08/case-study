@@ -254,6 +254,7 @@ export default function CreateTask() {
                           <span {...props} {...triggerState} tabIndex={-1}>
                             <Button
                               type="submit"
+                              data-variant="success"
                               disabled={!canSubmit || isSubmitting || isLoading}
                               style={{ width: "100%" }}
                             >

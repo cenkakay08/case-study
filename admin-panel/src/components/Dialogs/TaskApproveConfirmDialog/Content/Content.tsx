@@ -101,6 +101,7 @@ export function Content({ task, setOpenDialog }: ContentProps) {
         </AlertDialog.Close>
         <Button
           className={styles.confirmButton}
+          data-variant="success"
           onClick={handleConfirm}
           disabled={isLoading}
         >

@@ -51,7 +51,11 @@ export function Content({ user, setOpen }: ContentProps) {
         <Dialog.Close className={styles.cancelButton}>
           {t("common.cancel")}
         </Dialog.Close>
-        <Button className={styles.deleteButton} onClick={handleDelete}>
+        <Button
+          className={styles.deleteButton}
+          onClick={handleDelete}
+          data-variant="danger"
+        >
           {t("userManagement.delete")}
         </Button>
       </div>

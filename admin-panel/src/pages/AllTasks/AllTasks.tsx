@@ -29,7 +29,7 @@ const ITEMS_PER_PAGE = 10;
 export default function AllTasks() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
-  const { tasks, isLoading } = useAppSelector((state) => state.tasks);
+  const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [priorityFilter, setPriorityFilter] = useState("all");
@@ -68,6 +68,8 @@ export default function AllTasks() {
         <h1 className={styles.title}>{t("allTasks.title")}</h1>
         <p className={styles.subtitle}>{t("allTasks.subtitle")}</p>
       </header>
+
+      {error && <div className={styles.error}>{t(error)}</div>}
 
       <div className={styles.controls}>
         <input

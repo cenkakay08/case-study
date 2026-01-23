@@ -29,7 +29,10 @@ export function TaskApproveConfirmDialog({
           <Tooltip.Trigger
             render={(props, state) => (
               <span {...props} {...state} tabIndex={-1}>
-                <AlertDialog.Trigger disabled={!canApprove}>
+                <AlertDialog.Trigger
+                  disabled={!canApprove}
+                  data-variant="success"
+                >
                   {t("pendingTasks.approve")}
                 </AlertDialog.Trigger>
               </span>

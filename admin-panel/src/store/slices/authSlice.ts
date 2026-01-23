@@ -9,6 +9,8 @@ import {
   type AdminUser,
   type LoginPayload,
 } from "@/api/login/loginController";
+import { Toast } from "@case-study/ui";
+import i18n from "@/i18n/config";
 
 interface AuthState {
   user: AdminUser | null;
@@ -43,12 +45,27 @@ export const adminLoginAsync = createAsyncThunk(
   async (credentials: LoginPayload, { rejectWithValue }) => {
     try {
       const response = await adminLoginApi(credentials);
+
+      Toast.toastManager.add({
+        title: i18n.t("common.success"),
+        description: i18n.t("login.success"),
+        type: "success",
+      });
+
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.response?.data?.message || "Login failed");
-      }
-      return rejectWithValue("Login failed");
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "login.error"
+          : "login.error";
+
+      Toast.toastManager.add({
+        title: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+        type: "error",
+      });
+
+      return rejectWithValue(messageKey);
     }
   },
 );

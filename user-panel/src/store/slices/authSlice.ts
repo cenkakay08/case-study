@@ -11,6 +11,7 @@ import {
   type User,
 } from "@/api/login/loginController";
 import { AxiosError } from "axios";
+import i18n from "@/i18n/config";
 
 interface AuthState {
   user: User | null;
@@ -47,31 +48,27 @@ export const loginAsyncThunk = createAsyncThunk(
       const response = await loginApi(credentials);
 
       Toast.toastManager.add({
-        title: "Başarılı",
-        description: "Giriş yapıldı, hoş geldiniz!",
+        title: i18n.t("common.success"),
+        description: i18n.t("login.success"),
+        type: "success",
       });
 
       router.navigate("/dashboard");
 
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        const message = error.response?.data?.message || "Giriş başarısız oldu";
-
-        Toast.toastManager.add({
-          title: "Hata",
-          description: message,
-        });
-
-        return rejectWithValue(message);
-      }
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "login.error"
+          : "login.error";
 
       Toast.toastManager.add({
-        title: "Hata",
-        description: "Giriş başarısız oldu",
+        title: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+        type: "error",
       });
 
-      return rejectWithValue("Giriş başarısız oldu");
+      return rejectWithValue(messageKey);
     }
   },
 );

@@ -5,8 +5,9 @@ import React from "react";
 
 export function ToastList() {
   const { toasts } = BaseToast.useToastManager();
+
   return toasts.map((toast) => (
-    <Toast.Root key={toast.id} toast={toast}>
+    <Toast.Root key={toast.id} toast={toast} data-type={toast.type}>
       <Toast.Content>
         <Toast.Title />
         <Toast.Description />

@@ -10,6 +10,7 @@
     "error": "Hata",
     "fetchError": "Talepler yüklenemedi",
     "createError": "Talep oluşturulamadı",
+    "listError": "Talep listesi alınırken bir hata oluştu",
     "formInvalid": "Form geçersiz, lütfen alanları kontrol edin"
   },
   "login": {
@@ -24,7 +25,9 @@
     "emailRequired": "E-posta alanı zorunludur",
     "emailInvalid": "Geçerli bir e-posta adresi giriniz",
     "passwordRequired": "Şifre alanı zorunludur",
-    "passwordMin": "Şifre en az 6 karakter olmalıdır"
+    "passwordMin": "Şifre en az 6 karakter olmalıdır",
+    "success": "Başarıyla giriş yapıldı, hoş geldiniz!",
+    "error": "Giriş başarısız oldu"
   },
   "dashboard": {
     "welcome": "Hoş geldin, {{name}}!",

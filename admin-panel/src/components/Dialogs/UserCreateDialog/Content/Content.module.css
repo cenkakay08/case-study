@@ -76,23 +76,6 @@
   margin-top: 1rem;
 }
 
-.cancelButton {
-  padding: 0.625rem 1.25rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  background: var(--color-gray-100);
-  color: var(--color-gray-700);
-  border: 1px solid var(--color-gray-200);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.cancelButton:hover {
-  background: var(--color-gray-200);
-  color: var(--color-gray-900);
-}
-
 .submitButton {
   min-width: 100px;
 }

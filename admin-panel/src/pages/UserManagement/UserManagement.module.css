@@ -131,31 +131,6 @@
   color: var(--color-gray-500);
 }
 
-/* Role badge */
-.roleBadge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.roleBadge.admin {
-  background-color: var(--color-purple-100);
-  color: var(--color-purple-700);
-}
-
-.roleBadge.moderator {
-  background-color: var(--color-blue-100);
-  color: var(--color-blue-700);
-}
-
-.roleBadge.viewer {
-  background-color: var(--color-gray-100);
-  color: var(--color-gray-700);
-}
-
 /* Action buttons */
 .actionButtons {
   display: flex;

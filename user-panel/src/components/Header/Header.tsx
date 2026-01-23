@@ -38,7 +38,11 @@ export function Header() {
               <span className={styles.userName}>{user?.name}</span>
               <span className={styles.userEmail}>{user?.email}</span>
             </div>
-            <Button onClick={handleLogout} className={styles.logoutButton}>
+            <Button
+              onClick={handleLogout}
+              data-variant="danger"
+              className={styles.logoutButton}
+            >
               {t("common.logout")}
             </Button>
           </div>

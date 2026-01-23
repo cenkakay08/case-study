@@ -31,7 +31,7 @@ const ITEMS_PER_PAGE = 10;
 export default function PendingTasks() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
-  const { tasks, isLoading } = useAppSelector((state) => state.tasks);
+  const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
   const [searchTerm, setSearchTerm] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -75,6 +75,8 @@ export default function PendingTasks() {
         <h1 className={styles.title}>{t("pendingTasks.title")}</h1>
         <p className={styles.subtitle}>{t("pendingTasks.subtitle")}</p>
       </header>
+
+      {error && <div className={styles.error}>{t(error)}</div>}
 
       <div className={styles.controls}>
         <input

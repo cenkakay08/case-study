@@ -4,26 +4,15 @@ import { fetchUsersAsync } from "@/store/slices/userSlice";
 import { UserCreateDialog } from "@/components/Dialogs/UserCreateDialog/UserCreateDialog";
 import { UserEditDialog } from "@/components/Dialogs/UserEditDialog/UserEditDialog";
 import { UserDeleteDialog } from "@/components/Dialogs/UserDeleteDialog/UserDeleteDialog";
+import { Badge, type BadgeType } from "@case-study/ui";
 import styles from "./UserManagement.module.css";
 import { TableSkeleton } from "@/components/Skeletons/TableSkeleton";
 import { useTranslation } from "react-i18next";
-import { USER_ROLES } from "@/api/users/userController";
 
 export default function UserManagement() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { users, isLoading } = useAppSelector((state) => state.users);
-
-  const getRoleBadgeClass = (role: string) => {
-    switch (role) {
-      case USER_ROLES.ADMIN:
-        return styles.admin;
-      case USER_ROLES.MODERATOR:
-        return styles.moderator;
-      default:
-        return styles.viewer;
-    }
-  };
 
   useEffect(() => {
     const promise = dispatch(fetchUsersAsync());
@@ -65,11 +54,9 @@ export default function UserManagement() {
                   </td>
                   <td>{user.email}</td>
                   <td>
-                    <span
-                      className={`${styles.roleBadge} ${getRoleBadgeClass(user.role)}`}
-                    >
+                    <Badge type={user.role.toLowerCase() as BadgeType}>
                       {user.role}
-                    </span>
+                    </Badge>
                   </td>
                   <td className={styles.stickyColumn}>
                     <div className={styles.actionButtons}>

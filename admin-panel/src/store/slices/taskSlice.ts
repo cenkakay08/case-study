@@ -34,13 +34,11 @@ export const fetchTasksAsync = createAsyncThunk(
       const response = await fetchTasksApi(signal);
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(
-          error.response?.data?.message || "common.fetchError",
-        );
-      }
-
-      return rejectWithValue("common.fetchError");
+      return rejectWithValue(
+        error instanceof AxiosError
+          ? error.response?.data?.message || "pendingTasks.fetchError"
+          : "pendingTasks.fetchError",
+      );
     }
   },
 );
@@ -54,27 +52,23 @@ export const approveTaskAsync = createAsyncThunk(
       Toast.toastManager.add({
         title: i18n.t("common.success"),
         description: i18n.t("pendingTasks.approveSuccess"),
+        type: "success",
       });
 
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        const messageKey = error.response?.data?.message || "common.error";
-
-        Toast.toastManager.add({
-          title: i18n.t("common.error"),
-          description: i18n.t(messageKey),
-        });
-
-        return rejectWithValue(messageKey);
-      }
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "pendingTasks.approveError"
+          : "pendingTasks.approveError";
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+        type: "error",
       });
 
-      return rejectWithValue("common.error");
+      return rejectWithValue(messageKey);
     }
   },
 );
@@ -91,27 +85,23 @@ export const rejectTaskAsync = createAsyncThunk(
       Toast.toastManager.add({
         title: i18n.t("common.success"),
         description: i18n.t("pendingTasks.rejectSuccess"),
+        type: "success",
       });
 
       return response.data;
     } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        const messageKey = error.response?.data?.message || "common.error";
-
-        Toast.toastManager.add({
-          title: i18n.t("common.error"),
-          description: i18n.t(messageKey),
-        });
-
-        return rejectWithValue(messageKey);
-      }
+      const messageKey =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "pendingTasks.rejectError"
+          : "pendingTasks.rejectError";
 
       Toast.toastManager.add({
         title: i18n.t("common.error"),
-        description: i18n.t("common.error"),
+        description: i18n.t(messageKey),
+        type: "error",
       });
 
-      return rejectWithValue("common.error");
+      return rejectWithValue(messageKey);
     }
   },
 );

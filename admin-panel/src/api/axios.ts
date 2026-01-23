@@ -8,9 +8,11 @@ interface InjectedStore {
 }
 
 let store: InjectedStore | null = null;
+let clientId: string | null = null;
 
-export const injectStore = (_store: InjectedStore) => {
+export const injectAxiosStore = (_store: InjectedStore, _clientId: string) => {
   store = _store;
+  clientId = _clientId;
 };
 
 const axiosInstance = axios.create({
@@ -27,6 +29,7 @@ axiosInstance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    config.headers["x-client-id"] = clientId;
     return config;
   },
   (error) => {

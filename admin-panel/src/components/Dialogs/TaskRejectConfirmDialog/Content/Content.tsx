@@ -150,6 +150,7 @@ export function Content({ task, setOpenDialog }: ContentProps) {
                       <span {...props} {...state} tabIndex={-1}>
                         <Button
                           type="submit"
+                          data-variant="danger"
                           className={styles.confirmButton}
                           disabled={!canSubmit || isSubmitting || isLoading}
                         >
