@@ -69,6 +69,20 @@
       "email": "1231@sdaklsdjsald.com",
       "password": "",
       "role": "Viewer"
+    },
+    {
+      "id": "a11",
+      "name": "24234",
+      "email": "1231@test.com",
+      "password": "123456",
+      "role": "Viewer"
+    },
+    {
+      "id": "a12",
+      "name": "111",
+      "email": "11@test.com",
+      "password": "123456",
+      "role": "Viewer"
     }
   ],
   "panel_users": [
@@ -378,7 +392,8 @@
       "priority": "high",
       "createdBy": "u1",
       "createdAt": "2026-01-22T22:41:17.147Z",
-      "status": "pending"
+      "status": "rejected",
+      "rejectionReason": "dsf sdf sdf s f"
     },
     {
       "id": "t30",
