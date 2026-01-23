@@ -73,11 +73,12 @@ The following optional features mentioned in the case document were added during
 - **Dark/Light Theme:** Dynamic theme support that works based on the user's system preference or application-wide.
 - **Premium UI & Animations:** Smooth transitions, micro-animations, and a modern design language.
 - **Hierarchical Role-based Access:** Authorization layers specific to Moderator and Admin roles.
+- **Real-time Updates (WebSocket):** Task status updates are reflected in real-time across panels using a WebSocket connection.
 
 ## ⚠️ Known Issues and Notes
 
 - **Unit Tests:** Due to time constraints or current development priorities, unit tests have not been written for the project.
-- **Socket:** Real-time updates have been simulated through the mock-server.
+- **Unit Tests:** Due to time constraints or current development priorities, unit tests have not been written for the project.
 
 ---
 
