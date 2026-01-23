@@ -44,7 +44,7 @@
   box-sizing: border-box;
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
-  background-color: canvas;
+  background-color: var(--color-white);
   color: var(--color-gray-900);
   transform-origin: var(--transform-origin);
   transition:
@@ -99,7 +99,7 @@
 }
 
 .ArrowFill {
-  fill: canvas;
+  fill: var(--color-white);
 }
 
 .ArrowOuterStroke {
