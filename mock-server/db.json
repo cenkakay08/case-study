@@ -25,7 +25,7 @@
       "id": "a6",
       "name": "Cenk Akayv3",
       "email": "cenk_akay08@hotmail.com",
-      "password": "",
+      "password": "password123",
       "role": "Viewer"
     },
     {
@@ -36,7 +36,7 @@
       "role": "Admin"
     },
     {
-      "id": "a6",
+      "id": "a13",
       "name": "test",
       "email": "asdasd@asdfsada.com",
       "password": "13456213",
@@ -67,7 +67,7 @@
       "id": "a10",
       "name": "asdasd123123v2",
       "email": "1231@sdaklsdjsald.com",
-      "password": "",
+      "password": "password123",
       "role": "Viewer"
     },
     {
@@ -81,6 +81,13 @@
       "id": "a12",
       "name": "111",
       "email": "11@test.com",
+      "password": "123456",
+      "role": "Viewer"
+    },
+    {
+      "id": "a14",
+      "name": "213123",
+      "email": "123123@ewkqejqwe.com",
       "password": "123456",
       "role": "Viewer"
     }

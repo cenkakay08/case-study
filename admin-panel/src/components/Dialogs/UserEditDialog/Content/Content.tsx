@@ -73,7 +73,7 @@ export function Content({ user, setOpen }: ContentProps) {
             user: {
               name: value.name,
               email: value.email,
-              password: value.password,
+              ...(value.password ? { password: value.password } : {}),
               role: value.role,
             },
           },
