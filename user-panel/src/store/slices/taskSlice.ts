@@ -103,15 +103,27 @@ const taskSlice = createSlice({
         state.currentRequestId = action.meta.requestId;
         state.error = null;
       })
-      .addCase(fetchTasksAsync.fulfilled, (state, action) => {
-        if (state.currentRequestId === action.meta.requestId) {
-          state.isLoading = false;
-          state.currentRequestId = null;
-        }
-        state.tasks = action.payload;
-      })
+      .addCase(
+        fetchTasksAsync.fulfilled,
+        (
+          state,
+          action: PayloadAction<Task[], string, { requestId: string }>,
+        ) => {
+          if (
+            state.currentRequestId === action.meta.requestId ||
+            state.currentRequestId === null
+          ) {
+            state.isLoading = false;
+            state.currentRequestId = null;
+            state.tasks = action.payload;
+          }
+        },
+      )
       .addCase(fetchTasksAsync.rejected, (state, action) => {
-        if (state.currentRequestId === action.meta.requestId) {
+        if (
+          state.currentRequestId === action.meta.requestId ||
+          state.currentRequestId === null
+        ) {
           state.isLoading = false;
           state.currentRequestId = null;
           state.error = action.payload as string;
