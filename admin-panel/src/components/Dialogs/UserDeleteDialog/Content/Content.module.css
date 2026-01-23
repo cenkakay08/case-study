@@ -1,0 +1,56 @@
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.dialogHeader h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+.dialogCloseButton {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--color-gray-400);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.dialogCloseButton:hover {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-600);
+}
+
+.dialogContent {
+  padding: 0;
+}
+
+.dialogBody {
+  padding: 1.5rem;
+}
+
+.deleteConfirmText {
+  color: var(--color-gray-600);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.dialogFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--color-gray-50);
+  border-top: 1px solid var(--color-gray-200);
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}

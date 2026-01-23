@@ -7,11 +7,57 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
+<<<<<<< Updated upstream
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+=======
+  --color-blue: oklch(60% 0.18 264);
+  --color-blue-50: oklch(96% 0.01 264);
+  --color-blue-100: oklch(92% 0.02 264);
+  --color-blue-600: oklch(60% 0.18 264);
+  --color-blue-700: oklch(50% 0.2 264);
+
+  --color-red: oklch(60% 0.15 24);
+  --color-red-50: oklch(96% 0.01 24);
+  --color-red-100: oklch(92% 0.02 24);
+  --color-red-200: oklch(88% 0.04 24);
+  --color-red-600: oklch(60% 0.15 24);
+  --color-red-700: oklch(50% 0.18 24);
+  --color-red-800: oklch(40% 0.2 24);
+
+  --color-green-50: oklch(96% 0.02 145);
+  --color-green-100: oklch(92% 0.04 145);
+  --color-green-700: oklch(45% 0.15 145);
+
+  --color-yellow-50: oklch(96% 0.02 85);
+  --color-yellow-100: oklch(92% 0.04 85);
+  --color-yellow-700: oklch(45% 0.15 85);
+
+  --color-orange-50: oklch(96% 0.02 60);
+  --color-orange-100: oklch(92% 0.04 60);
+  --color-orange-700: oklch(45% 0.15 60);
+
+  --color-gray-50: oklch(98.5% 0.002 264);
+  --color-gray-100: oklch(97% 0.005 264);
+  --color-gray-200: oklch(92% 0.01 264);
+  --color-gray-300: oklch(85% 0.01 264);
+  --color-gray-400: oklch(70% 0.01 264);
+  --color-gray-500: oklch(55% 0.01 264);
+  --color-gray-600: oklch(40% 0.01 264);
+  --color-gray-700: oklch(30% 0.01 264);
+  --color-gray-800: oklch(20% 0.01 264);
+  --color-gray-900: oklch(15% 0.01 264);
+  --color-gray-950: oklch(10% 0.01 264);
+
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) & {
+      color-scheme: dark;
+      --color-white: oklch(20% 0.01 264);
+      --color-black: oklch(98% 0 0);
+>>>>>>> Stashed changes
 
 a {
   font-weight: 500;

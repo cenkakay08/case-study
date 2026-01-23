@@ -1,0 +1,164 @@
+{
+  "common": {
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "dashboard": "Panel",
+    "error": "Hata",
+    "success": "Başarılı",
+    "pendingTasks": "Bekleyen Talepler",
+    "allTasks": "Tüm Talepler",
+    "userManagement": "Kullanıcı Yönetimi",
+    "darkMode": "Karanlık Mod",
+    "loading": "Yükleniyor...",
+    "fetchError": "Veriler yüklenirken hata oluştu",
+    "cancel": "İptal",
+    "close": "Kapat"
+  },
+  "dashboard": {
+    "welcome": "Hoş geldiniz, {{name}}",
+    "totalPending": "Toplam Bekleyen",
+    "todayApproved": "Bugün Onaylanan",
+    "todayRejected": "Bugün Reddedilen",
+    "priorityDistribution": "Öncelik Dağılımı",
+    "recentPending": "Son Bekleyen Talepler",
+    "noPendingTasks": "Bekleyen talep yok"
+  },
+  "priorities": {
+    "urgent": "Acil",
+    "high": "Yüksek",
+    "normal": "Normal",
+    "low": "Düşük"
+  },
+  "categories": {
+    "technical_support": "Teknik Destek",
+    "leave_request": "İzin Talebi",
+    "purchase": "Satın Alma",
+    "other": "Diğer"
+  },
+  "status": {
+    "all": "Tüm Durumlar",
+    "pending": "Bekliyor",
+    "approved": "Onaylandı",
+    "rejected": "Reddedildi"
+  },
+  "filters": {
+    "allPriorities": "Tüm Öncelikler",
+    "allCategories": "Tüm Kategoriler"
+  },
+  "tasks": {
+    "table": {
+      "title": "Başlık",
+      "owner": "Talep Sahibi",
+      "category": "Kategori",
+      "priority": "Öncelik",
+      "status": "Durum",
+      "date": "Tarih",
+      "actions": "İşlemler"
+    }
+  },
+  "pendingTasks": {
+    "title": "Bekleyen Talepler",
+    "subtitle": "Onay bekleyen talepleri görüntüleyin ve yönetin",
+    "searchPlaceholder": "Başlık veya talep sahibi ara...",
+    "approve": "Onayla",
+    "reject": "Reddet",
+    "approveSuccess": "Talep başarıyla onaylandı",
+    "rejectSuccess": "Talep başarıyla reddedildi",
+    "fetchError": "Talepler yüklenirken bir hata oluştu",
+    "approveError": "Talep onaylanırken bir hata oluştu",
+    "rejectError": "Talep reddedilirken bir hata oluştu",
+    "noPermission": "Bu işlem için yetkiniz yok",
+    "noTasks": "Bekleyen talep bulunamadı",
+    "rejectDialog": {
+      "title": "Talebi Reddet",
+      "description": "Lütfen red sebebini belirtin",
+      "placeholder": "Red sebebini yazın...",
+      "reasonLabel": "Red Sebebi",
+      "reasonMin": "Red sebebi en az 3 karakter olmalıdır"
+    },
+    "approveDialog": {
+      "title": "Talebi Onayla",
+      "description": "Bu talebi onaylamak istediğinizden emin misiniz?"
+    }
+  },
+  "allTasks": {
+    "title": "Tüm Talepler",
+    "subtitle": "Sistemdeki tüm talepleri görüntüleyin",
+    "searchPlaceholder": "Başlık veya talep sahibi ara...",
+    "viewDetail": "Detay",
+    "noTasks": "Talep bulunamadı",
+    "detailDialog": {
+      "description": "Talep detayları",
+      "descriptionLabel": "Açıklama",
+      "rejectionReason": "Red Sebebi"
+    }
+  },
+  "pagination": {
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "pageInfo": "Sayfa {{current}} / {{total}}"
+  },
+  "userManagement": {
+    "title": "Kullanıcı Yönetimi",
+    "subtitle": "Admin paneli kullanıcılarını yönetin",
+    "addUser": "Kullanıcı Ekle",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "create": "Oluştur",
+    "save": "Kaydet",
+    "noUsers": "Kullanıcı bulunamadı",
+    "createSuccess": "Kullanıcı başarıyla oluşturuldu",
+    "updateSuccess": "Kullanıcı başarıyla güncellendi",
+    "deleteSuccess": "Kullanıcı başarıyla silindi",
+    "table": {
+      "name": "Ad",
+      "email": "E-posta",
+      "role": "Rol"
+    },
+    "form": {
+      "name": "Ad",
+      "nameRequired": "Ad gereklidir",
+      "namePlaceholder": "Kullanıcı adını girin",
+      "email": "E-posta",
+      "emailPlaceholder": "E-posta adresini girin",
+      "password": "Şifre",
+      "passwordPlaceholder": "Şifre girin",
+      "newPassword": "Yeni Şifre (opsiyonel)",
+      "newPasswordPlaceholder": "Boş bırakılırsa değişmez",
+      "confirmNewPassword": "Yeni Şifreyi Tekrarla",
+      "confirmNewPasswordPlaceholder": "Yeni şifreyi tekrar girin",
+      "confirmPassword": "Şifreyi Tekrarla",
+      "confirmPasswordPlaceholder": "Şifreyi tekrar girin",
+      "passwordsDoNotMatch": "Şifreler eşleşmiyor",
+      "role": "Rol"
+    },
+    "createDialog": {
+      "title": "Yeni Kullanıcı Ekle",
+      "description": "Yeni bir admin paneli kullanıcısı oluşturun"
+    },
+    "editDialog": {
+      "title": "Kullanıcıyı Düzenle",
+      "description": "Kullanıcı bilgilerini güncelleyin"
+    },
+    "deleteDialog": {
+      "title": "Kullanıcıyı Sil",
+      "description": "{{name}} kullanıcısını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+      "cannotDeleteSelf": "Kendi hesabınızı silemezsiniz"
+    }
+  },
+  "login": {
+    "title": "Yönetici Paneli",
+    "subtitle": "Yönetici hesabınızla giriş yapın",
+    "emailLabel": "E-posta Adresi",
+    "emailPlaceholder": "admin@test.com",
+    "passwordLabel": "Şifre",
+    "submitButton": "Giriş Yap",
+    "signingIn": "Giriş Yapılıyor...",
+    "emailRequired": "E-posta gereklidir",
+    "emailInvalid": "Geçersiz e-posta adresi",
+    "passwordRequired": "Şifre gereklidir",
+    "passwordMin": "Şifre en az 6 karakter olmalıdır",
+    "success": "Başarıyla giriş yapıldı",
+    "error": "Giriş başarısız oldu"
+  }
+}
