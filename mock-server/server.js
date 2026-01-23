@@ -228,8 +228,12 @@ app.post("/api/admin-users", authenticateToken, (req, res) => {
   if (req.user.role !== "Admin") {
     return res.status(403).json({ message: "Only Admin can manage users" });
   }
+  const maxId =
+    db.admin_users.length > 0
+      ? Math.max(...db.admin_users.map((u) => parseInt(u.id.substring(1)) || 0))
+      : 0;
   const newUser = {
-    id: "a" + (db.admin_users.length + 1),
+    id: "a" + (maxId + 1),
     ...req.body,
   };
   db.admin_users.push(newUser);
@@ -246,7 +250,11 @@ app.patch("/api/admin-users/:id", authenticateToken, (req, res) => {
   const index = db.admin_users.findIndex((u) => u.id === id);
 
   if (index !== -1) {
-    db.admin_users[index] = { ...db.admin_users[index], ...req.body };
+    const updateData = { ...req.body };
+    if (updateData.password === "") {
+      delete updateData.password;
+    }
+    db.admin_users[index] = { ...db.admin_users[index], ...updateData };
     updateDb();
     broadcast(
       "USER_UPDATED",
