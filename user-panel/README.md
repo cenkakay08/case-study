@@ -1,73 +1,38 @@
-# React + TypeScript + Vite
+# User Panel - Task Approval System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A panel where employees create tasks and track their own tasks.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Session Management:** Secure login with email and password.
+- **Dashboard:** Personal task statistics and summary of recent tasks.
+- **Create Task:**
+  - Form structure with validation support (Zod).
+  - Priority (Low, Normal, High, Urgent) and Category selection.
+- **My Tasks:**
+  - Status-based filtering.
+  - View task details.
+  - View rejection reason for rejected tasks.
 
-## React Compiler
+## 🛠️ Technical Details
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Form Management:** Performant form management was achieved using `@tanstack/react-form`.
+- **Language Support:** Multi-language support (TR/EN) infrastructure was prepared with i18next.
+- **Styling:** Encapsulated styles were created using CSS Modules.
 
-## Expanding the ESLint configuration
+## 🏃 Local Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+If dependencies are installed in the root directory:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run user-panel:dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The panel will run on `http://localhost:3000` by default.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔑 Test Users
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Email            | Password |
+| :--------------- | :------- |
+| `user1@test.com` | `123456` |
+| `user2@test.com` | `123456` |

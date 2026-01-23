@@ -1,0 +1,285 @@
+================================================================================
+                    FRONTEND DEVELOPER - TECHNICAL CASE STUDY
+                          TASK APPROVAL SYSTEM
+================================================================================
+
+İki ayrı panel geliştirmeniz beklenmektedir:
+1. User Panel - Çalışanların görev talebi oluşturduğu panel
+2. Admin Panel - Yöneticilerin talepleri gördüğün,onayladığı panel
+
+--------------------------------------------------------------------------------
+SÜRE
+--------------------------------------------------------------------------------
+5 gün
+
+--------------------------------------------------------------------------------
+TEKNOLOJİ STACK
+--------------------------------------------------------------------------------
+
+Zorunlu:
+- React
+- TypeScript
+- Redux Toolkit
+- React Router
+- Axios
+- SCSS veya CSS Modules
+
+Opsiyonel:
+- Build tool, form kütüphanesi, UI kütüphanesi tercihi size aittir
+
+--------------------------------------------------------------------------------
+PROJE YAPISI
+--------------------------------------------------------------------------------
+
+İki ayrı React uygulaması oluşturun:
+
+case-study/
+├── user-panel/        → Çalışan paneli (port: 3000)
+├── admin-panel/       → Yönetici paneli (port: 3001)
+└── README.md
+
+Her iki uygulama da ayrı çalışabilir olmalıdır.
+
+================================================================================
+                              USER PANEL
+================================================================================
+
+Çalışanların görev talebi oluşturup takip ettiği panel.
+
+--------------------------------------------------------------------------------
+SAYFALAR
+--------------------------------------------------------------------------------
+
+LOGIN
+- Email ve şifre ile giriş
+- Oturum yönetimi
+- Hatalı giriş uyarısı
+
+DASHBOARD
+- Toplam talep sayısı
+- Bekleyen / Onaylanan / Reddedilen talep sayıları
+- Son talepler özeti
+
+TALEP OLUŞTUR
+Form alanları:
+- Başlık (zorunlu)
+- Açıklama (zorunlu)
+- Öncelik (Düşük / Normal / Yüksek / Acil)
+- Kategori (Teknik Destek / İzin Talebi / Satın Alma / Diğer)
+
+Beklentiler:
+- Form validation
+- Hata mesajları
+- Başarılı kayıt bildirimi
+
+TALEPLERİM
+- Oluşturulan taleplerin listesi (tablo)
+- Durum filtreleme (Tümü / Bekliyor / Onaylandı / Reddedildi)
+- Talep detayı görüntüleme
+- Reddedilen taleplerde red sebebini gösterme
+
+--------------------------------------------------------------------------------
+TEST KULLANICILARI (USER PANEL)
+--------------------------------------------------------------------------------
+
+Email                  Şifre
+-----                  -----
+user1@test.com         123456
+user2@test.com         123456
+
+================================================================================
+                              ADMIN PANEL
+================================================================================
+
+Yöneticilerin talepleri inceleyip onayladığı panel.
+
+--------------------------------------------------------------------------------
+ROLLER
+--------------------------------------------------------------------------------
+
+Rol          Yetkiler
+---          --------
+Viewer       Talepleri görüntüleyebilir, onay/red yapamaz
+Moderator    Talepleri görüntüleyebilir ve onaylayabilir/reddedebilir
+Admin        Tüm yetkiler + Kullanıcı yönetimi
+
+--------------------------------------------------------------------------------
+SAYFALAR
+--------------------------------------------------------------------------------
+
+LOGIN
+- Email ve şifre ile giriş
+- Role göre menü/buton erişimi
+
+DASHBOARD
+- Toplam bekleyen talep sayısı
+- Bugün onaylanan / reddedilen sayısı
+- Öncelik bazlı dağılım
+
+BEKLEYEN TALEPLER
+- Onay bekleyen taleplerin listesi
+- Öncelik ve kategoriye göre filtreleme
+- Arama (başlık veya talep sahibi)
+- Sayfalama
+
+Her satırda:
+- Talep başlığı
+- Talep sahibi
+- Öncelik (renk kodlu badge)
+- Tarih
+- Onayla / Reddet butonları
+
+Onay/Red işlemi:
+- Viewer rolü için butonlar disabled görünmeli
+- Reddetme durumunda sebep girme zorunlu
+- İşlem sonrası liste güncellenmeli
+
+TÜM TALEPLER (Admin, Moderator)
+- Tüm taleplerin listesi (tüm durumlar)
+- Durum, öncelik, tarih filtreleme
+- Detay görüntüleme
+
+KULLANICI YÖNETİMİ (Sadece Admin)
+- Admin paneli kullanıcılarının listesi
+- Yeni kullanıcı ekleme (ad, email, şifre, rol)
+- Kullanıcı düzenleme
+- Kullanıcı silme (onay dialogu)
+
+Yetki kontrolü: Viewer ve Moderator bu sayfaya erişememeli
+
+--------------------------------------------------------------------------------
+TEST KULLANICILARI (ADMIN PANEL)
+--------------------------------------------------------------------------------
+
+Email                  Şifre          Rol
+-----                  -----          ---
+admin@test.com         admin123       Admin
+moderator@test.com     mod123         Moderator
+viewer@test.com        viewer123      Viewer
+
+--------------------------------------------------------------------------------
+VERİ MODELLERİ
+--------------------------------------------------------------------------------
+
+Task:
+{
+  id: string;
+  title: string;
+  description: string;
+  priority: 'low' | 'normal' | 'high' | 'urgent';
+  category: string;
+  status: 'pending' | 'approved' | 'rejected';
+  createdBy: string;
+  createdAt: string;
+  rejectionReason?: string;
+}
+
+AdminUser:
+{
+  id: string;
+  name: string;
+  email: string;
+  role: 'Admin' | 'Moderator' | 'Viewer';
+}
+
+--------------------------------------------------------------------------------
+ROL BAZLI ERİŞİM (ADMIN PANEL)
+--------------------------------------------------------------------------------
+
+Sayfa / İşlem                    Admin    Moderator    Viewer
+-------------                    -----    ---------    ------
+Dashboard                        ✓        ✓            ✓
+Bekleyen Talepler (görüntüleme)  ✓        ✓            ✓
+Talep Onaylama                   ✓        ✓            ✗
+Talep Reddetme                   ✓        ✓            ✗
+Tüm Talepler                     ✓        ✓            ✗
+Kullanıcı Yönetimi               ✓        ✗            ✗
+
+--------------------------------------------------------------------------------
+BEKLENEN AKIŞ
+--------------------------------------------------------------------------------
+
+1. Çalışan User Panel'e giriş yapar
+2. "Talep Oluştur" sayfasından yeni talep girer
+3. Talep "pending" durumunda kaydedilir
+
+4. Yönetici Admin Panel'e giriş yapar
+5. "Bekleyen Talepler" sayfasında yeni talebi görür
+6. İnceler ve "Onayla" veya "Reddet" butonuna tıklar
+7. Reddetirse sebep yazar
+
+8. Çalışan User Panel'de "Taleplerim"e bakar
+9. Talebinin onaylandığını veya red sebebini görür
+
+--------------------------------------------------------------------------------
+TEKNİK BEKLENTİLER
+--------------------------------------------------------------------------------
+
+Her iki panel için:
+- Redux Toolkit ile state yönetimi
+- createAsyncThunk ile async işlemler
+- Axios interceptor ile auth header ekleme
+- 401 durumunda login'e yönlendirme
+- Loading ve error state yönetimi
+- TypeScript tip tanımlamaları
+
+Admin Panel özel:
+- Rol bazlı route koruması
+- Yetkisiz butonların disabled görünmesi
+- Yetkisiz sayfalara erişim engeli
+
+--------------------------------------------------------------------------------
+UI BEKLENTİLERİ
+--------------------------------------------------------------------------------
+
+- Öncelik badge'leri renk kodlu (urgent: kırmızı, high: turuncu, vb.)
+- Durum badge'leri (pending: sarı, approved: yeşil, rejected: kırmızı)
+- Loading spinner/skeleton
+- Toast notification (işlem sonuçları)
+- Onay dialogu (silme, reddetme)
+- Responsive tasarım
+- Disabled butonlarda tooltip ile açıklama
+
+--------------------------------------------------------------------------------
+MOCK DATA
+--------------------------------------------------------------------------------
+
+İki panel aynı mock data'yı kullanabilir. En az:
+- 15-20 task (farklı durumlar ve öncelikler)
+
+Mock API için JSON Server, MSW veya Promise-based fonksiyonlar kullanabilirsiniz.
+
+--------------------------------------------------------------------------------
+BONUS (OPSİYONEL)
+--------------------------------------------------------------------------------
+
+- Çoklu dil desteği (TR/EN)
+- Dark/Light tema
+- Gerçek zamanlı güncelleme simülasyonu (socket)
+- Unit test
+- Animasyonlar
+
+--------------------------------------------------------------------------------
+TESLİM
+--------------------------------------------------------------------------------
+
+GitHub repository (public)
+
+İçerik:
+case-study/
+├── user-panel/
+│   ├── src/
+│   ├── package.json
+│   └── README.md
+├── admin-panel/
+│   ├── src/
+│   ├── package.json
+│   └── README.md
+└── README.md (genel açıklama)
+
+Ana README.md içeriği:
+- Her iki panelin kurulum adımları
+- Test kullanıcıları
+- Kullanılan teknolojiler
+- Mimari kararlar hakkında kısa açıklama
+- Varsa bilinen eksikler
