@@ -78,4 +78,8 @@
   .actions {
     grid-column: span 1;
   }
+
+  .container {
+    padding: 1rem;
+  }
 }

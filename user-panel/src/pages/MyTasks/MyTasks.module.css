@@ -164,4 +164,9 @@
   .tableContainer {
     overflow-x: auto;
   }
+
+  .container {
+    gap: 1rem;
+    padding: 1rem;
+  }
 }
