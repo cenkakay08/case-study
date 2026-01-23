@@ -1,0 +1,19 @@
+.layoutWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0px;
+  min-height: 0px;
+  overflow: auto;
+  background-color: var(--color-background);
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  min-width: 0px;
+  min-height: 0px;
+  padding: 1.5rem;
+  overflow: auto;
+  justify-content: center;
+}

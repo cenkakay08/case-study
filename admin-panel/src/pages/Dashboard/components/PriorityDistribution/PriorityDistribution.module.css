@@ -1,0 +1,79 @@
+.prioritySection {
+  flex-shrink: 0;
+  margin-bottom: 2rem;
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-gray-200);
+  box-shadow: 0 1px 3px oklch(0% 0 0 / 0.1);
+}
+
+.prioritySection h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-gray-900);
+}
+
+.priorityGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.priorityCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-gray-50);
+}
+
+.priorityCard.urgent {
+  background: var(--color-red-50);
+  border: 1px solid var(--color-red-200);
+}
+
+.priorityCard.high {
+  background: var(--color-orange-50);
+  border: 1px solid var(--color-orange-200);
+}
+
+.priorityCard.normal {
+  background: var(--color-blue-50);
+  border: 1px solid var(--color-blue-200);
+}
+
+.priorityCard.low {
+  background: var(--color-green-50);
+  border: 1px solid var(--color-green-200);
+}
+
+.priorityCount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.priorityCard.urgent .priorityCount {
+  color: var(--color-red-600);
+}
+
+.priorityCard.high .priorityCount {
+  color: var(--color-orange-600);
+}
+
+.priorityCard.normal .priorityCount {
+  color: var(--color-blue-600);
+}
+
+.priorityCard.low .priorityCount {
+  color: var(--color-green-600);
+}
+
+.priorityLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-gray-600);
+}
