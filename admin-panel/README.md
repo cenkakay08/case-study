@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Admin Panel - Task Approval System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Yöneticilerin talepleri inceleyip onayladığı, kullanıcı yönetiminin yapıldığı yönetim panelidir.
 
-Currently, two official plugins are available:
+## 🔐 Rol Bazlı Erişim (RBAC)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Panelde üç farklı yetki seviyesi bulunmaktadır:
 
-## React Compiler
+- **Admin:** Tüm yetkiler + Kullanıcı ekleme/düzenleme/silme.
+- **Moderator:** Bekleyen talepleri onaylama ve reddetme yetkisi.
+- **Viewer:** Sadece görüntüleme yetkisi (onay/red butonları pasiftir).
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## ✨ Özellikler
 
-## Expanding the ESLint configuration
+- **Gelişmiş Dashboard:** Bugünün onay/red sayıları ve öncelik bazlı dağılım grafikleri.
+- **Bekleyen Talepler:**
+  - Arama (Başlık, Talep Sahibi) ve filtreleme.
+  - Hızlı aksiyon butonları (Onayla/Reddet).
+  - Reddetme sırasında zorunlu gerekçe girişi.
+- **Tüm Talepler:** Arşiv sistemli tüm geçmiş taleplerin listesi.
+- **Kullanıcı Yönetimi (Admin Only):** Yeni yönetici ekleme ve mevcutları yönetme.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Teknik Detaylar
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Güvenlik:** Route-level yetki kontrolü (Guard components).
+- **UI/UX:** `@case-study/ui` kütüphanesi ile tutarlı arayüz. premium ve responsive tasarım.
+- **State:** Redux Toolkit ile global state yönetimi.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🏃 Yerel Çalıştırma
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Bağımlılıklar ana dizinde kurulmuşsa:
+
+```bash
+npm run admin-panel:dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Panel varsayılan olarak `http://localhost:3001` portunda çalışacaktır.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔑 Test Kullanıcıları
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Email                | Şifre       | Rol       |
+| :------------------- | :---------- | :-------- |
+| `admin@test.com`     | `admin123`  | Admin     |
+| `moderator@test.com` | `mod123`    | Moderator |
+| `viewer@test.com`    | `viewer123` | Viewer    |
