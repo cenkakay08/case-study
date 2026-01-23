@@ -1,44 +1,44 @@
 # Admin Panel - Task Approval System
 
-Yöneticilerin talepleri inceleyip onayladığı, kullanıcı yönetiminin yapıldığı yönetim panelidir.
+A management panel where managers review and approve tasks, and perform user management.
 
-## 🔐 Rol Bazlı Erişim (RBAC)
+## 🔐 Role-Based Access Control (RBAC)
 
-Panelde üç farklı yetki seviyesi bulunmaktadır:
+The panel has three different permission levels:
 
-- **Admin:** Tüm yetkiler + Kullanıcı ekleme/düzenleme/silme.
-- **Moderator:** Bekleyen talepleri onaylama ve reddetme yetkisi.
-- **Viewer:** Sadece görüntüleme yetkisi (onay/red butonları pasiftir).
+- **Admin:** All permissions + Add/Edit/Delete users.
+- **Moderator:** Permission to approve and reject pending tasks.
+- **Viewer:** View-only permission (approve/reject buttons are disabled).
 
-## ✨ Özellikler
+## ✨ Features
 
-- **Gelişmiş Dashboard:** Bugünün onay/red sayıları ve öncelik bazlı dağılım grafikleri.
-- **Bekleyen Talepler:**
-  - Arama (Başlık, Talep Sahibi) ve filtreleme.
-  - Hızlı aksiyon butonları (Onayla/Reddet).
-  - Reddetme sırasında zorunlu gerekçe girişi.
-- **Tüm Talepler:** Arşiv sistemli tüm geçmiş taleplerin listesi.
-- **Kullanıcı Yönetimi (Admin Only):** Yeni yönetici ekleme ve mevcutları yönetme.
+- **Advanced Dashboard:** Today's approval/rejection counts and priority-based distribution charts.
+- **Pending Tasks:**
+  - Search (Title, Task Owner) and filtering.
+  - Quick action buttons (Approve/Reject).
+  - Mandatory reason entry when rejecting.
+- **All Tasks:** List of all past tasks with archive system.
+- **User Management (Admin Only):** Add new administrators and manage existing ones.
 
-## 🛠️ Teknik Detaylar
+## 🛠️ Technical Details
 
-- **Güvenlik:** Route-level yetki kontrolü (Guard components).
-- **UI/UX:** `@case-study/ui` kütüphanesi ile tutarlı arayüz. premium ve responsive tasarım.
-- **State:** Redux Toolkit ile global state yönetimi.
+- **Security:** Route-level permission control (Guard components).
+- **UI/UX:** Consistent interface with `@case-study/ui` library. Premium and responsive design.
+- **State:** Global state management with Redux Toolkit.
 
-## 🏃 Yerel Çalıştırma
+## 🏃 Local Development
 
-Bağımlılıklar ana dizinde kurulmuşsa:
+If dependencies are installed in the root directory:
 
 ```bash
 npm run admin-panel:dev
 ```
 
-Panel varsayılan olarak `http://localhost:3001` portunda çalışacaktır.
+The panel will run on `http://localhost:3001` by default.
 
-## 🔑 Test Kullanıcıları
+## 🔑 Test Users
 
-| Email                | Şifre       | Rol       |
+| Email                | Password    | Role      |
 | :------------------- | :---------- | :-------- |
 | `admin@test.com`     | `admin123`  | Admin     |
 | `moderator@test.com` | `mod123`    | Moderator |

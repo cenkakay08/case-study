@@ -1,40 +1,40 @@
 # @case-study/ui
 
-Task Approval System projesi için geliştirilmiş ortak bileşen kütüphanesidir. Hem `user-panel` hem de `admin-panel` tarafından kullanılmaktadır.
+Shared component library developed for the Task Approval System project. It is used by both `user-panel` and `admin-panel`.
 
-## 🎨 Tasarım Sistemi
+## 🎨 Design System
 
-Kütüphane, modern ve premium bir görünüm için aşağıdaki prensipleri takip eder:
+The library follows the principles below for a modern and premium look:
 
-- **Design Tokens:** Renkler, boşluklar ve tipografi `tokens.css` üzerinden yönetilir.
-- **Theme flipping:** `--color-white` ve `--color-black` gibi değişkenler temaya göre otomatik renk değiştirir.
-- **Micro-animations:** Butonlar ve dialoglar için yumuşak transition efektleri.
+- **Design Tokens:** Colors, spacing, and typography are managed via `tokens.css`.
+- **Theme flipping:** Variables like `--color-white` and `--color-black` automatically change color based on the theme.
+- **Micro-animations:** Smooth transition effects for buttons and dialogs.
 
-## 📦 İçerik
+## 📦 Content
 
-Temel bileşenlerden bazıları:
+Some of the core components:
 
-- **Button:** Farklı varyantları (primary, secondary, danger) olan özelleştirilebilir butonlar.
-- **Badge:** Durum (Approved, Rejected, Pending) ve Öncelik (Urgent, High, vb.) gösterimi için renk kodlu etiketler.
-- **Tooltip:** `@base-ui/react` tabanlı, her iki temada yüksek okunabilirlikli bilgilendirme balonları.
-- **Dialog/Modal:** Formlar ve onay süreçleri için kullanılan erişilebilir modallar.
-- **Fields:** TanStack Form ile uyumlu input ve select bileşenleri.
+- **Button:** Customizable buttons with different variants (primary, secondary, danger).
+- **Badge:** Color-coded labels for indicating Status (Approved, Rejected, Pending) and Priority (Urgent, High, etc.).
+- **Tooltip:** `@base-ui/react` based information bubbles with high readability in both themes.
+- **Dialog/Modal:** Accessible modals used for forms and approval processes.
+- **Fields:** Input and select components compatible with TanStack Form.
 
-## 🛠️ Kullanım
+## 🛠️ Usage
 
-Bu paket monorepo içinde paylaşılan bir pakettir. Uygulamalarda şu şekilde import edilir:
+This package is a shared package within the monorepo. It is imported in applications as follows:
 
 ```tsx
 import { Button, Badge } from "@case-study/ui";
 ```
 
-## 🏗️ Yapı
+## 🏗️ Structure
 
 ```
 packages/ui/
 ├── src/
-│   ├── components/  # Reusable React bileşenleri
-│   ├── tokens.css   # Global design tokens ve renkler
-│   └── index.ts     # Export noktası
+│   ├── components/  # Reusable React components
+│   ├── tokens.css   # Global design tokens and colors
+│   └── index.ts     # Export point
 └── package.json
 ```
