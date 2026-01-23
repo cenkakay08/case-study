@@ -78,8 +78,6 @@ The following optional features mentioned in the case document were added during
 ## ⚠️ Known Issues and Notes
 
 - **Unit Tests:** Due to time constraints or current development priorities, unit tests have not been written for the project.
-- **Unit Tests:** Due to time constraints or current development priorities, unit tests have not been written for the project.
 
 ---
-
 _This project was prepared as a technical case study._
