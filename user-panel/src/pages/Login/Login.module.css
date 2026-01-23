@@ -6,6 +6,10 @@
   background-color: var(--color-gray-50);
   padding: 1.5rem;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 }
 
 .switchers {
