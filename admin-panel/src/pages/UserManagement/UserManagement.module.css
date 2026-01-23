@@ -272,4 +272,8 @@
   .tableContainer {
     overflow-x: auto;
   }
+
+  .container {
+    gap: 1rem;
+  }
 }
