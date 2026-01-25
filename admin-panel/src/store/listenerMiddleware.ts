@@ -15,7 +15,7 @@ authListenerMiddleware.startListening({
     localStorage.setItem("adminAuthState", JSON.stringify(authState));
 
     if (authState.isAuthenticated && authState.token) {
-      connectWebSocket();
+      connectWebSocket(authState.token);
     } else {
       disconnectWebSocket();
     }
